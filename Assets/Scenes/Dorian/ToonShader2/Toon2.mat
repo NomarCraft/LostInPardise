@@ -20,11 +20,31 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_6FCFC953:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_B9E52319:
         m_Texture: {fileID: 2800000, guid: 0529767a39ec9f748ae0132b0cb1eb65, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - Vector1_98C72531: -1
+    - Vector1_9BFBA74D: 10
+    - Vector1_E2FB12BD: 20
     m_Colors:
+    - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
+    - Color_652E856A: {r: 1, g: 1, b: 1, a: 0}
+    - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
     - _L1_color: {r: 0, g: 0, b: 0, a: 0}
     - _L1_dir: {r: 0, g: 0, b: 0, a: 0}
+    - _L2_color: {r: 1, g: 1, b: 1, a: 0}
+    - _L2_dir: {r: 0, g: 0, b: 0, a: 0}
+    - _L3_color: {r: 1, g: 1, b: 1, a: 0}
+    - _L3_dir: {r: 0, g: 0, b: 0, a: 0}
+    - _L4_color: {r: 1, g: 1, b: 1, a: 0}
+    - _L4_dir: {r: 0, g: 0, b: 0, a: 0}
+    - _L5_color: {r: 1, g: 1, b: 1, a: 0}
+    - _L5_dir: {r: 0, g: 0, b: 0, a: 0}
+    - _L6_color: {r: 1, g: 1, b: 1, a: 0}
+    - _L6_dir: {r: 0, g: 0, b: 0, a: 0}
