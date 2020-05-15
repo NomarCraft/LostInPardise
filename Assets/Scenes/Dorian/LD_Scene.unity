@@ -1318,54 +1318,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51970376}
   m_Mesh: {fileID: 280201506}
---- !u!21 &53544170
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Instance of Toon2
-  m_Shader: {fileID: -6465566751694194690, guid: 452c4a8fcdc516d448b6a4ee4fca0e3c,
-    type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - Texture2D_6FCFC953:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_B9E52319:
-        m_Texture: {fileID: 2800000, guid: f59750bd95c3e214a9f6e458cd325bc0, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_98C72531: -0.7
-    - Vector1_9BFBA74D: 15
-    - Vector1_E2FB12BD: 200
-    m_Colors:
-    - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
-    - Color_652E856A: {r: 0.6792453, g: 0.4007635, b: 0.1954432, a: 0}
-    - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
-    - _L1_color: {r: 2, g: 1.9137255, b: 1.6784314, a: 0.99}
-    - _L1_dir: {r: 0.5851661, g: 0.4869075, b: -0.6484611, a: 0}
-    - _L2_color: {r: 0.59002787, g: 0.34128433, b: 0.31468156, a: 0.29501393}
-    - _L2_dir: {r: -0.022497442, g: 0.99972093, b: -0.0072033796, a: 0}
-    - _L3_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L3_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L4_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L4_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L5_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L5_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L6_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L6_dir: {r: 0, g: 1, b: 0, a: 0}
 --- !u!1 &86105600
 GameObject:
   m_ObjectHideFlags: 0
@@ -24140,6 +24092,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710280816}
   m_Mesh: {fileID: 1983872711}
+--- !u!21 &711259172
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Instance of Toon2
+  m_Shader: {fileID: -6465566751694194690, guid: 452c4a8fcdc516d448b6a4ee4fca0e3c,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_6FCFC953:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B9E52319:
+        m_Texture: {fileID: 2800000, guid: f59750bd95c3e214a9f6e458cd325bc0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_98C72531: -0.7
+    - Vector1_9BFBA74D: 15
+    - Vector1_E2FB12BD: 200
+    m_Colors:
+    - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
+    - Color_652E856A: {r: 0.6792453, g: 0.4007635, b: 0.1954432, a: 0}
+    - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
+    - _L1_color: {r: 1.5, g: 1.4352942, b: 1.2588235, a: 0.99}
+    - _L1_dir: {r: 0.7621441, g: 0.48690757, b: -0.42668185, a: 0}
+    - _L2_color: {r: 1.092458, g: 0.6319003, b: 0.5826443, a: 0.546229}
+    - _L2_dir: {r: -0.03815673, g: 0.99919707, b: -0.012217274, a: 0}
+    - _L3_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L3_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L4_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L4_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L5_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L5_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L6_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L6_dir: {r: 0, g: 1, b: 0, a: 0}
 --- !u!1001 &714480522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50298,7 +50298,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 53544170}
+      objectReference: {fileID: 711259172}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340ab0ef75705954d91ed62d20789adc, type: 3}
 --- !u!1 &1565772189
@@ -62891,7 +62891,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -62947,13 +62947,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138677391}
-  m_LocalRotation: {x: 0.22984812, y: -0.35062703, z: 0.10304296, w: 0.9020048}
-  m_LocalPosition: {x: 1102, y: -21.7, z: 652.3}
+  m_LocalRotation: {x: 0.21005946, y: -0.4924775, z: 0.13900737, w: 0.8330774}
+  m_LocalPosition: {x: 104.68, y: 32.283, z: 70.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 616942280}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 29.138, y: 317.937, z: 361.621}
+  m_LocalEulerAnglesHint: {x: 29.138, y: 299.242, z: 361.621}
 --- !u!1 &2139506460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1596599619391921268, guid: bb6ddb950f48b3245aad5d19a71b7003,
