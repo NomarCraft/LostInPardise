@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : ScriptableObject{
 
     public int id;
+    public string itemName;
     public GameObject prefab;
     
     [TextArea(1, 20)]

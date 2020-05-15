@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ItemInventory : MonoBehaviour
+public class ItemInventoryDisplay : MonoBehaviour
 {
     public InventoryObject inventory;
 
