@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
   m_Name: Stick
   m_EditorClassIdentifier: 
+  id: 1
   prefab: {fileID: 6068398185263138036, guid: bb434fd486de200468f1b5bebc75c272, type: 3}
   description: BeauxBatons

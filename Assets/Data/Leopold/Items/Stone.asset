@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
+  id: 2
   prefab: {fileID: 6068398185263138036, guid: 93f5b7718bd472f4880ca975d98a8553, type: 3}
   description: "Chez nous \xE0 la maison,\r\nc'est moi le grand gar\xE7on,\r\nj'aime
     \xE7a toucher \xE0 tout j'm'appelle Caillou\r\n\r\nAutour de moi c'est tellement
