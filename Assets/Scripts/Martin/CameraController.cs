@@ -52,6 +52,7 @@ public partial class CameraController : MonoBehaviour
 	{
 		_player = GameObject.FindObjectOfType<CharacterController>();
 		_playerCenter = _player.playerCenter;
+		_player.camRef = this.transform;
 	}
 
 	private void CameraMovement()
