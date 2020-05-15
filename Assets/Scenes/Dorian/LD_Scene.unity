@@ -1318,6 +1318,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51970376}
   m_Mesh: {fileID: 280201506}
+--- !u!21 &53544170
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Instance of Toon2
+  m_Shader: {fileID: -6465566751694194690, guid: 452c4a8fcdc516d448b6a4ee4fca0e3c,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_6FCFC953:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B9E52319:
+        m_Texture: {fileID: 2800000, guid: f59750bd95c3e214a9f6e458cd325bc0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_98C72531: -0.7
+    - Vector1_9BFBA74D: 15
+    - Vector1_E2FB12BD: 200
+    m_Colors:
+    - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
+    - Color_652E856A: {r: 0.6792453, g: 0.4007635, b: 0.1954432, a: 0}
+    - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
+    - _L1_color: {r: 2, g: 1.9137255, b: 1.6784314, a: 0.99}
+    - _L1_dir: {r: 0.5851661, g: 0.4869075, b: -0.6484611, a: 0}
+    - _L2_color: {r: 0.59002787, g: 0.34128433, b: 0.31468156, a: 0.29501393}
+    - _L2_dir: {r: -0.022497442, g: 0.99972093, b: -0.0072033796, a: 0}
+    - _L3_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L3_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L4_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L4_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L5_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L5_dir: {r: 0, g: 1, b: 0, a: 0}
+    - _L6_color: {r: 0, g: 0, b: 0, a: 1}
+    - _L6_dir: {r: 0, g: 1, b: 0, a: 0}
 --- !u!1 &86105600
 GameObject:
   m_ObjectHideFlags: 0
@@ -50149,7 +50197,7 @@ PrefabInstance:
     - target: {fileID: 3296508675575330439, guid: 340ab0ef75705954d91ed62d20789adc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.84
+      value: 33.642
       objectReference: {fileID: 0}
     - target: {fileID: 3296508675575330439, guid: 340ab0ef75705954d91ed62d20789adc,
         type: 3}
@@ -50250,7 +50298,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1586439536}
+      objectReference: {fileID: 53544170}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340ab0ef75705954d91ed62d20789adc, type: 3}
 --- !u!1 &1565772189
@@ -51231,54 +51279,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &1586439536
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Instance of Toon2
-  m_Shader: {fileID: -6465566751694194690, guid: 452c4a8fcdc516d448b6a4ee4fca0e3c,
-    type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - Texture2D_6FCFC953:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_B9E52319:
-        m_Texture: {fileID: 2800000, guid: 0529767a39ec9f748ae0132b0cb1eb65, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_98C72531: -1
-    - Vector1_9BFBA74D: 10
-    - Vector1_E2FB12BD: 20
-    m_Colors:
-    - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
-    - Color_652E856A: {r: 1, g: 1, b: 1, a: 0}
-    - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
-    - _L1_color: {r: 2, g: 1.9137255, b: 1.6784314, a: 0.99}
-    - _L1_dir: {r: 0.5851661, g: 0.4869075, b: -0.6484611, a: 0}
-    - _L2_color: {r: 0.45894295, g: 0.26546207, b: 0.24476957, a: 0.22947146}
-    - _L2_dir: {r: -0.018978948, g: 0.9998014, b: -0.006076805, a: 0}
-    - _L3_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L3_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L4_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L4_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L5_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L5_dir: {r: 0, g: 1, b: 0, a: 0}
-    - _L6_color: {r: 0, g: 0, b: 0, a: 1}
-    - _L6_dir: {r: 0, g: 1, b: 0, a: 0}
 --- !u!43 &1587836614
 Mesh:
   m_ObjectHideFlags: 0
