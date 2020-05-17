@@ -55,7 +55,8 @@ public partial class CharacterController : MonoBehaviour
 	[SerializeField] private bool _isGrounded;
 	[SerializeField] private bool _isJumping;
 	private bool _jumpSafety = false;
-	private bool _isFalling = false;
+	[SerializeField] private bool _isFalling = false;
+	public bool isFalling { get { return _isFalling; } }
 
 	[Space(10)]
 	[Header("Metrics")]
@@ -263,7 +264,7 @@ public partial class CharacterController : MonoBehaviour
 				_isGrounded = true;
 				return true;
 			}
-			_isFalling = true;
+			_isFalling = false;
 			_isGrounded = true;
 			return true;
 		}

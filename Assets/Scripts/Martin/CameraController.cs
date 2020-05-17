@@ -61,36 +61,59 @@ public partial class CameraController : MonoBehaviour
 
 	private void CameraMovement()
 	{
+		_rotationRadiusChecked = 0;
 		Vector3 dir;
 		Vector3 cameraOriginalPosition = new Vector3(_playerCenter.position.x + Mathf.Cos(_angle) * (rotationRadius + _rotationRadiusChecked), _playerCenter.position.y + heightOffset, _playerCenter.position.z + Mathf.Sin(_angle) * (rotationRadius + _rotationRadiusChecked));
+		Vector3 relativePoint = _playerCenter.InverseTransformPoint(transform.position);
+		Debug.Log(relativePoint.x);
 
 		if (SightCheck(transform.position))
 		{
-			Vector3 relativePoint = _playerCenter.InverseTransformPoint(transform.position);
-
+			//float distance;
+			//if (!DirCheck(_playerCenter.position, -transform.forward, _rotationRadius, out distance))
+			//{
+			//	_rotationRadiusChecked = _rotationRadius - distance + 0.25f;
+			//}
+			//else
+			//{
 			if (relativePoint.x > 0)
 				_angle -= angularSpeed * Time.deltaTime;
 			else if (relativePoint.x < 0)
 				_angle += angularSpeed * Time.deltaTime;
+			else
+				_angle += angularSpeed * Time.deltaTime;
+			//}
 		}
+
 		AngleCheck();
 		HeightCheck();
 
-		if (!DirCheck(_playerCenter.position, Vector3.up, 10)) 
+		if (!DirCheck(_playerCenter.position, Vector3.up, 10)/* || !DirCheck(transform.position, Vector3.up, maximumHeightOffset)*/) 
 		{
 			_rotationRadiusChecked = _rotationRadius / 2.25f;
 			if (_heightOffset > _maximumHeightOffset / 2)
 				_heightOffset = 3;
 		}
-		else
-		{
-			if (DirCheck(transform.position, Vector3.up, 10))
-				_rotationRadiusChecked = 0;
-		}
 
 		_angle += (_angleCorrection + _lookMovement.x) * angularSpeed * Time.deltaTime;
 		_previousAngle = _angle;
 		_heightOffset = Mathf.Clamp(_heightOffset + _heightCorrection + _lookMovement.y * angularSpeed * Time.deltaTime, minimumHeightOffset, maximumHeightOffset);
+
+		if (_player.isFalling == true)
+		{
+			//_heightOffset = maximumHeightOffset - 0.5f;
+			_rotationRadiusChecked = rotationRadius / 1.25f;
+			//if (!DirCheck(_playerCenter.position, -transform.forward, _rotationRadius))
+			//{
+				//if (Mathf.Abs(relativePoint.x) > 0.1f)
+				//{
+				//	if (relativePoint.x > 0)
+				//		_angle -= angularSpeed * Time.deltaTime;
+				//	else if (relativePoint.x < 0)
+				//		_angle += angularSpeed * Time.deltaTime;
+				//}
+			//}
+		}
 
 		dir = new Vector3(_playerCenter.position.x + Mathf.Cos(_angle) * (rotationRadius - _rotationRadiusChecked), _playerCenter.position.y + heightOffset, _playerCenter.position.z + Mathf.Sin(_angle) * (rotationRadius - _rotationRadiusChecked));
 		transform.position = Vector3.Lerp(transform.position, dir, angularSpeed * 3 * Time.deltaTime);
@@ -133,13 +156,13 @@ public partial class CameraController : MonoBehaviour
 		if (!DirCheck(transform.position, Vector3.up, 1f))
 		{
 			_lookMovement.y = 0;
-			_heightCorrection -= angularSpeed / 10 * Time.deltaTime;
+			//_heightCorrection -= angularSpeed / 10 * Time.deltaTime;
 			return;
 		}
 		if (!DirCheck(transform.position, Vector3.down, 1f))
 		{
 			_lookMovement.y = 0;
-			_heightCorrection += angularSpeed / 10 * Time.deltaTime;
+			//_heightCorrection += angularSpeed / 10 * Time.deltaTime;
 			return;
 		}
 
@@ -162,7 +185,6 @@ public partial class CameraController : MonoBehaviour
 				Vector3 inverseDir = (pos - _playerCenter.position).normalized;
 				if (Physics.Raycast(_playerCenter.position, inverseDir, out hit, Vector3.Distance(_playerCenter.position, pos)))
 				{
-					Debug.Log(hit.transform.name);
 					if (hit.transform.gameObject.GetComponent<CameraController>() == null)
 						return true;
 					else
@@ -181,6 +203,19 @@ public partial class CameraController : MonoBehaviour
 			return false;
 		}
 
+		return true;
+	}
+
+	private bool DirCheck(Vector3 origin, Vector3 dir, float dist, out float distance)
+	{
+		RaycastHit hit;
+		if (Physics.Raycast(origin, dir, out hit, dist))
+		{
+			distance = hit.distance;
+			return false;
+		}
+
+		distance = 0;
 		return true;
 	}
 }
