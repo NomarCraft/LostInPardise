@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2600325056757575190}
   _playerCenter: {fileID: 6284730170820926451}
-  _rotationRadius: 6
+  _rotationRadius: 5
   _heightOffset: 3
   _minimumHeightOffset: 0.1
   _maximumHeightOffset: 6
