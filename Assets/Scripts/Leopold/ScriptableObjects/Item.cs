@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : ScriptableObject{
 
     public int id;
+    public bool unlocked;
     public string itemName;
     public GameObject prefab;
     
