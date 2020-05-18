@@ -43,6 +43,7 @@ public partial class CharacterController : MonoBehaviour
 
 	[Header("Components")]
 	private Vector2 _movementInput;
+	private Vector3 _direction;
 	[SerializeField] private Transform _playerCenter;
 	public Transform playerCenter { get { return _playerCenter; } }
 	private Transform _camRef;
@@ -52,6 +53,10 @@ public partial class CharacterController : MonoBehaviour
 	[Header("Bools")]
 	[SerializeField] private bool _isRunning;
 	[SerializeField] private bool _isGrounded;
+	[SerializeField] private bool _isJumping;
+	private bool _jumpSafety = false;
+	[SerializeField] private bool _isFalling = false;
+	public bool isFalling { get { return _isFalling; } }
 
 	[Space(10)]
 	[Header("Metrics")]
@@ -61,10 +66,18 @@ public partial class CharacterController : MonoBehaviour
 	public float runningMultiplyFactor { get { return _runningMultiplyFactor; } }
 	[SerializeField] private float _rotSpeed = 7f;
 	public float rotSpeed { get { return _rotSpeed; } }
-	[SerializeField] private float _gravityStrength = 9.8f;
-	public float gravityStrength { get { return _gravityStrength; } }
+	[SerializeField] private float _groundDetectionRayLength = 0.5f;
+	public float groundDetectionRayLength { get { return _groundDetectionRayLength; } }
+	[SerializeField] private float _slopeCorrectorForce = 2f;
+	public float slopeCorrectorForce { get { return _slopeCorrectorForce; } }
+	[SerializeField] private float _jumpStrength = 6f;
+	private float jumpStrength { get { return _jumpStrength; } }
 	[SerializeField] private float _fallSpeed = 4f;
 	public float fallSpeed { get { return _fallSpeed; } }
+	[SerializeField] private float _fallingTreshold = 10f;
+	public float fallingTreshold { get { return _fallingTreshold; } }
+
+	private Coroutine jumpCoroutine;
 
 	private void Awake()
 	{
@@ -73,8 +86,8 @@ public partial class CharacterController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		GroundDetection();
-		ComputeMovement();
+		Move();
+		Debug.Log(OnGround());
 	}
 
 	#region INPUTS
@@ -83,10 +96,10 @@ public partial class CharacterController : MonoBehaviour
 	{
 		_movementInput = context.ReadValue<Vector2>();
 
-		if (_movementInput.x >= -0.2f && _movementInput.x <= 0.2f)
+		if (Mathf.Abs(_movementInput.x) <= 0.1f)
 			_movementInput.x = 0;
 
-		if (_movementInput.y >= -0.2f && _movementInput.y <= 0.2f)
+		if (Mathf.Abs(_movementInput.y) <= 0.1f)
 			_movementInput.y = 0;
 
 		if (_movementInput != Vector2.zero)
@@ -108,9 +121,40 @@ public partial class CharacterController : MonoBehaviour
 			_isRunning = false;
 	}
 
+	public void JumpInput (InputAction.CallbackContext context)
+	{
+		Debug.Log("hit");
+		if (context.started)
+			Jump();
+	}
+
 	#endregion
 
 	#region BEHAVIOUR
+
+	private void Move()
+	{
+		anim.SetBool("IsGrounded", OnGround());
+		anim.SetBool("isFalling", _isFalling);
+
+		if (OnGround() && !_isJumping)
+		{
+			ComputeMovement();
+			return;
+		}
+
+		if (!OnGround() && _isJumping)
+		{
+			Jumping();
+			return;
+		}
+
+		if (_isFalling)
+		{
+			Gravity();
+			return;
+		}
+	}
 
 	private void ComputeMovement()
 	{
@@ -138,63 +182,98 @@ public partial class CharacterController : MonoBehaviour
 			anim.SetFloat("ForwardBlend", 1);
 		}
 
-		Vector3 dir = transform.forward * (normalSpeed * moveAmount);
-		dir.y = rb.velocity.y;
+		_direction = transform.forward * (normalSpeed * moveAmount);
 
-		rb.velocity = dir;
+		_direction.y = rb.velocity.y;
+
+		if ((Mathf.Abs(_movementInput.x) > 0.1f || Mathf.Abs(_movementInput.y) > 0.1f) && OnSlope())
+			_direction += Vector3.down * cc.height * slopeCorrectorForce * Time.deltaTime;
+
+		rb.velocity = _direction;
 	}
 
-	private float Gravity(float y)
+	private void Gravity()
 	{
-		float gravity = y;
-		
-		if (_isGrounded)
-			return gravity = 0f;
-
-		gravity -= gravityStrength * fallSpeed * Time.deltaTime;
-
-		return gravity;
+		rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x, 0, fallSpeed * Time.deltaTime), rb.velocity.y, Mathf.Lerp(rb.velocity.z, 0, fallSpeed * Time.deltaTime));
+		rb.velocity -= new Vector3(0, fallSpeed * 2 * Time.deltaTime, 0);
 	}
-	/*
-	private void Rotate()
+
+	private void Jump()
 	{
-		if (_movementInput == Vector2.zero)
+		if (!_isGrounded)
 			return;
 
-		float angle;
-		angle = Mathf.Atan2(-_movementInput.y, _movementInput.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
+		if (jumpCoroutine != null)
+			StopCoroutine(jumpCoroutine);
+		jumpCoroutine = StartCoroutine(JumpCoroutine());
+
+		Debug.Log("Jumping");
+		rb.AddForce(Vector3.up * _jumpStrength);
+		_isJumping = true;
+		_isGrounded = false;
+		anim.SetTrigger("Jump");
 	}
 
-	private void Move()
+	private void Jumping()
 	{
-		if (_movementInput == Vector2.zero)
+		if (rb.velocity.y < -fallingTreshold)
+		{
+			_isJumping = false;
+			_isFalling = true;
 			return;
-			
-		Vector3 playerMovement = Vector3.forward * speed * Time.deltaTime;
-		transform.Translate(playerMovement);
-	}*/
+		}
+	}
+
+	private IEnumerator JumpCoroutine()
+	{
+		_jumpSafety = true;
+		yield return new WaitForSeconds(0.1f);
+		_jumpSafety = false;
+	}
 
 	#endregion
 
 	#region PHYSICS
-
-	private void GroundDetection()
+	
+	private bool OnSlope()
 	{
-		if (_isGrounded)
-			return;
+		if (_isJumping)
+			return false;
 
-		if (Physics.Raycast(transform.TransformPoint(cc.center + new Vector3(0, -cc.height / 2f, 0)), Vector3.down, 5f))
-			_isGrounded = true;
-		else
-			_isGrounded = false;
+		RaycastHit hit;
 
-		Debug.Log(_isGrounded);
+		if (Physics.Raycast(transform.TransformPoint(cc.center), Vector3.down, out hit, cc.height / 2 * groundDetectionRayLength))
+			if (hit.normal != Vector3.up)
+				return true;
+
+		return false;
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private bool OnGround()
 	{
-		GroundDetection();
+		if (_jumpSafety)
+			return false;
+
+		RaycastHit hit;
+
+		if (Physics.Raycast(transform.TransformPoint(cc.center), Vector3.down, out hit, cc.height / 2 * groundDetectionRayLength))
+		{
+			if (_isJumping)
+			{
+				_isJumping = false;
+				_isGrounded = true;
+				return true;
+			}
+			_isFalling = false;
+			_isGrounded = true;
+			return true;
+		}
+
+		if (!_isJumping)
+			_isFalling = true;
+
+		_isGrounded = false;
+		return false;
 	}
 
 	#endregion

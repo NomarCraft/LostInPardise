@@ -16,6 +16,9 @@ public partial class CameraController : MonoBehaviour
 
 		Gizmos.color = Color.red;
 		Gizmos.DrawSphere(transform.position, 0.5f);
+
+		Gizmos.color = Color.green;
+		Handles.DrawLine(transform.position, transform.position + Vector3.right);
 	}
 }
 #endif
