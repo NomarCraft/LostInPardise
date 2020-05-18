@@ -207,7 +207,6 @@ public partial class CharacterController : MonoBehaviour
 			StopCoroutine(jumpCoroutine);
 		jumpCoroutine = StartCoroutine(JumpCoroutine());
 
-		Debug.Log("Jumping");
 		rb.AddForce(Vector3.up * _jumpStrength);
 		_isJumping = true;
 		_isGrounded = false;
@@ -254,7 +253,7 @@ public partial class CharacterController : MonoBehaviour
 		if (_jumpSafety)
 			return false;
 
-		RaycastHit hit;
+		/*RaycastHit hit;
 
 		if (Physics.Raycast(transform.TransformPoint(cc.center), Vector3.down, out hit, cc.height / 2 * groundDetectionRayLength))
 		{
@@ -267,6 +266,26 @@ public partial class CharacterController : MonoBehaviour
 			_isFalling = false;
 			_isGrounded = true;
 			return true;
+		}*/
+
+		Collider[] colliders = Physics.OverlapSphere(transform.TransformPoint(cc.center) - new Vector3(0, cc.height / 2, 0), groundDetectionRayLength);
+		
+		foreach (Collider col in colliders)
+		{
+			if (col != cc)
+			{
+				{
+					if (_isJumping)
+					{
+						_isJumping = false;
+						_isGrounded = true;
+						return true;
+					}
+					_isFalling = false;
+					_isGrounded = true;
+					return true;
+				}
+			}
 		}
 
 		if (!_isJumping)
