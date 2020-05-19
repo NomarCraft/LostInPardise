@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1065001686211177411}
   - component: {fileID: 1065001686196682603}
   m_Layer: 0
-  m_Name: IL3DN_Shrub_Round_01_OneMesh
+  m_Name: Bush_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49205e5c7b68f364b92a10e9b3e76a83, type: 2}
+  - {fileID: 2100000, guid: 4ea518f471fd6ab469a44aef2fe80780, type: 2}
   - {fileID: 2100000, guid: d196cda956361f54cb094f4acad1b233, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
