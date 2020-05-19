@@ -41,6 +41,18 @@ public partial class CharacterController : MonoBehaviour
 		}
 	}
 
+	private Entity _ent;
+	public Entity ent
+	{
+		get
+		{
+			if (!_ent)
+				_ent = GetComponent<Entity>();
+
+			return _ent;
+		}
+	}
+
 	[Header("Components")]
 	private Vector2 _movementInput;
 	private Vector3 _direction;
@@ -76,6 +88,10 @@ public partial class CharacterController : MonoBehaviour
 	public float fallSpeed { get { return _fallSpeed; } }
 	[SerializeField] private float _fallingTreshold = 10f;
 	public float fallingTreshold { get { return _fallingTreshold; } }
+	[SerializeField] private float _fallingDamageTreshold = 20f;
+	public float fallingDamageTreshold { get { return _fallingDamageTreshold; } }
+	[SerializeField] private float _fallingDamageLethalTreshold = 30f;
+	public float fallingDamageLethalTreshold { get { return _fallingDamageLethalTreshold; } }
 
 	private Coroutine jumpCoroutine;
 
@@ -176,7 +192,7 @@ public partial class CharacterController : MonoBehaviour
 
 		float normalSpeed = ((Mathf.Abs(_movementInput.x) + Mathf.Abs(_movementInput.y)) / 2f) * speed;
 
-		if (_isRunning)
+		if (_isRunning && normalSpeed / speed >= 0.4f)
 		{
 			normalSpeed *= runningMultiplyFactor;
 			anim.SetFloat("ForwardBlend", 1);
@@ -207,7 +223,10 @@ public partial class CharacterController : MonoBehaviour
 			StopCoroutine(jumpCoroutine);
 		jumpCoroutine = StartCoroutine(JumpCoroutine());
 
-		rb.AddForce(Vector3.up * _jumpStrength);
+		Vector3 jumpVel = rb.velocity;
+		jumpVel.y = jumpStrength;
+
+		rb.velocity = jumpVel;
 		_isJumping = true;
 		_isGrounded = false;
 		anim.SetTrigger("Jump");
@@ -228,6 +247,16 @@ public partial class CharacterController : MonoBehaviour
 		_jumpSafety = true;
 		yield return new WaitForSeconds(0.1f);
 		_jumpSafety = false;
+	}
+
+	private void CheckFallDamage()
+	{
+		if (rb.velocity.y < -fallingDamageLethalTreshold)
+			ent.Death();
+		else if (rb.velocity.y < -fallingDamageTreshold)
+			ent.TakeDamage(1);
+		else
+			return;
 	}
 
 	#endregion
@@ -268,7 +297,7 @@ public partial class CharacterController : MonoBehaviour
 			return true;
 		}*/
 
-		Collider[] colliders = Physics.OverlapSphere(transform.TransformPoint(cc.center) - new Vector3(0, cc.height / 2, 0), groundDetectionRayLength);
+		Collider[] colliders = Physics.OverlapSphere(transform.TransformPoint(cc.center) - new Vector3(0, cc.height / 2, 0), cc.radius);
 		
 		foreach (Collider col in colliders)
 		{
@@ -281,6 +310,9 @@ public partial class CharacterController : MonoBehaviour
 						_isGrounded = true;
 						return true;
 					}
+					if (_isFalling)
+						CheckFallDamage();
+
 					_isFalling = false;
 					_isGrounded = true;
 					return true;
