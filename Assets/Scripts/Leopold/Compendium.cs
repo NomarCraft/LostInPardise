@@ -23,7 +23,11 @@ public class Compendium : MonoBehaviour
     [HideInInspector] public List<RecipeDictionnary> recipeDictionnaryInstance;
     public List<LogDictionnary> logDictionnary;
     [HideInInspector] public List<LogDictionnary> logDictionnaryInstance;
+    public List<ItemDictionnary> unlockedItem = new List<ItemDictionnary>();
+    public List<RecipeDictionnary> unlockedRecipe = new List<RecipeDictionnary>();
+    public List<LogDictionnary> unlockedLog = new List<LogDictionnary>();
 
+//Setting instance of the Scriptable Objects
     void Start(){
         for (int i = 0; i < itemDictionnary.Count; i++)
         {
@@ -45,11 +49,41 @@ public class Compendium : MonoBehaviour
     }
 
     public void CheckCompendium(Item pickedItem){
-        if(pickedItem.unlocked == false){
-            for (int i = itemDictionnaryInstance.Count - 1; i >= 0 ; i--)
-            {
-                if(itemDictionnaryInstance[i].item == pickedItem){
+
+        //Check if we already had the item
+        for (int i = itemDictionnaryInstance.Count - 1; i >= 0 ; i--)
+        {
+            if(itemDictionnaryInstance[i].item.id == pickedItem.id){
+                if(itemDictionnaryInstance[i].item.unlocked == false){
                     UnlockItem(i);
+
+                    //Check if we can unlock recipes
+                    for (int k = 0; k < recipeDictionnaryInstance.Count; k++)
+                    {
+                        if(!recipeDictionnaryInstance[k].recipe.unlocked){
+                            recipeDictionnaryInstance[k].recipe.unlocked = true;
+                            SortUnlockedRecipe();
+                            for (int j = 0; j < recipeDictionnaryInstance[k].recipe.ingredients.Count; j++)
+                            {
+                                int id = new int();
+
+                                for (int l = 0; l < itemDictionnaryInstance.Count; l++)
+                                {
+                                    if(itemDictionnaryInstance[l].item.id == recipeDictionnaryInstance[k].recipe.ingredients[j].id){
+                                        id = l;
+                                        break;
+                                    }
+                                }
+
+                                if(!itemDictionnaryInstance[id].item.unlocked){
+                                    recipeDictionnaryInstance[k].recipe.unlocked = false;
+                                    SortUnlockedRecipe();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     break;
                 }
             }
@@ -58,23 +92,41 @@ public class Compendium : MonoBehaviour
 
     public void UnlockItem(int id){
         itemDictionnaryInstance[id].item.unlocked = true;
-
-        for (int i = 0; i < recipeDictionnaryInstance.Count; i++)
-        {
-            if(!recipeDictionnaryInstance[i].recipe.unlocked){
-                recipeDictionnaryInstance[i].recipe.unlocked = true;
-                for (int j = 0; j < recipeDictionnaryInstance[i].recipe.ingredients.Count; j++)
-                {
-                    if(!recipeDictionnaryInstance[i].recipe.ingredients[j].unlocked){
-                        recipeDictionnaryInstance[i].recipe.unlocked = false;
-                        break;
-                    }
-                }
-            }
-        }
+        SortUnlockedItem();
     }
 
     public void UnlockLog(int logNumber){
-        
+        SortUnlockedLog();
+    }
+
+    public void SortUnlockedItem(){
+
+        unlockedItem.Sort(delegate(ItemDictionnary x, ItemDictionnary y)
+        {
+            if (x.item.id == 0 && y.item.id == 0) return 0;
+            else if (x.item.id == 0) return -1;
+            else if (y.item.id == 0) return 1;
+            else return x.item.id.CompareTo(y.item.id);
+        });
+    }
+    public void SortUnlockedRecipe(){
+
+        unlockedRecipe.Sort(delegate(RecipeDictionnary x, RecipeDictionnary y)
+        {
+            if (x.recipe.id == 0 && y.recipe.id == 0) return 0;
+            else if (x.recipe.id == 0) return -1;
+            else if (y.recipe.id == 0) return 1;
+            else return x.recipe.id.CompareTo(y.recipe.id);
+        });
+    }
+    public void SortUnlockedLog(){
+
+        unlockedLog.Sort(delegate(LogDictionnary x, LogDictionnary y)
+        {
+            if (x.log.id == 0 && y.log.id == 0) return 0;
+            else if (x.log.id == 0) return -1;
+            else if (y.log.id == 0) return 1;
+            else return x.log.id.CompareTo(y.log.id);
+        });
     }
 }

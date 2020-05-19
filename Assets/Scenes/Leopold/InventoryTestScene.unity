@@ -204,8 +204,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: RemoveDisplay
+      - m_Target: {fileID: 1944622194}
+        m_MethodName: ChangeDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -536,7 +536,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1805898972}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1259689235
@@ -2204,7 +2204,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2317,6 +2317,9 @@ MonoBehaviour:
   recipeDictionnaryInstance: []
   logDictionnary: []
   logDictionnaryInstance: []
+  unlockedItem: []
+  unlockedRecipe: []
+  unlockedLog: []
 --- !u!114 &1944622190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,8 +2374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2929bc48b1434ca4da4e7930112c5a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPage: {fileID: 0}
-  compendiumPage: {fileID: 0}
+  inventoryPage: {fileID: 1944622190}
+  inventoryDisplay: {fileID: 0}
+  compendiumPage: {fileID: 1944622189}
+  compendiumDisplay: {fileID: 0}
 --- !u!114 &1944622194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2390,7 +2395,7 @@ MonoBehaviour:
   X_START: -200
   Y_START: 280
   X_SPACE_BETWEEN_ITEM: 100
-  NUMBER_OF_COLUMN: 5
+  NUMBER_OF_COLUMN: 1
   Y_SPACE_BETWEEN_ITEMS: 100
 --- !u!1 &2037567727
 GameObject:

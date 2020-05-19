@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
   m_Name: Grass
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6068398185263138036, guid: e3d6446dd9b8f5848b7369231baabfc7, type: 3}
+  unlocked: 0
+  id: 0
+  itemName: 
+  weight: 0
+  menuAsset: {fileID: 6068398185263138036, guid: e3d6446dd9b8f5848b7369231baabfc7,
+    type: 3}
+  sprite: {fileID: 0}
   description: It's dead

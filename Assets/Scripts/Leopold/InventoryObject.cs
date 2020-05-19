@@ -6,6 +6,7 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> container = new List<InventorySlot>();
+    public Compendium compendium;
 
     public void AddItem(Item item, int amount){
 
@@ -20,7 +21,7 @@ public class InventoryObject : ScriptableObject
         }
         if(!hasItem){
             container.Add(new InventorySlot(item, amount));
-
+            compendium.CheckCompendium(item);
         }
     }
 
