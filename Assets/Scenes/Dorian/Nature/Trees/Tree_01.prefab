@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8455873776883921073}
   - component: {fileID: 8455873776897893401}
   m_Layer: 0
-  m_Name: IL3DN_Tree_Birch_01_OneMesh
+  m_Name: Tree_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
