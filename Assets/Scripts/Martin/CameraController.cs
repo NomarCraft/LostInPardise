@@ -64,19 +64,8 @@ public partial class CameraController : MonoBehaviour
 		_rotationRadiusChecked = 0;
 		Vector3 dir;
 		Vector3 cameraOriginalPosition = new Vector3(_playerCenter.position.x + Mathf.Cos(_angle) * (rotationRadius + _rotationRadiusChecked), _playerCenter.position.y + heightOffset, _playerCenter.position.z + Mathf.Sin(_angle) * (rotationRadius + _rotationRadiusChecked));
-		Vector3 relativePoint = _playerCenter.InverseTransformPoint(transform.position);
-		Debug.Log(relativePoint.x);
 
-		if (SightCheck(transform.position))
-		{
-			if (relativePoint.x > 0)
-				_angle -= angularSpeed * Time.deltaTime;
-			else if (relativePoint.x < 0)
-				_angle += angularSpeed * Time.deltaTime;
-			else
-				_angle += angularSpeed * Time.deltaTime;
-		}
-
+		CorrectPosition();
 		AngleCheck();
 		HeightCheck();
 
@@ -91,12 +80,7 @@ public partial class CameraController : MonoBehaviour
 		_previousAngle = _angle;
 		_heightOffset = Mathf.Clamp(_heightOffset + _heightCorrection + _lookMovement.y * angularSpeed * Time.deltaTime, minimumHeightOffset, maximumHeightOffset);
 
-		if (_player.isFalling == true && DirCheck(_playerCenter.position, Vector3.down, 4f))
-		{
-			_rotationRadiusChecked = rotationRadius / 1.25f;
-			if (SightCheck(cameraOriginalPosition))
-				_angle -= 1f;
-		}
+		FallCorrection(cameraOriginalPosition);
 
 		dir = new Vector3(_playerCenter.position.x + Mathf.Cos(_angle) * (rotationRadius - _rotationRadiusChecked), _playerCenter.position.y + heightOffset, _playerCenter.position.z + Mathf.Sin(_angle) * (rotationRadius - _rotationRadiusChecked));
 		transform.position = Vector3.Lerp(transform.position, dir, angularSpeed * 3 * Time.deltaTime);
@@ -109,10 +93,25 @@ public partial class CameraController : MonoBehaviour
 			_angle = 0f;
 	}
 
+	private void CorrectPosition()
+	{
+		Vector3 relativePoint = _playerCenter.InverseTransformPoint(transform.position);
+
+		if (SightCheck(transform.position))
+		{
+			if (relativePoint.x > 0)
+				_angle -= angularSpeed * Time.deltaTime;
+			else if (relativePoint.x < 0)
+				_angle += angularSpeed * Time.deltaTime;
+			else
+				_angle += angularSpeed * Time.deltaTime;
+		}
+	}
+
 	private void AngleCheck()
 	{
 		
-		if (!DirCheck(transform.position, -transform.right, 1.5f))
+		if (!DirCheck(transform.position, -transform.right, 2f))
 		{
 			if (_lookMovement.x < 0f)
 			{
@@ -120,7 +119,7 @@ public partial class CameraController : MonoBehaviour
 			}
 			return;
 		}
-		if (!DirCheck(transform.position, transform.right, 1.5f))
+		if (!DirCheck(transform.position, transform.right, 2f))
 		{
 			if (_lookMovement.x > 0f)
 			{
@@ -145,12 +144,22 @@ public partial class CameraController : MonoBehaviour
 		if (!DirCheck(transform.position, Vector3.down, 1f))
 		{
 			_lookMovement.y = 0;
-			_heightCorrection += angularSpeed / 20 * Time.deltaTime;
+			_heightCorrection += angularSpeed / 10 * Time.deltaTime;
 			return;
 		}
 
 		_heightCorrection = 0f;
 		return;
+	}
+
+	private void FallCorrection(Vector3 pos)
+	{
+		if (_player.isFalling == true && DirCheck(_playerCenter.position, Vector3.down, 6f))
+		{
+			_rotationRadiusChecked = rotationRadius / 1.25f;
+			if (SightCheck(pos))
+				_angle -= 1f;
+		}
 	}
 
 	private bool SightCheck(Vector3 pos)

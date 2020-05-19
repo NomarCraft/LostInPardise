@@ -3588,6 +3588,7 @@ GameObject:
   - component: {fileID: 594877578165683725}
   - component: {fileID: 594877578165683720}
   - component: {fileID: 8890249799327440756}
+  - component: {fileID: 2296153966717203585}
   - component: {fileID: 8890249799327440757}
   m_Layer: 0
   m_Name: Character
@@ -3675,7 +3676,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCenter: {fileID: 0}
+  _isRunning: 0
+  _isGrounded: 0
+  _isJumping: 0
+  _isFalling: 0
   _speed: 5
+  _runningMultiplyFactor: 2
+  _rotSpeed: 7
+  _groundDetectionRayLength: 0.5
+  _slopeCorrectorForce: 2
+  _jumpStrength: 6
+  _fallSpeed: 4
+  _fallingTreshold: 10
+  _fallingDamageTreshold: 20
+  _fallingDamageLethalTreshold: 30
+--- !u!114 &2296153966717203585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890249799327440763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f8b0329eaa3174f9f0e4728e09dd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invincible: 0
+  _canRespawn: 1
+  _life: 5
 --- !u!114 &8890249799327440757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3776,6 +3805,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d0b5b7ac-2a21-426f-918f-9bd2ebc77864
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b233777f-8d5a-486b-985f-4af5f59a09ce
+    m_ActionName: Player/Jump[/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
