@@ -53,6 +53,22 @@ public partial class CharacterController : MonoBehaviour
 		}
 	}
 
+	private GameManager _gm;
+	public GameManager gm
+	{
+		get
+		{
+			if (!_gm)
+				_gm = GameManager.Instance;
+
+			return _gm;
+		}
+	}
+
+	[Header("References")]
+	private UIManager _ui;
+
+	[Space(10)]
 	[Header("Components")]
 	private Vector2 _movementInput;
 	private Vector3 _direction;
@@ -95,9 +111,11 @@ public partial class CharacterController : MonoBehaviour
 
 	private Coroutine jumpCoroutine;
 
-	private void Awake()
+	#region UNITY
+
+	private void Start()
 	{
-		
+		Initialize();
 	}
 
 	private void FixedUpdate()
@@ -105,6 +123,8 @@ public partial class CharacterController : MonoBehaviour
 		Move();
 		Debug.Log(OnGround());
 	}
+
+	#endregion
 
 	#region INPUTS
 
@@ -147,6 +167,14 @@ public partial class CharacterController : MonoBehaviour
 	#endregion
 
 	#region BEHAVIOUR
+
+	private void Initialize()
+	{
+		if (gm.uiManager != null)
+			_ui = gm.uiManager;
+
+		ent.OnLifeChange += UpdateLifeBar;
+	}
 
 	private void Move()
 	{
@@ -329,5 +357,16 @@ public partial class CharacterController : MonoBehaviour
 
 	#endregion
 
+	#region UI
+
+	private void UpdateLifeBar()
+	{
+		if (_ui == null)
+			return;
+
+		_ui.UpdateScrollbarValue(ent.startingLife, ent.life, _ui._playerLifeScrollbar);
+	}
+
+	#endregion
 
 }
