@@ -44,6 +44,10 @@ public class CompendiumDisplay : MonoBehaviour
         }
     }
 
+    public void DisplayData(CompendiumData scriptable){
+        
+    }
+
     public Vector3 GetPosition(int i){
         return new Vector3(X_START, Y_START + (-Y_SPACE_BETWEEN_ITEMS * i), 0f);
     }
