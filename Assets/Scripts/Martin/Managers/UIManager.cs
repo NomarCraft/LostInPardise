@@ -9,9 +9,26 @@ public class UIManager : MonoBehaviour
 	[Header("Panels")]
 	public GameObject _allPanelsParent;
 	public GameObject _playerStatusPanel;
+	public GameObject _interactPanel;
 
-	[Header("Fields")]
+	[Space(10)]
+	[Header("PlayerStatus")]
 	public Scrollbar _playerLifeScrollbar;
+
+	[Space(10)]
+	[Header("Interactable")]
+	public Image _interactableCenterImage;
+	public TextMeshProUGUI _interactableNameText;
+	public Image _xButtonImage;
+	public Image _yButtonImage;
+	public Image _bButtonImage;
+	public TextMeshProUGUI _xNameText;
+	public TextMeshProUGUI _yNameText;
+	public TextMeshProUGUI _bNameText;
+	public TextMeshProUGUI _xInteractableNameText;
+	public TextMeshProUGUI _yInteractableNameText;
+	public TextMeshProUGUI _bInteractableNameText;
+
 
 	private void Start()
 	{
