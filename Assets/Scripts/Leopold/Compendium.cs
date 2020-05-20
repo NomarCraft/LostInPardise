@@ -6,15 +6,15 @@ public class Compendium : MonoBehaviour
 {
     [System.Serializable]
     public class ItemDictionnary{
-        public Item item;
+        public CompendiumData item;
     }
     [System.Serializable]
     public class RecipeDictionnary{
-        public Recipe recipe;
+        public CompendiumData recipe;
     }
     [System.Serializable]
     public class LogDictionnary{
-        public Log log;
+        public CompendiumData log;
     }
 
     public List<ItemDictionnary> itemDictionnary;
@@ -48,7 +48,7 @@ public class Compendium : MonoBehaviour
         }
     }
 
-    public void CheckCompendium(Item pickedItem){
+    public void CheckCompendium(CompendiumData pickedItem){
 
         //Check if we already had the item
         for (int i = itemDictionnaryInstance.Count - 1; i >= 0 ; i--)
