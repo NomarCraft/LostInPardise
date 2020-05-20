@@ -13,10 +13,15 @@ public class Entity : MonoBehaviour
 	[Space(10)]
 	[Header("Metrics")]
 	private int _startingLife;
+	public int startingLife { get { return _startingLife; } }
 	[SerializeField] private int _life = 5;
 	public int life { get { return _life; } }
-
 	private Vector3 _startPos;
+
+	//Events
+	public delegate void DefaultCallback();
+
+	public DefaultCallback OnLifeChange;
 
 	private void Start()
 	{
@@ -31,8 +36,7 @@ public class Entity : MonoBehaviour
 
 
 		_life -= amount;
-		//Play Anim and Sound
-		Debug.Log(life);
+		OnLifeChange();
 
 		if (_life <= 0)
 			Death();
@@ -45,11 +49,13 @@ public class Entity : MonoBehaviour
 			return;
 
 		Respawn();
+		OnLifeChange();
 	}
 
 	public void Respawn()
 	{
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		transform.position = _startPos;
+		_life = _startingLife;
 	}
 }
