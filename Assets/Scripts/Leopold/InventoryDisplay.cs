@@ -48,7 +48,7 @@ public class InventoryDisplay : MonoBehaviour
 
     public void ChangeDisplay(){
 
-        inventory.SortInventoryById();
+        //inventory.SortInventoryById();
 
         foreach (var item in itemsDisplayed)
         {
@@ -56,7 +56,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         itemsDisplayed.Clear();
 
-        CreateDisplay();
+        //CreateDisplay();
     }
 
     public Vector3 GetPosition(int i){
