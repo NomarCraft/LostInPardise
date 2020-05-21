@@ -34,7 +34,7 @@ Material:
     - Vector1_E2FB12BD: 200
     m_Colors:
     - Color_23FB68F0: {r: 1, g: 1, b: 1, a: 0}
-    - Color_652E856A: {r: 0.6792453, g: 0.4007635, b: 0.1954432, a: 0}
+    - Color_652E856A: {r: 0.7735849, g: 0.58044934, b: 0.56559277, a: 0}
     - Color_E863D39D: {r: 1, g: 1, b: 1, a: 0}
     - _L1_color: {r: 0, g: 0, b: 0, a: 0}
     - _L1_dir: {r: 0, g: 0, b: 0, a: 0}
