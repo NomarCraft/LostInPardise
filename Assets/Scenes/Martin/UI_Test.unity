@@ -814,15 +814,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f479623f026276448411af7dac620b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allPanelsParent: {fileID: 605609250}
+  allPanelsParent:
+  - {fileID: 1178576543}
+  - {fileID: 1748330117}
   _playerStatusPanel: {fileID: 1178576543}
   _interactPanel: {fileID: 1748330117}
   _playerLifeScrollbar: {fileID: 1274368844}
   _interactableCenterImage: {fileID: 524775535}
   _interactableNameText: {fileID: 1106339695}
+  _buttonsImage:
+  - {fileID: 846100716}
+  - {fileID: 1252547050}
+  - {fileID: 1100183763}
   _xButtonImage: {fileID: 846100716}
   _yButtonImage: {fileID: 1252547050}
   _bButtonImage: {fileID: 1100183763}
+  _buttonsName:
+  - {fileID: 2086827479}
+  - {fileID: 230112647}
+  - {fileID: 730054016}
+  _interactablesNameText:
+  - {fileID: 1845372248}
+  - {fileID: 424661725}
+  - {fileID: 415096571}
   _xNameText: {fileID: 2086827479}
   _yNameText: {fileID: 230112647}
   _bNameText: {fileID: 730054016}
@@ -1775,7 +1789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13.999939, y: -13.000061}
+  m_AnchoredPosition: {x: 14, y: -13}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1638219208

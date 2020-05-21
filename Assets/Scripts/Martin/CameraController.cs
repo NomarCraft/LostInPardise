@@ -168,7 +168,7 @@ public partial class CameraController : MonoBehaviour
 		Vector3 dir = (_playerCenter.position - pos).normalized;
 
 		if (Physics.Raycast(pos, dir, out hit, Vector3.Distance(pos, _playerCenter.position)))
-			if (hit.transform.gameObject.GetComponent<CharacterController>() == null)
+			if (hit.transform.gameObject.GetComponent<CharacterController>() == null && !hit.collider.isTrigger)
 			{
 				return true;
 			}
@@ -177,7 +177,7 @@ public partial class CameraController : MonoBehaviour
 				Vector3 inverseDir = (pos - _playerCenter.position).normalized;
 				if (Physics.Raycast(_playerCenter.position, inverseDir, out hit, Vector3.Distance(_playerCenter.position, pos)))
 				{
-					if (hit.transform.gameObject.GetComponent<CameraController>() == null)
+					if (hit.transform.gameObject.GetComponent<CameraController>() == null && !hit.collider.isTrigger)
 						return true;
 					else
 						return false;
@@ -190,9 +190,11 @@ public partial class CameraController : MonoBehaviour
 
 	private bool DirCheck(Vector3 origin, Vector3 dir, float dist)
 	{
-		if (Physics.Raycast(origin, dir, dist))
+		RaycastHit hit;
+		if (Physics.Raycast(origin, dir, out hit, dist))
 		{
-			return false;
+			if (!hit.collider.isTrigger)
+				return false;
 		}
 
 		return true;
@@ -203,8 +205,11 @@ public partial class CameraController : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast(origin, dir, out hit, dist))
 		{
-			distance = hit.distance;
-			return false;
+			if (!hit.collider.isTrigger)
+			{
+				distance = hit.distance;
+				return false;
+			}
 		}
 
 		distance = 0;

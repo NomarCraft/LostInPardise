@@ -7,7 +7,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
 	[Header("Panels")]
-	public GameObject _allPanelsParent;
+	public GameObject[] allPanelsParent;
 	public GameObject _playerStatusPanel;
 	public GameObject _interactPanel;
 
@@ -19,9 +19,12 @@ public class UIManager : MonoBehaviour
 	[Header("Interactable")]
 	public Image _interactableCenterImage;
 	public TextMeshProUGUI _interactableNameText;
+	public Image[] _buttonsImage;
 	public Image _xButtonImage;
 	public Image _yButtonImage;
 	public Image _bButtonImage;
+	public TextMeshProUGUI[] _buttonsName;
+	public TextMeshProUGUI[] _interactablesNameText;
 	public TextMeshProUGUI _xNameText;
 	public TextMeshProUGUI _yNameText;
 	public TextMeshProUGUI _bNameText;
@@ -37,8 +40,10 @@ public class UIManager : MonoBehaviour
 
 	public void HideAllElements()
 	{
-		if (_allPanelsParent.activeSelf != false)
-			_allPanelsParent.SetActive(false);
+		foreach (GameObject panel in allPanelsParent)
+		{
+			panel.SetActive(false);
+		}
 	}
 
 	public void DisplayElement(GameObject obj)
@@ -58,4 +63,18 @@ public class UIManager : MonoBehaviour
 		scrollbar.size = amount / totalAmount;
 	}
 
+	public void ChangeText(TextMeshProUGUI textToChange, string text)
+	{
+		textToChange.text = text;
+	}
+
+	public void ChangeTextColor(TextMeshProUGUI textToChange, Color color)
+	{
+		textToChange.color = color;
+	}
+
+	public void UpdateImageAlpha(Image imageToChange, float alpha)
+	{
+		imageToChange.color = new Color(imageToChange.color.r, imageToChange.color.g, imageToChange.color.b, alpha);
+	}
 }

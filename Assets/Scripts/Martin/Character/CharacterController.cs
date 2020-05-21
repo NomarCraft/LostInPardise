@@ -121,7 +121,6 @@ public partial class CharacterController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		Move();
-		Debug.Log(OnGround());
 	}
 
 	#endregion
@@ -171,9 +170,19 @@ public partial class CharacterController : MonoBehaviour
 	private void Initialize()
 	{
 		if (gm.uiManager != null)
+		{
 			_ui = gm.uiManager;
+			InitializeUI();
+		}
+
 
 		ent.OnLifeChange += UpdateLifeBar;
+	}
+
+	private void InitializeUI()
+	{
+		_ui.HideAllElements();
+		_ui.DisplayElement(_ui._playerStatusPanel);
 	}
 
 	private void Move()
