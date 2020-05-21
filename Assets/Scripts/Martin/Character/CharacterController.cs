@@ -65,6 +65,18 @@ public partial class CharacterController : MonoBehaviour
 		}
 	}
 
+	private Interactor _interactor;
+	public Interactor interactor
+	{
+		get
+		{
+			if (!_interactor)
+				_interactor = GetComponentInChildren<Interactor>();
+
+			return _interactor;
+		}
+	}
+
 	[Header("References")]
 	private UIManager _ui;
 
@@ -177,6 +189,7 @@ public partial class CharacterController : MonoBehaviour
 
 
 		ent.OnLifeChange += UpdateLifeBar;
+		interactor.OnInteract += UpdateInteraction;
 	}
 
 	private void InitializeUI()
@@ -340,20 +353,23 @@ public partial class CharacterController : MonoBehaviour
 		{
 			if (col != cc)
 			{
+				if (_isJumping)
 				{
-					if (_isJumping)
-					{
-						_isJumping = false;
-						_isGrounded = true;
-						return true;
-					}
-					if (_isFalling)
-						CheckFallDamage();
+					_isJumping = false;
+					_isGrounded = true;
+					return true;
+				}
 
+				if (_isFalling)
+				{
+					CheckFallDamage();
 					_isFalling = false;
 					_isGrounded = true;
 					return true;
 				}
+
+				_isGrounded = true;
+				return true;
 			}
 		}
 
@@ -374,6 +390,39 @@ public partial class CharacterController : MonoBehaviour
 			return;
 
 		_ui.UpdateScrollbarValue(ent.startingLife, ent.life, _ui._playerLifeScrollbar);
+	}
+
+	private void UpdateInteraction()
+	{
+		if (_ui == null)
+			return;
+
+		if (interactor._interactables.Count == 0)
+		{
+			_ui.HideElement(_ui._interactPanel);
+			return;
+		}
+
+		InteractableType[] interaction = interactor._interactables[0]._interactions;
+
+		_ui.DisplayElement(_ui._interactPanel);
+		_ui.UpdateImageAlpha(_ui._interactableCenterImage, 1f);
+		_ui.ChangeText(_ui._interactableNameText, interactor._interactables[0]._interactableName);
+		_ui.InteractTextReset();
+
+		for (int i = 0; i < interaction.Length; i++)
+		{
+			_ui.ChangeText(_ui._interactablesNameText[i], interaction[i]._interaction.ToString());
+
+			if (interaction[i]._toolRequired)
+			{
+				_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.red);
+			}
+			else
+			{
+				_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.white);
+			}
+		}
 	}
 
 	#endregion

@@ -4,14 +4,22 @@ using UnityEngine;
 
 public partial class Interactor : MonoBehaviour
 {
-	public List<Interactable> _interactables;
+	public delegate void InteractCallBack();
+
+	public InteractCallBack OnInteract;
+
+	public List<Interactable> _interactables = new List<Interactable>();
 
 	private void OnTriggerEnter(Collider other)
 	{
+		Debug.Log(other.name);
 		Interactable interactable = other.GetComponent<Interactable>();
 
 		if (interactable != null)
+		{
 			_interactables.Add(interactable);
+			OnInteract();
+		}
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -25,6 +33,8 @@ public partial class Interactor : MonoBehaviour
 				if (interactable == inter)
 				{
 					_interactables.Remove(inter);
+					OnInteract();
+					return;
 				}
 			}
 		}

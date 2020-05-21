@@ -77,4 +77,12 @@ public class UIManager : MonoBehaviour
 	{
 		imageToChange.color = new Color(imageToChange.color.r, imageToChange.color.g, imageToChange.color.b, alpha);
 	}
+
+	public void InteractTextReset()
+	{
+		foreach (TextMeshProUGUI text in _interactablesNameText)
+		{
+			text.text = "";
+		}
+	}
 }
