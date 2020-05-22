@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour
 	public bool invincible { get { return _invincible; } }
 	[SerializeField] private bool _canRespawn = false;
 	public bool canRespawn { get { return _canRespawn; } }
+	[SerializeField] private bool _respawnPilotedByScript = true;
+	public bool respawnPilotedByScript { get { return _respawnPilotedByScript; } }
 
 	[Space(10)]
 	[Header("Metrics")]
@@ -22,6 +24,7 @@ public class Entity : MonoBehaviour
 	public delegate void DefaultCallback();
 
 	public DefaultCallback OnLifeChange;
+	public DefaultCallback OnDeath;
 
 	private void Start()
 	{
@@ -44,12 +47,15 @@ public class Entity : MonoBehaviour
 
 	public void Death()
 	{
+		_life = 0;
 		Debug.Log("AIE");
 		if (!canRespawn)
 			return;
-
-		Respawn();
 		OnLifeChange();
+		OnDeath();
+
+		if (!respawnPilotedByScript)
+			Respawn();
 	}
 
 	public void Respawn()
@@ -57,5 +63,6 @@ public class Entity : MonoBehaviour
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		transform.position = _startPos;
 		_life = _startingLife;
+		OnLifeChange();
 	}
 }

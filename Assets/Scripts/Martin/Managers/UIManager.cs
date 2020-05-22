@@ -7,6 +7,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
 	[Header("Panels")]
+	public Image _fadeImage;
 	public GameObject[] allPanelsParent;
 	public GameObject _playerStatusPanel;
 	public GameObject _interactPanel;
@@ -32,10 +33,16 @@ public class UIManager : MonoBehaviour
 	public TextMeshProUGUI _yInteractableNameText;
 	public TextMeshProUGUI _bInteractableNameText;
 
+	private Coroutine fadeCoroutine;
 
 	private void Start()
 	{
 
+	}
+
+	private void Update()
+	{
+		
 	}
 
 	public void HideAllElements()
@@ -61,6 +68,11 @@ public class UIManager : MonoBehaviour
 	public void UpdateScrollbarValue(float totalAmount, float amount, Scrollbar scrollbar)
 	{
 		scrollbar.size = amount / totalAmount;
+
+		if (scrollbar.size == 0)
+			scrollbar.GetComponentInChildren<RectTransform>().gameObject.SetActive(false);
+		else
+			scrollbar.GetComponentInChildren<RectTransform>().gameObject.SetActive(true);
 	}
 
 	public void ChangeText(TextMeshProUGUI textToChange, string text)
@@ -83,6 +95,35 @@ public class UIManager : MonoBehaviour
 		foreach (TextMeshProUGUI text in _interactablesNameText)
 		{
 			text.text = "";
+		}
+	}
+
+	public void StartFade(Image imageToFade, int mode)
+	{
+		if (fadeCoroutine != null)
+			StopCoroutine(fadeCoroutine);
+
+		fadeCoroutine = StartCoroutine(Fade(imageToFade, mode));
+	}
+
+	private IEnumerator Fade(Image imageToFade, int mode)
+	{
+		if (mode == 0)
+		{
+			for (float i = 1; i >= 0; i = imageToFade.color.a)
+			{
+				imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, Mathf.Lerp(imageToFade.color.a, 0, Time.deltaTime * 3f));
+				yield return null;
+			}
+		}
+		else if (mode == 1)
+		{
+			for (float i = 0; i <= 1; i = imageToFade.color.a)
+			{
+				imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, Mathf.Lerp(imageToFade.color.a, 1, Time.deltaTime * 3f));
+				//imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, i);
+				yield return null;
+			}
 		}
 	}
 }

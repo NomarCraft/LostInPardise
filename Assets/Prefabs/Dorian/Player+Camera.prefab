@@ -1093,6 +1093,7 @@ MonoBehaviour:
   _fallingTreshold: 5
   _fallingDamageTreshold: 15
   _fallingDamageLethalTreshold: 25
+  _respawnTime: 5
 --- !u!114 &8585615535073204104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,6 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _invincible: 0
   _canRespawn: 1
+  _respawnPilotedByScript: 1
   _life: 5
 --- !u!114 &1412770315032018044
 MonoBehaviour:
