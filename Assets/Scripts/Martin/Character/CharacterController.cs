@@ -65,6 +65,18 @@ public partial class CharacterController : MonoBehaviour
 		}
 	}
 
+	private Interactor _interactor;
+	public Interactor interactor
+	{
+		get
+		{
+			if (!_interactor)
+				_interactor = GetComponentInChildren<Interactor>();
+
+			return _interactor;
+		}
+	}
+
 	[Header("References")]
 	private UIManager _ui;
 
@@ -85,6 +97,9 @@ public partial class CharacterController : MonoBehaviour
 	private bool _jumpSafety = false;
 	[SerializeField] private bool _isFalling = false;
 	public bool isFalling { get { return _isFalling; } }
+	private bool _isFastFalling = false;
+	private bool _isDeadlyFalling = false;
+	private bool _invinsibility = false;
 
 	[Space(10)]
 	[Header("Metrics")]
@@ -108,8 +123,13 @@ public partial class CharacterController : MonoBehaviour
 	public float fallingDamageTreshold { get { return _fallingDamageTreshold; } }
 	[SerializeField] private float _fallingDamageLethalTreshold = 30f;
 	public float fallingDamageLethalTreshold { get { return _fallingDamageLethalTreshold; } }
+	[SerializeField] private float _respawnTime = 5f;
+	public float respawnTime { get { return _respawnTime; } }
+	private float _freezeMovement = 1f;
 
 	private Coroutine jumpCoroutine;
+	private Coroutine respawnCoroutine;
+	private Coroutine invinsibilityCoroutine;
 
 	#region UNITY
 
@@ -120,8 +140,10 @@ public partial class CharacterController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (!_invinsibility)
+			VelocityCheck();
+
 		Move();
-		Debug.Log(OnGround());
 	}
 
 	#endregion
@@ -171,23 +193,36 @@ public partial class CharacterController : MonoBehaviour
 	private void Initialize()
 	{
 		if (gm.uiManager != null)
+		{
 			_ui = gm.uiManager;
+			InitializeUI();
+		}
+
 
 		ent.OnLifeChange += UpdateLifeBar;
+		ent.OnDeath += Respawn;
+		interactor.OnInteract += UpdateInteraction;
+	}
+
+	private void InitializeUI()
+	{
+		_ui.HideAllElements();
+		_ui.DisplayElement(_ui._playerStatusPanel);
 	}
 
 	private void Move()
 	{
-		anim.SetBool("IsGrounded", OnGround());
+		_isGrounded = OnGround();
+		anim.SetBool("IsGrounded",_isGrounded);
 		anim.SetBool("isFalling", _isFalling);
 
-		if (OnGround() && !_isJumping)
+		if (_isGrounded && !_isJumping)
 		{
 			ComputeMovement();
 			return;
 		}
 
-		if (!OnGround() && _isJumping)
+		if (!_isGrounded && _isJumping)
 		{
 			Jumping();
 			return;
@@ -216,7 +251,9 @@ public partial class CharacterController : MonoBehaviour
 
 		Quaternion lookDir = Quaternion.LookRotation(targetDir);
 		Quaternion targetRot = Quaternion.Slerp(transform.rotation, lookDir, Time.deltaTime * rotSpeed);
-		transform.rotation = targetRot;
+
+		if (_freezeMovement != 0)
+			transform.rotation = targetRot;
 
 		float normalSpeed = ((Mathf.Abs(_movementInput.x) + Mathf.Abs(_movementInput.y)) / 2f) * speed;
 
@@ -233,7 +270,7 @@ public partial class CharacterController : MonoBehaviour
 		if ((Mathf.Abs(_movementInput.x) > 0.1f || Mathf.Abs(_movementInput.y) > 0.1f) && OnSlope())
 			_direction += Vector3.down * cc.height * slopeCorrectorForce * Time.deltaTime;
 
-		rb.velocity = _direction;
+		rb.velocity = _direction * _freezeMovement;
 	}
 
 	private void Gravity()
@@ -277,14 +314,49 @@ public partial class CharacterController : MonoBehaviour
 		_jumpSafety = false;
 	}
 
+	private void VelocityCheck()
+	{
+		if (rb.velocity.y < -fallingDamageTreshold && !_isFastFalling)
+			_isFastFalling = true;
+
+		if (rb.velocity.y < -fallingDamageLethalTreshold && !_isDeadlyFalling)
+			_isDeadlyFalling = true;
+	}
+
 	private void CheckFallDamage()
 	{
-		if (rb.velocity.y < -fallingDamageLethalTreshold)
+		if (_isDeadlyFalling)
+		{
+			_isDeadlyFalling = false;
+			_isFastFalling = false;
 			ent.Death();
-		else if (rb.velocity.y < -fallingDamageTreshold)
+
+			if (invinsibilityCoroutine != null)
+				StopCoroutine(invinsibilityCoroutine);
+			invinsibilityCoroutine = StartCoroutine(Invinsibility());
+
+			return;
+		}
+		else if (_isFastFalling)
+		{
+			_isFastFalling = false;
 			ent.TakeDamage(1);
+
+			if (invinsibilityCoroutine != null)
+				StopCoroutine(invinsibilityCoroutine);
+			invinsibilityCoroutine = StartCoroutine(Invinsibility());
+
+			return;
+		}
 		else
 			return;
+	}
+
+	private IEnumerator Invinsibility()
+	{
+		_invinsibility = true;
+		yield return new WaitForSeconds(0.5f);
+		_invinsibility = false;
 	}
 
 	#endregion
@@ -331,20 +403,19 @@ public partial class CharacterController : MonoBehaviour
 		{
 			if (col != cc)
 			{
+				if (_isJumping)
 				{
-					if (_isJumping)
-					{
-						_isJumping = false;
-						_isGrounded = true;
-						return true;
-					}
-					if (_isFalling)
-						CheckFallDamage();
-
-					_isFalling = false;
+					_isJumping = false;
 					_isGrounded = true;
 					return true;
 				}
+
+				CheckFallDamage();
+				_isFastFalling = false;
+				_isDeadlyFalling = false;
+				_isFalling = false;
+				_isGrounded = true;
+				return true;
 			}
 		}
 
@@ -365,6 +436,59 @@ public partial class CharacterController : MonoBehaviour
 			return;
 
 		_ui.UpdateScrollbarValue(ent.startingLife, ent.life, _ui._playerLifeScrollbar);
+	}
+
+	private void Respawn()
+	{
+		_ui.StartFade(_ui._fadeImage, 1);
+		_freezeMovement = 0f;
+
+		if (respawnCoroutine != null)
+			StopCoroutine(respawnCoroutine);
+
+		respawnCoroutine = StartCoroutine(RespawnTimer(respawnTime));
+	}
+
+	private IEnumerator RespawnTimer(float respawnTime)
+	{
+		yield return new WaitForSeconds(respawnTime);
+		ent.Respawn();
+		yield return new WaitForSeconds(0.5f);
+		_ui.StartFade(_ui._fadeImage, 0);
+		_freezeMovement = 1f;
+	}
+
+	private void UpdateInteraction()
+	{
+		if (_ui == null)
+			return;
+
+		if (interactor._interactables.Count == 0)
+		{
+			_ui.HideElement(_ui._interactPanel);
+			return;
+		}
+
+		InteractableType[] interaction = interactor._interactables[0]._interactions;
+
+		_ui.DisplayElement(_ui._interactPanel);
+		_ui.UpdateImageAlpha(_ui._interactableCenterImage, 1f);
+		_ui.ChangeText(_ui._interactableNameText, interactor._interactables[0]._interactableName);
+		_ui.InteractTextReset();
+
+		for (int i = 0; i < interaction.Length; i++)
+		{
+			_ui.ChangeText(_ui._interactablesNameText[i], interaction[i]._interaction.ToString());
+
+			if (interaction[i]._toolRequired)
+			{
+				_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.red);
+			}
+			else
+			{
+				_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.white);
+			}
+		}
 	}
 
 	#endregion
