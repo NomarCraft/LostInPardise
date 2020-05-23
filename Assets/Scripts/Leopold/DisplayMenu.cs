@@ -22,7 +22,7 @@ public class DisplayMenu : MonoBehaviour
         inventoryShown = false;
         inventoryPage.gameObject.SetActive(false);
         compendiumPage.gameObject.SetActive(true);
-        compendiumDisplay.CreateItemDisplay();
+        //compendiumDisplay.CreateItemDisplay();
     }
 
     public void ChangeCompendiumPage(){

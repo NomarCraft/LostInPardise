@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class CompendiumDisplay : MonoBehaviour
-{
+{/*
     public Compendium compendium;
     
     [SerializeField] Transform compendiumPage;
@@ -15,6 +15,10 @@ public class CompendiumDisplay : MonoBehaviour
     void Start(){
         CreateItemDisplay();
     }
+
+    TextMeshProUGUI itemName;
+    TextMeshProUGUI itemDescription;
+    Sprite itemSprite;
 
     public void CreateItemDisplay(){
         
@@ -45,10 +49,16 @@ public class CompendiumDisplay : MonoBehaviour
     }
 
     public void DisplayData(CompendiumData scriptable){
-        
+        itemName.text = scriptable.itemName;
+        itemDescription.text = scriptable.description;
+    }
+
+    public void RemoveData(CompendiumData scriptable){
+        itemName.text = null;
+        itemDescription.text = null;
     }
 
     public Vector3 GetPosition(int i){
         return new Vector3(X_START, Y_START + (-Y_SPACE_BETWEEN_ITEMS * i), 0f);
-    }
+    }*/
 }

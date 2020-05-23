@@ -2292,7 +2292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944622187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12456107, y: 0.12763643, z: -0.21389937}
+  m_LocalPosition: {x: -2.6, y: 0.12763643, z: -0.21389937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1478381543}
@@ -2312,7 +2312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f0c6a58fdc09944bd9e7ca55549b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDictionnary: []
+  itemDictionnary:
+  - item: {fileID: 11400000, guid: d7948e0e261d5cb4d8c7a7bab86c13af, type: 2}
+  - item: {fileID: 11400000, guid: 37d137a383e374a45aa337ad50639d6a, type: 2}
+  - item: {fileID: 11400000, guid: 41871d9e664d06d4fb5a4fedbee7e611, type: 2}
   itemDictionnaryInstance: []
   recipeDictionnary: []
   recipeDictionnaryInstance: []
@@ -2333,7 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7215924c05249f14182a6868fba155f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 193457d1df1746c469c737043e914a99, type: 2}
+  inventory: {fileID: 1944622195}
 --- !u!54 &1944622191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2376,7 +2379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPage: {fileID: 1944622190}
-  inventoryDisplay: {fileID: 0}
+  inventoryDisplay: {fileID: 1944622194}
   compendiumPage: {fileID: 1944622189}
   compendiumDisplay: {fileID: 0}
 --- !u!114 &1944622194
@@ -2391,7 +2394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb596e535484d6d46976b59cacf32ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 193457d1df1746c469c737043e914a99, type: 2}
+  inventory: {fileID: 1944622195}
   itemPage: {fileID: 1126272538}
   X_START: -200
   Y_START: 280
@@ -2407,21 +2410,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1944622187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7922f85ffb8ce5c47b34932dfe864951, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b3bf9367b8dfcb48a7aa85158906d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container:
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  compendium: {fileID: 0}
+  container: []
+  compendium: {fileID: 1944622189}
 --- !u!1 &2037567727
 GameObject:
   m_ObjectHideFlags: 0

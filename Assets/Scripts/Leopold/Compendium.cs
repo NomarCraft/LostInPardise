@@ -62,7 +62,6 @@ public class Compendium : MonoBehaviour
                     {
                         if(!recipeDictionnaryInstance[k].recipe.unlocked){
                             recipeDictionnaryInstance[k].recipe.unlocked = true;
-                            SortUnlockedRecipe();
                             for (int j = 0; j < recipeDictionnaryInstance[k].recipe.ingredients.Count; j++)
                             {
                                 int id = new int();
@@ -77,10 +76,11 @@ public class Compendium : MonoBehaviour
 
                                 if(!itemDictionnaryInstance[id].item.unlocked){
                                     recipeDictionnaryInstance[k].recipe.unlocked = false;
-                                    SortUnlockedRecipe();
                                     break;
                                 }
                             }
+                            
+                            SortUnlockedRecipe();
                         }
                     }
 
@@ -128,5 +128,17 @@ public class Compendium : MonoBehaviour
             else if (y.log.id == 0) return 1;
             else return x.log.id.CompareTo(y.log.id);
         });
+    }
+
+    public Item GetItemReference(Item compendiumData){
+        Item returnedItem = compendiumData; 
+        for (int i = 0; i < itemDictionnaryInstance.Count; i++)
+        {
+            if(itemDictionnaryInstance[i].item.id == compendiumData.id){
+                returnedItem = itemDictionnaryInstance[i].item;
+            }
+            break;
+        }
+        return returnedItem;
     }
 }

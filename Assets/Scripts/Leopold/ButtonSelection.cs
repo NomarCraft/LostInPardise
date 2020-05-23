@@ -7,14 +7,15 @@ using UnityEngine.EventSystems;
 public class ButtonSelection : Button
 {
     public CompendiumDisplay compendiumDisplay;
+    public CompendiumData compendiumData;
 
     public override void OnSelect(BaseEventData eventData){
         base.OnSelect(eventData);
-        Debug.Log("Selected");
+        //compendiumDisplay.DisplayData(compendiumData);
     }
 
     public override void OnDeselect(BaseEventData eventData){
         base.OnDeselect(eventData);
-        Debug.Log("Deselected");
+        //compendiumDisplay.RemoveData(compendiumData);
     }
 }

@@ -15,6 +15,7 @@ public class InventoryDisplay : MonoBehaviour
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
    Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+   List<GameObject> menuItems;
 
     void Start(){
         CreateDisplay();
@@ -27,8 +28,10 @@ public class InventoryDisplay : MonoBehaviour
         for (int i = 0; i < inventory.container.Count; i++)
         {
             var obj = Instantiate(inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, transform);
+            //menuItems.Add(obj);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
             obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
+            Debug.Log(obj.name);
         }
     }
 
@@ -48,11 +51,11 @@ public class InventoryDisplay : MonoBehaviour
 
     public void ChangeDisplay(){
 
-        //inventory.SortInventoryById();
+        inventory.SortInventoryById();
 
         foreach (var item in itemsDisplayed)
         {
-            Destroy(item.Value.gameObject);
+            Destroy(item.Value);
         }
         itemsDisplayed.Clear();
 

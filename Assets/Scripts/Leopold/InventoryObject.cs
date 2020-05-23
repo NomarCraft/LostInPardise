@@ -13,15 +13,16 @@ public class InventoryObject : MonoBehaviour
         bool hasItem = false;
 
         for(int i = 0; i < container.Count; i++){
-            if(container[i].item == item){
+            if(container[i].item.id == item.id){
                 container[i].AddAmount(amount);
                 hasItem = true;
                 break;
             }
         }
         if(!hasItem){
+            item = compendium.GetItemReference(item);
             container.Add(new InventorySlot(item, amount));
-            compendium.CheckCompendium(item);
+            //compendium.CheckCompendium(item);
         }
     }
 

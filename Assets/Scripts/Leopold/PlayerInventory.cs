@@ -7,13 +7,13 @@ public class PlayerInventory : MonoBehaviour
     public InventoryObject inventory;
 
     public void OnTriggerEnter(Collider other){
-        var item = other.GetComponent<ItemObject>().item;
+        Item item = other.GetComponent<ItemObject>().item;
         if(item){
             inventory.AddItem(item, 1);
             Destroy(other.gameObject);
         }
     }
-    private void OnApplicationQuit(){
+    /*private void OnApplicationQuit(){
         inventory.container.Clear();
-    }
+    }*/
 }
