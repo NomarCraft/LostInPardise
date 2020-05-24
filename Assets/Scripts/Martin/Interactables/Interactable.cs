@@ -16,6 +16,11 @@ public class Interactable : MonoBehaviour
 
 	public string _interactableName;
 	public InteractableType[] _interactions;
+
+	public virtual void Interaction()
+	{
+		Debug.Log("Interact Complete");
+	}
 }
 
 [System.Serializable]

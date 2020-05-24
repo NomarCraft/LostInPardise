@@ -186,6 +186,12 @@ public partial class CharacterController : MonoBehaviour
 			Jump();
 	}
 
+	public void InteractInput (InputAction.CallbackContext context)
+	{
+		if (context.started)
+			Interact();
+	}
+
 	#endregion
 
 	#region BEHAVIOUR
@@ -357,6 +363,25 @@ public partial class CharacterController : MonoBehaviour
 		_invinsibility = true;
 		yield return new WaitForSeconds(0.5f);
 		_invinsibility = false;
+	}
+
+	private void Interact()
+	{
+		if (interactor._interactables.Count == 0)
+			return;
+
+		Interactable interactable = interactor._interactables[0];
+
+		if (interactable._interactions[0]._toolRequired)
+		{
+			Debug.Log("Pas le bon outil");
+		}
+		else
+		{
+			interactable.Interaction();
+			interactor._interactables.Remove(interactable);
+			UpdateInteraction();
+		}
 	}
 
 	#endregion
