@@ -140,6 +140,9 @@ public partial class CharacterController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (gm._gamePaused)
+			return;
+
 		if (!_invinsibility)
 			VelocityCheck();
 
@@ -152,6 +155,9 @@ public partial class CharacterController : MonoBehaviour
 
 	public void MovementInput (InputAction.CallbackContext context)
 	{
+		if (gm._gamePaused)
+			return;
+
 		_movementInput = context.ReadValue<Vector2>();
 
 		if (Mathf.Abs(_movementInput.x) <= 0.1f)
@@ -181,9 +187,21 @@ public partial class CharacterController : MonoBehaviour
 
 	public void JumpInput (InputAction.CallbackContext context)
 	{
+		if (gm._gamePaused)
+			return;
+
 		Debug.Log("hit");
 		if (context.started)
 			Jump();
+	}
+
+	public void InteractInput (InputAction.CallbackContext context)
+	{
+		if (gm._gamePaused)
+			return;
+
+		if (context.started)
+			Interact();
 	}
 
 	#endregion
@@ -357,6 +375,25 @@ public partial class CharacterController : MonoBehaviour
 		_invinsibility = true;
 		yield return new WaitForSeconds(0.5f);
 		_invinsibility = false;
+	}
+
+	private void Interact()
+	{
+		if (interactor._interactables.Count == 0)
+			return;
+
+		Interactable interactable = interactor._interactables[0];
+
+		if (interactable._interactions[0]._toolRequired)
+		{
+			Debug.Log("Pas le bon outil");
+		}
+		else
+		{
+			interactable.Interaction();
+			interactor._interactables.Remove(interactable);
+			UpdateInteraction();
+		}
 	}
 
 	#endregion
