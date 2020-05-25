@@ -15,13 +15,12 @@ public class InventoryDisplay : MonoBehaviour
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
    Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
-   List<GameObject> menuItems;
 
     void Start(){
         CreateDisplay();
     }
     void Update(){
-        UpdateDisplay();
+        
     }
 
     public void CreateDisplay(){
@@ -59,7 +58,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         itemsDisplayed.Clear();
 
-        //CreateDisplay();
+        UpdateDisplay();
     }
 
     public Vector3 GetPosition(int i){

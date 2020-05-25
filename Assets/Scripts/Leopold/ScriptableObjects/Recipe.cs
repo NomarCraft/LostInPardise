@@ -4,8 +4,10 @@ using UnityEngine;
 
 
  [CreateAssetMenu(fileName = "New Recipe", menuName = "Inventory System/Recipe")]
-public class Recipe : CompendiumData
+public class RecipeData : CompendiumData
 {
     DataType dataType = DataType.Recipe;
-    public List<Item> ingredients;
+
+    //Maybe change to id
+    public List<ItemData> ingredients;
 }

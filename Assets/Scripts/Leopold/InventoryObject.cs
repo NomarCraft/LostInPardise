@@ -8,19 +8,20 @@ public class InventoryObject : MonoBehaviour
     public List<InventorySlot> container = new List<InventorySlot>();
     public Compendium compendium;
 
-    public void AddItem(Item item, int amount){
+    public void AddItem(int id, int amount){
 
         bool hasItem = false;
+        ItemData item;
 
         for(int i = 0; i < container.Count; i++){
-            if(container[i].item.id == item.id){
+            if(container[i].item.id == id){
                 container[i].AddAmount(amount);
                 hasItem = true;
                 break;
             }
         }
         if(!hasItem){
-            item = compendium.GetItemReference(item);
+            item = compendium.GetItemReference(id);
             container.Add(new InventorySlot(item, amount));
             //compendium.CheckCompendium(item);
         }
@@ -37,7 +38,7 @@ public class InventoryObject : MonoBehaviour
         });
     }
 
-    public void RemoveItem(Item item){
+    public void RemoveItem(ItemData item){
 
         for (int i = 0; i < container.Count; i++)
         {
@@ -52,9 +53,9 @@ public class InventoryObject : MonoBehaviour
 [System.Serializable]
 public class InventorySlot
 {
-    public Item item;
+    public ItemData item;
     public int amount;
-    public InventorySlot(Item _item, int _amount){
+    public InventorySlot(ItemData _item, int _amount){
         item = _item;
         amount = _amount;
     }

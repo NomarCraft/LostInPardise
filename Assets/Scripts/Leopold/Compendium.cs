@@ -6,15 +6,15 @@ public class Compendium : MonoBehaviour
 {
     [System.Serializable]
     public class ItemDictionnary{
-        public Item item;
+        public ItemData item;
     }
     [System.Serializable]
     public class RecipeDictionnary{
-        public Recipe recipe;
+        public RecipeData recipe;
     }
     [System.Serializable]
     public class LogDictionnary{
-        public Log log;
+        public LogData log;
     }
 
     public List<ItemDictionnary> itemDictionnary;
@@ -48,12 +48,12 @@ public class Compendium : MonoBehaviour
         }
     }
 
-    public void CheckCompendium(Item pickedItem){
+    public void CheckCompendium(int itemID){
 
         //Check if we already had the item
         for (int i = itemDictionnaryInstance.Count - 1; i >= 0 ; i--)
         {
-            if(itemDictionnaryInstance[i].item.id == pickedItem.id){
+            if(itemDictionnaryInstance[i].item.id == itemID){
                 if(itemDictionnaryInstance[i].item.unlocked == false){
                     UnlockItem(i);
 
@@ -130,11 +130,11 @@ public class Compendium : MonoBehaviour
         });
     }
 
-    public Item GetItemReference(Item compendiumData){
-        Item returnedItem = compendiumData; 
+    public ItemData GetItemReference(int itemId){
+        ItemData returnedItem = null; 
         for (int i = 0; i < itemDictionnaryInstance.Count; i++)
         {
-            if(itemDictionnaryInstance[i].item.id == compendiumData.id){
+            if(itemDictionnaryInstance[i].item.id == itemId){
                 returnedItem = itemDictionnaryInstance[i].item;
             }
             break;
