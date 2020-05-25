@@ -140,6 +140,9 @@ public partial class CharacterController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (gm._gamePaused)
+			return;
+
 		if (!_invinsibility)
 			VelocityCheck();
 
@@ -152,6 +155,9 @@ public partial class CharacterController : MonoBehaviour
 
 	public void MovementInput (InputAction.CallbackContext context)
 	{
+		if (gm._gamePaused)
+			return;
+
 		_movementInput = context.ReadValue<Vector2>();
 
 		if (Mathf.Abs(_movementInput.x) <= 0.1f)
@@ -181,6 +187,9 @@ public partial class CharacterController : MonoBehaviour
 
 	public void JumpInput (InputAction.CallbackContext context)
 	{
+		if (gm._gamePaused)
+			return;
+
 		Debug.Log("hit");
 		if (context.started)
 			Jump();
@@ -188,6 +197,9 @@ public partial class CharacterController : MonoBehaviour
 
 	public void InteractInput (InputAction.CallbackContext context)
 	{
+		if (gm._gamePaused)
+			return;
+
 		if (context.started)
 			Interact();
 	}

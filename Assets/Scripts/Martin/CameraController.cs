@@ -6,6 +6,18 @@ using UnityEngine.InputSystem;
 public partial class CameraController : MonoBehaviour
 {
 	[Header("Components")]
+	private GameManager _gm;
+	public GameManager gm
+	{
+		get
+		{
+			if (!_gm)
+				_gm = GameManager.Instance;
+
+			return _gm;
+		}
+	}
+
 	[SerializeField] private CharacterController _player;
 	public CharacterController player { get { return _player; } }
 	[SerializeField] private Transform _playerCenter;
@@ -47,6 +59,9 @@ public partial class CameraController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (gm._gamePaused)
+			return;
+
 		CameraMovement();
 		AngleNormalize();
 	}
