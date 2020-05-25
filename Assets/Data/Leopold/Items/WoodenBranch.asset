@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
-  m_Name: Grass
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 0}
+  m_Name: WoodenBranch
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
   unlocked: 0
   id: 0
-  itemName: 
-  weight: 0
-  menuAsset: {fileID: 6068398185263138036, guid: e3d6446dd9b8f5848b7369231baabfc7,
+  itemName: Wooden Branch
+  menuAsset: {fileID: 6068398185263138036, guid: bb434fd486de200468f1b5bebc75c272,
     type: 3}
   sprite: {fileID: 0}
-  description: It's dead
+  description: This is a Batton
+  weight: 0

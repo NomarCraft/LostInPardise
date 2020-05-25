@@ -20,17 +20,20 @@ public class InventoryDisplay : MonoBehaviour
         CreateDisplay();
     }
     void Update(){
-        
+		
     }
 
     public void CreateDisplay(){
         for (int i = 0; i < inventory.container.Count; i++)
         {
             var obj = Instantiate(inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, transform);
-            //menuItems.Add(obj);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
-            Debug.Log(obj.name);
+			//menuItems.Add(obj);
+			RectTransform trans = obj.GetComponent<RectTransform>();
+			trans.localPosition = GetPosition(i);
+			trans.anchorMax = new Vector2(0, 1);
+			trans.anchorMin = new Vector2(0, 1);
+			trans.pivot = new Vector2(0, 1);
+			obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
         }
     }
 
@@ -41,8 +44,12 @@ public class InventoryDisplay : MonoBehaviour
                 itemsDisplayed[inventory.container[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
             }else{
                 var obj = Instantiate(inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, itemPage);
-                obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
+				RectTransform trans = obj.GetComponent<RectTransform>();
+				trans.localPosition = GetPosition(i);
+				trans.anchorMax = new Vector2(0, 1);
+				trans.anchorMin = new Vector2(0, 1);
+				trans.pivot = new Vector2(0, 1);
+				obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.container[i].amount.ToString("n0");
                 itemsDisplayed.Add(inventory.container[i], obj);
             }
         }

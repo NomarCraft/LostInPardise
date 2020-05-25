@@ -137,7 +137,7 @@ public class Compendium : MonoBehaviour
             if(itemDictionnaryInstance[i].item.id == itemId){
                 returnedItem = itemDictionnaryInstance[i].item;
             }
-            break;
+            //break;
         }
         return returnedItem;
     }

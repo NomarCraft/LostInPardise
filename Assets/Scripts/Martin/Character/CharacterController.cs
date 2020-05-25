@@ -141,7 +141,11 @@ public partial class CharacterController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		if (gm._gamePaused)
+		{
+			rb.velocity = Vector3.zero;
 			return;
+		}
+
 
 		if (!_invinsibility)
 			VelocityCheck();
@@ -202,6 +206,31 @@ public partial class CharacterController : MonoBehaviour
 
 		if (context.started)
 			Interact();
+	}
+
+	public void PauseInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			if (gm._gamePaused)
+			{
+				gm._gamePaused = false;
+				rb.velocity = _direction;
+			}
+			else
+			{
+				_direction = rb.velocity;
+				gm._gamePaused = true;
+			}
+
+			if (_ui._compendiumPanel.activeSelf)
+				_ui.HideElement(_ui._compendiumPanel);
+			else
+			{
+				_ui.DisplayElement(_ui._compendiumPanel);
+				gm.invDis.ChangeDisplay();
+			}
+		}
 	}
 
 	#endregion

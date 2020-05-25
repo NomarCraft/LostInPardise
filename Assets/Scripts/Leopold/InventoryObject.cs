@@ -6,7 +6,18 @@ using UnityEngine;
 public class InventoryObject : MonoBehaviour
 {
     public List<InventorySlot> container = new List<InventorySlot>();
-    public Compendium compendium;
+
+	private Compendium _compendium;
+    public Compendium compendium
+	{
+		get
+		{
+			if (!_compendium)
+				_compendium = GameManager.Instance.comp;
+
+			return _compendium;
+		}
+	}
 
     public void AddItem(int id, int amount){
 

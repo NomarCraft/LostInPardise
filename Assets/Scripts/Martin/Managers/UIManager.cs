@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 	public GameObject[] allPanelsParent;
 	public GameObject _playerStatusPanel;
 	public GameObject _interactPanel;
+	public GameObject _compendiumPanel;
 
 	[Space(10)]
 	[Header("PlayerStatus")]
