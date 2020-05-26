@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: WoodenBranch
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   unlocked: 0
-  id: 0
+  id: 1
   itemName: Wooden Branch
   menuAsset: {fileID: 6068398185263138036, guid: bb434fd486de200468f1b5bebc75c272,
     type: 3}
   sprite: {fileID: 0}
   description: This is a Batton
-  weight: 0
+  weight: 1.5

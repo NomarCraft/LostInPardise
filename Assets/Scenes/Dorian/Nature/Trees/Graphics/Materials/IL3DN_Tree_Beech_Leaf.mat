@@ -10,7 +10,7 @@ Material:
   m_Name: IL3DN_Tree_Beech_Leaf
   m_Shader: {fileID: 4800000, guid: 5a31b57bf4856e940b34c99ac2bf12b6, type: 3}
   m_ShaderKeywords: EFFECT_HUE_VARIATION GEOM_TYPE_LEAF _ALPHATEST_ON _BEND_ON _EMISSION
-    _SHOWBACKFACES_ON _SHOWFRONTFACES_ON
+    _SHOWBACKFACES_ON _SHOWFRONTFACES_ON _WIND_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -137,7 +137,7 @@ Material:
     - _WiggleRandomisation: 0.01
     - _WiggleSpeed: 1
     - _WiggleStrenght: 1
-    - _Wind: 0
+    - _Wind: 1
     - _WindAmplitudeMultiplier: 1
     - _WindFLoat: 1
     - _WindQuality: 0
