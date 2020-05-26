@@ -15,7 +15,7 @@ public class DisplayMenu : MonoBehaviour
         inventoryShown = true;
         compendiumPage.gameObject.SetActive(false);
         inventoryPage.gameObject.SetActive(true);
-        inventoryDisplay.CreateDisplay();
+        //inventoryDisplay.CreateDisplay();
     }
 
     public void ShowCompendium(){

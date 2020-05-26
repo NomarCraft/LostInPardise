@@ -6,5 +6,5 @@ using UnityEngine;
 public class ItemData : CompendiumData
 {
     DataType dataType = DataType.Item;
-    public float weight;
+    public float itemWeight;
 }

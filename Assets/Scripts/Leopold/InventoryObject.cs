@@ -6,6 +6,8 @@ using UnityEngine;
 public class InventoryObject : MonoBehaviour
 {
     public List<InventorySlot> container = new List<InventorySlot>();
+    public float maximumWeight;
+    public float actualWeight;
 
 	private Compendium _compendium;
     public Compendium compendium
@@ -24,17 +26,26 @@ public class InventoryObject : MonoBehaviour
         bool hasItem = false;
         ItemData item;
 
-        for(int i = 0; i < container.Count; i++){
-            if(container[i].item.id == id){
-                container[i].AddAmount(amount);
-                hasItem = true;
-                break;
+        item = compendium.GetItemReference(id);
+
+        if(actualWeight + item.itemWeight <= maximumWeight){
+
+            for(int i = 0; i < container.Count; i++){
+                if(container[i].item.id == id){
+                    item = container[i].item;
+                    container[i].AddAmount(amount);
+                    hasItem = true;
+                    break;
+                }
             }
-        }
-        if(!hasItem){
-            item = compendium.GetItemReference(id);
-            container.Add(new InventorySlot(item, amount));
-            //compendium.CheckCompendium(item);
+            if(!hasItem){
+                container.Add(new InventorySlot(item, amount));
+                //compendium.CheckCompendium(item);
+            }
+
+            actualWeight += item.itemWeight;
+        }else{
+            //inserer message
         }
     }
 
