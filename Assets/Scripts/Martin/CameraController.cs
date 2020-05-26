@@ -153,13 +153,13 @@ public partial class CameraController : MonoBehaviour
 		if (!DirCheck(transform.position, Vector3.up, 1f))
 		{
 			_lookMovement.y = 0;
-			//_heightCorrection -= angularSpeed / 10 * Time.deltaTime;
+			_heightCorrection -= angularSpeed / 5 * Time.deltaTime;
 			return;
 		}
 		if (!DirCheck(transform.position, Vector3.down, 1f))
 		{
 			_lookMovement.y = 0;
-			_heightCorrection += angularSpeed / 10 * Time.deltaTime;
+			_heightCorrection += angularSpeed / 5 * Time.deltaTime;
 			return;
 		}
 

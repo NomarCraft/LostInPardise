@@ -9,9 +9,9 @@ public class Gatherable : Interactable
 	public int _gatheredItemId;
 	public int _gatheredItemAmount;
 
-	public override void Interaction()
+	public void Interaction(out ItemData item)
 	{
 		GameManager.Instance.inv.AddItem(_gatheredItemId, _gatheredItemAmount);
-		Debug.Log("C'est la même mais là c'est un Gatherable");
+		item = GameManager.Instance.comp.GetItemReference(_gatheredItemId);
 	}
 }
