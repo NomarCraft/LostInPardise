@@ -86,7 +86,7 @@ public partial class CharacterController : MonoBehaviour
 	private Vector3 _direction;
 	[SerializeField] private Transform _playerCenter;
 	public Transform playerCenter { get { return _playerCenter; } }
-	private Transform _camRef;
+	[SerializeField] private Transform _camRef;
 	public Transform camRef { get { return _camRef; } set { _camRef = value; } }
 
 	[Space(10)]
@@ -94,12 +94,12 @@ public partial class CharacterController : MonoBehaviour
 	[SerializeField] private bool _isRunning;
 	[SerializeField] private bool _isGrounded;
 	[SerializeField] private bool _isJumping;
-	private bool _jumpSafety = false;
+	[SerializeField] private bool _jumpSafety = false;
 	[SerializeField] private bool _isFalling = false;
 	public bool isFalling { get { return _isFalling; } }
 	private bool _isFastFalling = false;
 	private bool _isDeadlyFalling = false;
-	private bool _invinsibility = false;
+	private bool _invinsibilityBuffer = false;
 
 	[Space(10)]
 	[Header("Metrics")]
@@ -147,7 +147,7 @@ public partial class CharacterController : MonoBehaviour
 		}
 
 
-		if (!_invinsibility)
+		if (!_invinsibilityBuffer)
 			VelocityCheck();
 
 		Move();
@@ -183,29 +183,52 @@ public partial class CharacterController : MonoBehaviour
 
 	public void RunInput (InputAction.CallbackContext context)
 	{
-		if (context.started)
-			_isRunning = true;
-		else if (context.canceled)
-			_isRunning = false;
+		if (!gm._gamePaused)
+		{
+			if (context.started)
+				_isRunning = true;
+			else if (context.canceled)
+				_isRunning = false;
+		}
+		else if (gm._gamePaused && _ui)
+		{
+			if (context.started)
+			{
+				_ui.HideElement(_ui._inventoryPanel);
+				_ui.DisplayElement(_ui._compendiumInventoryPanel);
+			}
+		}
+	}
+
+	public void LeftTriggerInput (InputAction.CallbackContext context)
+	{
+		if (gm._gamePaused && _ui)
+		{
+			if (context.started)
+			{
+				_ui.HideElement(_ui._compendiumInventoryPanel);
+				_ui.DisplayElement(_ui._inventoryPanel);
+				gm.invDis.ChangeDisplay();
+			}
+		}
 	}
 
 	public void JumpInput (InputAction.CallbackContext context)
 	{
-		if (gm._gamePaused)
-			return;
-
-		Debug.Log("hit");
-		if (context.started)
-			Jump();
+		if (!gm._gamePaused)
+		{
+			if (context.started)
+				Jump();
+		}
 	}
 
 	public void InteractInput (InputAction.CallbackContext context)
 	{
-		if (gm._gamePaused)
-			return;
-
-		if (context.started)
-			Interact();
+		if (!gm._gamePaused)
+		{
+			if (context.started)
+				Interact();
+		}
 	}
 
 	public void PauseInput(InputAction.CallbackContext context)
@@ -244,7 +267,6 @@ public partial class CharacterController : MonoBehaviour
 			_ui = gm.uiManager;
 			InitializeUI();
 		}
-
 
 		ent.OnLifeChange += UpdateLifeBar;
 		ent.OnDeath += Respawn;
@@ -401,9 +423,9 @@ public partial class CharacterController : MonoBehaviour
 
 	private IEnumerator Invinsibility()
 	{
-		_invinsibility = true;
+		_invinsibilityBuffer = true;
 		yield return new WaitForSeconds(0.5f);
-		_invinsibility = false;
+		_invinsibilityBuffer = false;
 	}
 
 	private void Interact()
@@ -419,7 +441,23 @@ public partial class CharacterController : MonoBehaviour
 		}
 		else
 		{
-			interactable.Interaction();
+			Gatherable gatherable;
+
+			if (interactable.TryGetComponent<Gatherable>(out gatherable))
+			{
+				ItemData item;
+
+				gatherable.Interaction(out item);
+
+				if (_ui)
+				{
+					_ui.DisplayElement(_ui._displayMessagePanel);
+					_ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You acquired " + gatherable._gatheredItemAmount.ToString() + " " + item.itemName, Color.green);
+				}
+			}
+			else
+				interactable.Interaction();
+
 			interactor._interactables.Remove(interactable);
 			UpdateInteraction();
 		}

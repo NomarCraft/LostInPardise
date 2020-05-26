@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 	public GameObject _playerStatusPanel;
 	public GameObject _interactPanel;
 	public GameObject _compendiumPanel;
+	public GameObject _displayMessagePanel;
 
 	[Space(10)]
 	[Header("PlayerStatus")]
@@ -34,7 +35,18 @@ public class UIManager : MonoBehaviour
 	public TextMeshProUGUI _yInteractableNameText;
 	public TextMeshProUGUI _bInteractableNameText;
 
+	[Space(10)]
+	[Header("Compendium/Inventory")]
+	public GameObject _inventoryPanel;
+	public GameObject _compendiumInventoryPanel;
+
+	[Space(10)]
+	[Header("DisplayMessage")]
+	public float _messageDisplayTime;
+	public TextMeshProUGUI _itemDisplayMessageText;
+
 	private Coroutine fadeCoroutine;
+	private Coroutine displayMessageBuffer;
 
 	private void Start()
 	{
@@ -107,6 +119,17 @@ public class UIManager : MonoBehaviour
 		fadeCoroutine = StartCoroutine(Fade(imageToFade, mode));
 	}
 
+	public void DisplayTemporaryMessageWithColor(TextMeshProUGUI textToDisplay, string text, Color color)
+	{
+		ChangeText(textToDisplay, text);
+		ChangeTextColor(textToDisplay, color);
+
+		if (displayMessageBuffer != null)
+			StopCoroutine(displayMessageBuffer);
+
+		displayMessageBuffer = StartCoroutine(DisplayMessage(textToDisplay));
+	}
+
 	private IEnumerator Fade(Image imageToFade, int mode)
 	{
 		if (mode == 0)
@@ -122,9 +145,14 @@ public class UIManager : MonoBehaviour
 			for (float i = 0; i <= 1; i = imageToFade.color.a)
 			{
 				imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, Mathf.Lerp(imageToFade.color.a, 1, Time.deltaTime * 3f));
-				//imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, i);
 				yield return null;
 			}
 		}
+	}
+
+	private IEnumerator DisplayMessage(TextMeshProUGUI textToDisplay)
+	{
+		yield return new WaitForSeconds(_messageDisplayTime);
+		ChangeText(textToDisplay, null);
 	}
 }

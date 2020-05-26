@@ -37,8 +37,8 @@ public class Entity : MonoBehaviour
 		if (invincible)
 			return;
 
-
 		_life -= amount;
+
 		OnLifeChange();
 
 		if (_life <= 0)
@@ -48,9 +48,10 @@ public class Entity : MonoBehaviour
 	public void Death()
 	{
 		_life = 0;
-		Debug.Log("AIE");
+
 		if (!canRespawn)
 			return;
+
 		OnLifeChange();
 		OnDeath();
 
@@ -62,6 +63,7 @@ public class Entity : MonoBehaviour
 	{
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		transform.position = _startPos;
+
 		_life = _startingLife;
 		OnLifeChange();
 	}
