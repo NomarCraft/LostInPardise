@@ -5,7 +5,7 @@ using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    List<InventoryDisplayPack> packs;
+    public List<InventoryDisplayPack> packs;
     /*public List<InventoryObject> inventories;
 
     [SerializeField] Transform itemPage;*/
