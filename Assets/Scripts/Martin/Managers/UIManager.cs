@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 	public GameObject _interactPanel;
 	public GameObject _compendiumPanel;
 	public GameObject _displayMessagePanel;
+	public GameObject _dialoguePanel;
 
 	[Space(10)]
 	[Header("PlayerStatus")]
@@ -41,12 +42,19 @@ public class UIManager : MonoBehaviour
 	public GameObject _compendiumInventoryPanel;
 
 	[Space(10)]
+	[Header("Dialogue")]
+	public float _dialogueSpeed;
+	public TextMeshProUGUI _dialogueText;
+	public bool _textIsDisplayed = false;
+
+	[Space(10)]
 	[Header("DisplayMessage")]
-	public float _messageDisplayTime;
+	public float _messageDisplayTime = 0.05f;
 	public TextMeshProUGUI _itemDisplayMessageText;
 
 	private Coroutine fadeCoroutine;
 	private Coroutine displayMessageBuffer;
+	private Coroutine dialogueDisplay;
 
 	private void Start()
 	{
@@ -130,6 +138,16 @@ public class UIManager : MonoBehaviour
 		displayMessageBuffer = StartCoroutine(DisplayMessage(textToDisplay));
 	}
 
+	public void DisplayDialogue(TextMeshProUGUI textToDisplay, string text)
+	{
+		DisplayElement(_dialoguePanel);
+
+		if (dialogueDisplay != null)
+			StopCoroutine(dialogueDisplay);
+
+		StartCoroutine(DisplayTextLetterByLetter(textToDisplay, text));
+	}
+
 	private IEnumerator Fade(Image imageToFade, int mode)
 	{
 		if (mode == 0)
@@ -154,5 +172,18 @@ public class UIManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(_messageDisplayTime);
 		ChangeText(textToDisplay, null);
+	}
+
+	private IEnumerator DisplayTextLetterByLetter(TextMeshProUGUI textTodisplay, string text)
+	{
+		string currentText;
+		for (int i = 0; i < text.Length + 1; i++)
+		{
+			currentText = text.Substring(0, i);
+			textTodisplay.text = currentText;
+			yield return new WaitForSeconds(_dialogueSpeed);
+		}
+
+		_textIsDisplayed = true;
 	}
 }

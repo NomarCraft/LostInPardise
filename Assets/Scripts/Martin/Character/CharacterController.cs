@@ -208,7 +208,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 				_ui.HideElement(_ui._compendiumInventoryPanel);
 				_ui.DisplayElement(_ui._inventoryPanel);
-				gm.invDis.ChangeDisplay();
+				gm.invDis.ChangeDisplay(0);
 			}
 		}
 	}
@@ -229,11 +229,22 @@ public partial class CharacterController : MonoBehaviour
 			if (context.started)
 				Interact();
 		}
+		else if (gm._gamePaused)
+		{
+			if (_ui._dialoguePanel.activeSelf)
+			{
+				if (_ui._textIsDisplayed)
+				{
+					_ui.HideElement(_ui._dialoguePanel);
+					gm._gamePaused = false;
+				}
+			}
+		}
 	}
 
 	public void PauseInput(InputAction.CallbackContext context)
 	{
-		if (context.started)
+		if (context.started && !_ui._dialoguePanel.activeSelf)
 		{
 			if (gm._gamePaused)
 			{
@@ -251,7 +262,7 @@ public partial class CharacterController : MonoBehaviour
 			else
 			{
 				_ui.DisplayElement(_ui._compendiumPanel);
-				gm.invDis.ChangeDisplay();
+				gm.invDis.ChangeDisplay(0);
 			}
 		}
 	}
@@ -442,6 +453,7 @@ public partial class CharacterController : MonoBehaviour
 		else
 		{
 			Gatherable gatherable;
+			Dialoguable dialogue;
 
 			if (interactable.TryGetComponent<Gatherable>(out gatherable))
 			{
@@ -453,6 +465,19 @@ public partial class CharacterController : MonoBehaviour
 				{
 					_ui.DisplayElement(_ui._displayMessagePanel);
 					_ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You acquired " + gatherable._gatheredItemAmount.ToString() + " " + item.itemName, Color.green);
+				}
+			}
+			else if (interactable.TryGetComponent<Dialoguable>(out dialogue))
+			{
+				string text;
+
+				dialogue.Interaction(out text);
+
+				if (_ui)
+				{
+					_ui._textIsDisplayed = false;
+					gm._gamePaused = true;
+					_ui.DisplayDialogue(_ui._dialogueText, text);
 				}
 			}
 			else
