@@ -1086,15 +1086,15 @@ MonoBehaviour:
   _jumpSafety: 0
   _isFalling: 0
   _speed: 8
-  _runningMultiplyFactor: 4
+  _runningMultiplyFactor: 2
   _rotSpeed: 10
   _groundDetectionRayLength: 0.5
   _slopeCorrectorForce: 10
   _jumpStrength: 6
   _fallSpeed: 4
   _fallingTreshold: 5
-  _fallingDamageTreshold: 15
-  _fallingDamageLethalTreshold: 25
+  _fallingDamageTreshold: 10
+  _fallingDamageLethalTreshold: 1e+10
   _respawnTime: 5
 --- !u!114 &8585615535073204104
 MonoBehaviour:
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f8b0329eaa3174f9f0e4728e09dd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincible: 0
+  _invincible: 1
   _canRespawn: 1
   _respawnPilotedByScript: 1
   _life: 5
