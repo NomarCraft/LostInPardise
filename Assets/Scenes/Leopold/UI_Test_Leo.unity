@@ -1218,6 +1218,7 @@ MonoBehaviour:
   _playerStatusPanel: {fileID: 1178576543}
   _interactPanel: {fileID: 1748330117}
   _compendiumPanel: {fileID: 316592035}
+  _displayMessagePanel: {fileID: 0}
   _playerLifeScrollbar: {fileID: 1274368844}
   _interactableCenterImage: {fileID: 524775535}
   _interactableNameText: {fileID: 1106339695}
@@ -1242,6 +1243,10 @@ MonoBehaviour:
   _xInteractableNameText: {fileID: 1845372248}
   _yInteractableNameText: {fileID: 424661725}
   _bInteractableNameText: {fileID: 415096571}
+  _inventoryPanel: {fileID: 0}
+  _compendiumInventoryPanel: {fileID: 0}
+  _messageDisplayTime: 0
+  _itemDisplayMessageText: {fileID: 0}
 --- !u!114 &620404114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1272,8 +1277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb596e535484d6d46976b59cacf32ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 620404116}
-  itemPage: {fileID: 1339794769}
+  packs:
+  - inventory: {fileID: 620404116}
+    invetoryPage: {fileID: 1339794769}
   X_START: 40
   Y_START: -96
   X_SPACE_BETWEEN_ITEM: 120
@@ -4248,8 +4254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb596e535484d6d46976b59cacf32ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 620404116}
-  itemPage: {fileID: 1126272538}
+  packs: []
   X_START: -200
   Y_START: 280
   X_SPACE_BETWEEN_ITEM: 100

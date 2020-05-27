@@ -21,7 +21,7 @@ public class InventoryDisplay : MonoBehaviour
     }*/
     void Update(){
         //Remove Line when trying opening and closing the inventory
-		ChangeDisplay();
+		ChangeDisplay(0);
     }
 /*
     public void CreateDisplay(){
@@ -61,19 +61,16 @@ public class InventoryDisplay : MonoBehaviour
         }
     }
 
-    public void ChangeDisplay(){
-        for (int nb = 0; nb < packs.Count-2; nb++)
+    public void ChangeDisplay(int nb){
+        packs[nb].inventory.SortInventoryById();
+
+        foreach (var obj in packs[nb].itemsDisplayed)
         {
-            packs[nb].inventory.SortInventoryById();
-
-            foreach (var obj in packs[nb].itemsDisplayed)
-            {
-                Destroy(obj.Value);
-            }
-            packs[nb].itemsDisplayed.Clear();
-
-            UpdateDisplay(nb);
+            Destroy(obj.Value);
         }
+        packs[nb].itemsDisplayed.Clear();
+
+        UpdateDisplay(nb);
     }
 
     public Vector3 GetPosition(int i){

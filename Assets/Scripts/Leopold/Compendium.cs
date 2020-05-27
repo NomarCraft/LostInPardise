@@ -96,6 +96,8 @@ public class Compendium : MonoBehaviour
     }
 
     public void UnlockLog(int logNumber){
+        logDictionnaryInstance[logNumber].log.unlocked = true;
+        unlockedLog.Add(logDictionnaryInstance[logNumber]);
         SortUnlockedLog();
     }
 
