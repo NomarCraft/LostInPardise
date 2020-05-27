@@ -43,12 +43,14 @@ public class InventoryDisplay : MonoBehaviour
     }*/
 
     void UpdateDisplay(int nb){
+
+        NUMBER_OF_COLUMN = Mathf.RoundToInt(packs[nb].invetoryPage.GetComponent<RectTransform>().sizeDelta.x / X_SPACE_BETWEEN_ITEM);
+        
         for (int i = 0; i < packs[nb].inventory.container.Count; i++)
         {
             if(packs[nb].itemsDisplayed.ContainsKey(packs[nb].inventory.container[i])){
                 packs[nb].itemsDisplayed[packs[nb].inventory.container[i]].GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
             }else{
-                NUMBER_OF_COLUMN = Mathf.RoundToInt(packs[nb].invetoryPage.GetComponent<RectTransform>().sizeDelta.x / X_SPACE_BETWEEN_ITEM);
                 var obj = Instantiate(packs[nb].inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].invetoryPage);
                 RectTransform trans = obj.GetComponent<RectTransform>();
                 trans.localPosition = GetPosition(i);

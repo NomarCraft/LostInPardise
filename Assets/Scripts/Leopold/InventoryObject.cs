@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryObject : MonoBehaviour
 {
     public List<InventorySlot> container = new List<InventorySlot>();
-    public float maximumWeight;
+    public float maximumWeight = Mathf.Infinity;
     public float actualWeight;
 
 	private Compendium _compendium;

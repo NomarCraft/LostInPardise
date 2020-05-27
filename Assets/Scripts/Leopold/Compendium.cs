@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class Compendium : MonoBehaviour
 {
-    [System.Serializable]
-    public class ItemDictionnary{
-        public ItemData item;
-    }
-    [System.Serializable]
-    public class RecipeDictionnary{
-        public RecipeData recipe;
-    }
-    [System.Serializable]
-    public class LogDictionnary{
-        public LogData log;
-    }
 
     public List<ItemDictionnary> itemDictionnary;
     [HideInInspector] public List<ItemDictionnary> itemDictionnaryInstance;
@@ -144,3 +132,19 @@ public class Compendium : MonoBehaviour
         return returnedItem;
     }
 }
+
+    public class CustomDictionnary{
+
+    }
+    [System.Serializable]
+    public class ItemDictionnary : CustomDictionnary{
+        public ItemData item;
+    }
+    [System.Serializable]
+    public class RecipeDictionnary : CustomDictionnary{
+        public RecipeData recipe;
+    }
+    [System.Serializable]
+    public class LogDictionnary : CustomDictionnary{
+        public LogData log;
+    }
