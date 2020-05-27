@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class CompendiumDisplay : MonoBehaviour
-{/*
+{
     public Compendium compendium;
     
     [SerializeField] Transform compendiumPage;
@@ -19,9 +19,11 @@ public class CompendiumDisplay : MonoBehaviour
 
     public void Update(){
         UpdateDisplayedItems();
+        UpdateDisplayedRecipes();
+        UpdateDisplayedLogs();
     }
 
-    public void CreateItemDisplay(){
+    /*public void CreateItemDisplay(){
         
         for (int i = 0; i < compendium.unlockedItem.Count; i++)
         {
@@ -29,41 +31,39 @@ public class CompendiumDisplay : MonoBehaviour
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
             obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedItem[i].item.itemName.ToString();
         }
-    }
+    }*/
     void UpdateDisplayedItems(){
         for (int i = 0; i < compendium.unlockedItem.Count; i++)
         {
-            UpdateDisplay(i, 0, compendium.itemDictionnaryInstance);
+            UpdateDisplay(i, 0, compendium.unlockedItem[i].item);
         }
     }
     void UpdateDisplayedRecipes(){
         for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
         {
-            UpdateDisplay(i, 1, compendium.recipeDictionnaryInstance);
+            UpdateDisplay(i, 1, compendium.unlockedRecipe[i].recipe);
         }
     }
     void UpdateDisplayedLogs(){
         for (int i = 0; i < compendium.unlockedLog.Count; i++)
         {
-            UpdateDisplay(i, 2, compendium.logDictionnaryInstance);
+            UpdateDisplay(i, 2, compendium.unlockedLog[i].log);
         }
     }
 
-    public void UpdateDisplay(int i, int nb, List<CustomDictionnary> listC){
-        if(packs[nb].objDisplayed.ContainsKey(listC[i].)){
-            packs[nb].objDisplayed[packs[nb].inventory.container[i]].GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
-        }else{
-            var obj = Instantiate(packs[nb].inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].page);
+    public void UpdateDisplay(int i, int nb, CompendiumData data){
+        if(!packs[nb].objDisplayed.ContainsKey(data)){
+            var obj = Instantiate(data.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].page);
             RectTransform trans = obj.GetComponent<RectTransform>();
             trans.localPosition = GetPosition(i);
             trans.anchorMax = new Vector2(0, 1);
             trans.anchorMin = new Vector2(0, 1);
             trans.pivot = new Vector2(0, 1);
-            packs[nb].objDisplayed.Add(packs[nb].inventory.container[i], obj);
+            packs[nb].objDisplayed.Add(data, obj);
         }
     }
 
-    public void CreateRecipeDisplay(){
+    /*public void CreateRecipeDisplay(){
         
         for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
         {
@@ -80,7 +80,7 @@ public class CompendiumDisplay : MonoBehaviour
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
             obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedLog[i].log.itemName.ToString();
         }
-    }
+    }*/
 
     public void DisplayData(CompendiumData scriptable){
         itemName.text = scriptable.itemName;
@@ -94,7 +94,7 @@ public class CompendiumDisplay : MonoBehaviour
 
     public Vector3 GetPosition(int i){
         return new Vector3(X_START, Y_START + (-Y_SPACE_BETWEEN_ITEMS * i), 0f);
-    }*/
+    }
 }
 
 [System.Serializable]
