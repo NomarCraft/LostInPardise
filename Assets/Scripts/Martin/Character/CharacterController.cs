@@ -461,11 +461,6 @@ public partial class CharacterController : MonoBehaviour
 
 				gatherable.Interaction(out item);
 
-				if (_ui)
-				{
-					_ui.DisplayElement(_ui._displayMessagePanel);
-					_ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You acquired " + gatherable._gatheredItemAmount.ToString() + " " + item.itemName, Color.green);
-				}
 			}
 			else if (interactable.TryGetComponent<Dialoguable>(out dialogue))
 			{

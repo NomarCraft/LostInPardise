@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &316592036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -657,8 +657,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDictionnary:
-  - item: {fileID: 11400000, guid: 00c9e2df22037eb478578dd7854ed103, type: 2}
-  - item: {fileID: 11400000, guid: 7e6bf2006844c7344adcac11df8e0172, type: 2}
+  - data: {fileID: 0}
+    item: {fileID: 11400000, guid: 00c9e2df22037eb478578dd7854ed103, type: 2}
+  - data: {fileID: 0}
+    item: {fileID: 11400000, guid: 7e6bf2006844c7344adcac11df8e0172, type: 2}
   itemDictionnaryInstance: []
   recipeDictionnary: []
   recipeDictionnaryInstance: []
@@ -1026,7 +1028,7 @@ MonoBehaviour:
   _bInteractableNameText: {fileID: 415096571}
   _inventoryPanel: {fileID: 1339794768}
   _compendiumInventoryPanel: {fileID: 1011414992}
-  _dialogueSpeed: 0.05
+  _dialogueSpeed: 0.01
   _dialogueText: {fileID: 996059049}
   _textIsDisplayed: 0
   _messageDisplayTime: 3
@@ -1082,7 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: []
-  maximumWeight: 0
+  maximumWeight: 5
   actualWeight: 0
 --- !u!1 &640738667
 GameObject:
