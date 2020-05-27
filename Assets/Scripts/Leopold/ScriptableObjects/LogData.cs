@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- [CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Item")]
+ [CreateAssetMenu(fileName = "New Log", menuName = "Inventory System/Log")]
 public class LogData : CompendiumData
 {
     DataType dataType = DataType.Log;

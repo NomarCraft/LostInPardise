@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class CompendiumDisplay : MonoBehaviour
-{/*
+{
     public Compendium compendium;
     
     [SerializeField] Transform compendiumPage;
@@ -60,5 +60,5 @@ public class CompendiumDisplay : MonoBehaviour
 
     public Vector3 GetPosition(int i){
         return new Vector3(X_START, Y_START + (-Y_SPACE_BETWEEN_ITEMS * i), 0f);
-    }*/
+    }
 }
