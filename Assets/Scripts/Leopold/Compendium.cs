@@ -134,7 +134,7 @@ public class Compendium : MonoBehaviour
 }
 
     public class CustomDictionnary{
-
+        public CompendiumData data;
     }
     [System.Serializable]
     public class ItemDictionnary : CustomDictionnary{

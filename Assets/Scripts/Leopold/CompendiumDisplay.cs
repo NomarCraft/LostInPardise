@@ -33,24 +33,24 @@ public class CompendiumDisplay : MonoBehaviour
     void UpdateDisplayedItems(){
         for (int i = 0; i < compendium.unlockedItem.Count; i++)
         {
-            UpdateDisplay(i, 0);
+            UpdateDisplay(i, 0, compendium.itemDictionnaryInstance);
         }
     }
     void UpdateDisplayedRecipes(){
         for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
         {
-            UpdateDisplay(i, 1);
+            UpdateDisplay(i, 1, compendium.recipeDictionnaryInstance);
         }
     }
     void UpdateDisplayedLogs(){
         for (int i = 0; i < compendium.unlockedLog.Count; i++)
         {
-            UpdateDisplay(i, 2);
+            UpdateDisplay(i, 2, compendium.logDictionnaryInstance);
         }
     }
 
     public void UpdateDisplay(int i, int nb, List<CustomDictionnary> listC){
-        if(packs[nb].objDisplayed.ContainsKey(compendium.)){
+        if(packs[nb].objDisplayed.ContainsKey(listC[i].)){
             packs[nb].objDisplayed[packs[nb].inventory.container[i]].GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
         }else{
             var obj = Instantiate(packs[nb].inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].page);
