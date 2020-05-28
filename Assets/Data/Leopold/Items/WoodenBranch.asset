@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: WoodenBranch
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   unlocked: 0
-  id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  id: 1
+  itemName: Wooden Branch
+  menuAsset: {fileID: 6068398185263138036, guid: 082c8e200c090ce4bacfb543706545b8,
+    type: 3}
   sprite: {fileID: 0}
   description: 
   itemWeight: 0
