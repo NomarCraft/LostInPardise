@@ -6,8 +6,6 @@ using TMPro;
 public class CompendiumDisplay : MonoBehaviour
 {
     public Compendium compendium;
-    
-    [SerializeField] Transform compendiumPage;
     public List<DisplayPack> packs = new List<DisplayPack>(new DisplayPack[3]);
 
     public int X_START;
@@ -18,9 +16,9 @@ public class CompendiumDisplay : MonoBehaviour
     Sprite itemSprite;
 
     public void Update(){
-        UpdateDisplayedItems();
+        /*UpdateDisplayedItems();
         UpdateDisplayedRecipes();
-        UpdateDisplayedLogs();
+        UpdateDisplayedLogs();*/
     }
 
     /*public void CreateItemDisplay(){
@@ -32,6 +30,13 @@ public class CompendiumDisplay : MonoBehaviour
             obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedItem[i].item.itemName.ToString();
         }
     }*/
+    public void UpdateTime(){
+        ChangeDisplay();
+        UpdateDisplayedItems();
+        UpdateDisplayedRecipes();
+        UpdateDisplayedLogs();
+    }
+
     void UpdateDisplayedItems(){
         for (int i = 0; i < compendium.unlockedItem.Count; i++)
         {
@@ -48,6 +53,18 @@ public class CompendiumDisplay : MonoBehaviour
         for (int i = 0; i < compendium.unlockedLog.Count; i++)
         {
             UpdateDisplay(i, 2, compendium.unlockedLog[i].log);
+        }
+    }
+
+    public void ChangeDisplay(){
+       // packs[nb].inventory.SortInventoryById();
+        for (int i = 0; i < packs.Count; i++)
+        {
+            foreach (var obj in packs[i].objDisplayed)
+            {
+                Destroy(obj.Value);
+            }
+            packs[i].objDisplayed.Clear();
         }
     }
 
@@ -100,5 +117,5 @@ public class CompendiumDisplay : MonoBehaviour
 [System.Serializable]
 public class DisplayPack{
     public Transform page;
-    public Dictionary<CompendiumData, GameObject> objDisplayed;
+    public Dictionary<CompendiumData, GameObject> objDisplayed = new Dictionary<CompendiumData, GameObject>();
 }

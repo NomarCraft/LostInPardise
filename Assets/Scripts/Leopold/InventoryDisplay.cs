@@ -21,7 +21,6 @@ public class InventoryDisplay : MonoBehaviour
     }*/
     void Update(){
         //Remove Line when trying opening and closing the inventory
-		ChangeDisplay(0);
     }
 /*
     public void CreateDisplay(){
