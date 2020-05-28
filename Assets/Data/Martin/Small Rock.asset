@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
-  m_Name: WoodenBranch
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  m_Name: Small Rock
+  m_EditorClassIdentifier: 
   unlocked: 0
-  id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  id: 1
+  itemName: Small Rock
+  menuAsset: {fileID: 6068398185263138036, guid: 93f5b7718bd472f4880ca975d98a8553,
+    type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: A small rock you picked up from the ground
   itemWeight: 0

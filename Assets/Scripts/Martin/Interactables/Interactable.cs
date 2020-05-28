@@ -11,6 +11,7 @@ public class Interactable : MonoBehaviour
 		Mine,
 		Craft,
 		Store,
+		Interact,
 		None
 	};
 

@@ -21,6 +21,18 @@ public class InventoryObject : MonoBehaviour
 		}
 	}
 
+	private UIManager _ui;
+	public UIManager ui
+	{
+		get
+		{
+			if (!_ui)
+				_ui = GameManager.Instance.uiManager;
+
+			return _ui;
+		}
+	}
+
     public void AddItem(int id, int amount){
 
         bool hasItem = false;
@@ -43,10 +55,23 @@ public class InventoryObject : MonoBehaviour
                 //compendium.CheckCompendium(item);
             }
 
-            actualWeight += item.itemWeight;
+			if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You acquired " + amount.ToString() + " " + item.itemName, Color.green);
+			}
+
+			actualWeight += item.itemWeight;
+
         }else{
-            //inserer message
-        }
+
+            if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You can't get " + amount.ToString() + " " + item.itemName + " because your inventory is full", Color.red);
+			}
+
+		}
     }
 
     public void SortInventoryById(){

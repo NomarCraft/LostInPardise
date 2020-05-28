@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public void OnTriggerEnter(Collider other){
         ItemData item = other.GetComponent<ItemObject>().item;
         if(item){
-            inventory.AddItem(item.id, 1);
+            //inventory.AddItem(item.id, 1);
             Destroy(other.gameObject);
         }
     }
