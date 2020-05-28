@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  itemName: New Recipe
+  menuAsset: {fileID: 6068398185263138036, guid: 7a9f7875d6ca5514d9ba402e3113b6f8,
+    type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: A Recipe
   ingredients: []

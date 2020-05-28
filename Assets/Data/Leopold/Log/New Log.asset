@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  itemName: New Log
+  menuAsset: {fileID: 6068398185263138036, guid: 6ac4ad13f271adc4baae83578a7939f4,
+    type: 3}
   sprite: {fileID: 0}
-  description: 
-  text: 
+  description: "Ma Bite\t"
+  text: est un volcan
