@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Ore
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  id: 3
+  itemName: Ore
+  menuAsset: {fileID: 6068398185263138036, guid: 00531faaff3f10743a16e740de54d270,
+    type: 3}
   sprite: {fileID: 0}
   description: 
   itemWeight: 0

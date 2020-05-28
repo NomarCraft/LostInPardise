@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Vegetable Fiber
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  id: 2
+  itemName: Vegetable Fiber
+  menuAsset: {fileID: 6068398185263138036, guid: cb8a6145dc0f5f44289cb4bf8d448bb0,
+    type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: Obtained when stripping vegetables
   itemWeight: 0

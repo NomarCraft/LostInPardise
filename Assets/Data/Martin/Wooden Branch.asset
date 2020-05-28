@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  itemName: Wooden Branch
+  menuAsset: {fileID: 6068398185263138036, guid: bb434fd486de200468f1b5bebc75c272,
+    type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: A wooden branch which fell from a tree
   itemWeight: 0
