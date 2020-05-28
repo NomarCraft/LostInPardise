@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
-  m_Name: Ore
+  m_Name: Seeds
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 3
-  itemName: Ore
-  menuAsset: {fileID: 6068398185263138036, guid: 00531faaff3f10743a16e740de54d270,
+  id: 5
+  itemName: Seeds
+  menuAsset: {fileID: 6068398185263138036, guid: af72f5c69a5724e4c8377ba119b35d75,
     type: 3}
   sprite: {fileID: 0}
-  description: A raw piece of mineral
+  description: 
   itemWeight: 0

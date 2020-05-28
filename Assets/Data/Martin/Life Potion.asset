@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
-  m_Name: Ore
+  m_Name: Life Potion
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 3
-  itemName: Ore
-  menuAsset: {fileID: 6068398185263138036, guid: 00531faaff3f10743a16e740de54d270,
+  id: 16
+  itemName: Life Potion
+  menuAsset: {fileID: 6068398185263138036, guid: 43734ca0f0c85ba42aa588f838206f5d,
     type: 3}
   sprite: {fileID: 0}
-  description: A raw piece of mineral
+  description: 
   itemWeight: 0
