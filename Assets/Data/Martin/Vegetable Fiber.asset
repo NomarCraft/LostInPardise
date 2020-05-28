@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac596d7271f92654e88a1adce056a5c3, type: 3}
-  m_Name: WoodenBranch
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  m_Name: Vegetable Fiber
+  m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
   itemName: 
