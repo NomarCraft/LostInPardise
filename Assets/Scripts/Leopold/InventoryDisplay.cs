@@ -5,7 +5,19 @@ using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    public List<InventoryDisplayPack> packs;
+	private GameManager _gm;
+	public GameManager gm
+	{
+		get
+		{
+			if (!_gm)
+				_gm = GameManager.Instance;
+
+			return _gm;
+		}
+	}
+
+    [SerializeField] private List<InventoryDisplayPack> packs;
     /*public List<InventoryObject> inventories;
 
     [SerializeField] Transform itemPage;*/
@@ -43,6 +55,7 @@ public class InventoryDisplay : MonoBehaviour
 
     void UpdateDisplay(int nb){
 
+		packs = gm.packs;
         NUMBER_OF_COLUMN = Mathf.RoundToInt(packs[nb].invetoryPage.GetComponent<RectTransform>().sizeDelta.x / X_SPACE_BETWEEN_ITEM);
         
         for (int i = 0; i < packs[nb].inventory.container.Count; i++)
@@ -63,7 +76,8 @@ public class InventoryDisplay : MonoBehaviour
     }
 
     public void ChangeDisplay(int nb){
-        packs[nb].inventory.SortInventoryById();
+		packs = gm.packs;
+		packs[nb].inventory.SortInventoryById();
 
         foreach (var obj in packs[nb].itemsDisplayed)
         {
