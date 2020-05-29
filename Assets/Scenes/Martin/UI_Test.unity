@@ -1066,6 +1066,10 @@ MonoBehaviour:
   _comp: {fileID: 441865426}
   _inv: {fileID: 620404116}
   _invDis: {fileID: 620404115}
+  _packs:
+  - inventory: {fileID: 620404116}
+    invetoryPage: {fileID: 1339794769}
+  _compDis: {fileID: 0}
 --- !u!114 &620404115
 MonoBehaviour:
   m_ObjectHideFlags: 0
