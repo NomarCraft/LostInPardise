@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 
 public class ButtonSelection : Button
 {
-    public CompendiumDisplay compendiumDisplay;
-    public CompendiumData compendiumData;
 
     public override void OnSelect(BaseEventData eventData){
         base.OnSelect(eventData);
-        //compendiumDisplay.DisplayData(compendiumData);
+        //UIManager.Instance.compendiumDisplay
     }
 
     public override void OnDeselect(BaseEventData eventData){
