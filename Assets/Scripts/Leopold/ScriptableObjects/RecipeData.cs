@@ -9,5 +9,12 @@ public class RecipeData : CompendiumData
     DataType dataType = DataType.Recipe;
 
     //Maybe change to id
-    public List<ItemData> ingredients;
+    public List<Ingredient> ingredients;
+}
+
+[System.Serializable]
+public class Ingredient
+{
+	public ItemData ingredient;
+	public int amount;
 }

@@ -56,7 +56,7 @@ public class Compendium : MonoBehaviour
 
                                 for (int l = 0; l < itemDictionnaryInstance.Count; l++)
                                 {
-                                    if(itemDictionnaryInstance[l].item.id == recipeDictionnaryInstance[k].recipe.ingredients[j].id){
+                                    if(itemDictionnaryInstance[l].item.id == recipeDictionnaryInstance[k].recipe.ingredients[j].ingredient.id){
                                         id = l;
                                         break;
                                     }
