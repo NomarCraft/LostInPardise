@@ -17,4 +17,6 @@ public class GameManager : Singleton<GameManager>
 	public InventoryDisplay invDis { get { return _invDis; } }
 	[SerializeField] private List<InventoryDisplayPack> _packs;
 	public List<InventoryDisplayPack> packs { get { return _packs; } }
+	[SerializeField] private CompendiumDisplay _compDis;
+	public CompendiumDisplay compDis { get { return _compDis; } }
 }
