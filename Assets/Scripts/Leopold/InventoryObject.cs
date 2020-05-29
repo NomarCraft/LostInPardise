@@ -95,6 +95,32 @@ public class InventoryObject : MonoBehaviour
             }
         }
     }
+
+	public bool CheckItem(int id)
+	{
+		for (int i = 0; i < container.Count; i++)
+		{
+			if (container[i].item.id == id)
+				return true;
+		}
+
+		return false;
+	}
+
+	public bool CheckItem(int id, out int amount)
+	{
+		for (int i = 0; i < container.Count; i++)
+		{
+			if (container[i].item.id == id)
+			{
+				amount = container[i].amount;
+				return true;
+			}
+		}
+
+		amount = 0;
+		return false;
+	}
 }
 
 [System.Serializable]

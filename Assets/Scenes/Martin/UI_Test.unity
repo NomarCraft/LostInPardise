@@ -657,10 +657,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDictionnary:
-  - data: {fileID: 0}
-    item: {fileID: 11400000, guid: 00c9e2df22037eb478578dd7854ed103, type: 2}
-  - data: {fileID: 0}
-    item: {fileID: 11400000, guid: 7e6bf2006844c7344adcac11df8e0172, type: 2}
+  - item: {fileID: 11400000, guid: 00c9e2df22037eb478578dd7854ed103, type: 2}
+  - item: {fileID: 11400000, guid: 7e6bf2006844c7344adcac11df8e0172, type: 2}
+  - item: {fileID: 11400000, guid: d2acd1614c4c56249b3f743ff0cf4135, type: 2}
+  - item: {fileID: 11400000, guid: f545734360c3a1d4c8c66f6c95a10adf, type: 2}
+  - item: {fileID: 11400000, guid: 0212a90e863b65345a4df5d8c5b3c970, type: 2}
+  - item: {fileID: 11400000, guid: 6aedec49e08355e42877bfdfeb71de68, type: 2}
+  - item: {fileID: 11400000, guid: f2fc4ee5e8060524cbd0c31b2ea1289b, type: 2}
+  - item: {fileID: 11400000, guid: 7807c6cc792c88c4a9ed598022360776, type: 2}
+  - item: {fileID: 11400000, guid: 544f100d30cdc1041aa22926f09ff102, type: 2}
+  - item: {fileID: 11400000, guid: 8ca75092d143a314cbd05957ee1664eb, type: 2}
+  - item: {fileID: 11400000, guid: 35580e2697bc6294ca0eaebf47b76798, type: 2}
+  - item: {fileID: 11400000, guid: ca9167d314a076141bdf0a30417c2e92, type: 2}
+  - item: {fileID: 11400000, guid: 4c09dab63413b044ab30bb2eb4c8d8ba, type: 2}
+  - item: {fileID: 11400000, guid: 9c07d5bfde878ee4b86e238856710497, type: 2}
+  - item: {fileID: 11400000, guid: cfb41cc794eb5374e9afcfa3bbe065f4, type: 2}
+  - item: {fileID: 11400000, guid: 3440408e7c8f6bb4fbb8b525243f2721, type: 2}
+  - item: {fileID: 11400000, guid: 592f13552c1298b4494572f5b4de0e41, type: 2}
+  - item: {fileID: 11400000, guid: b3de15c4faa485e4aa75b2a4e5b39bf8, type: 2}
+  - item: {fileID: 11400000, guid: f2d98214d95324947b9c4ac94681113f, type: 2}
   itemDictionnaryInstance: []
   recipeDictionnary: []
   recipeDictionnaryInstance: []
