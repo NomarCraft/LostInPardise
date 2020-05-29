@@ -17,7 +17,7 @@ public class Crafter : MonoBehaviour
 				}
 				else
 				{
-					//inventories[i];
+					///////inventories[i];
 				}
 			}
 		}
