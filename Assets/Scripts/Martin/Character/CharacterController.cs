@@ -231,11 +231,19 @@ public partial class CharacterController : MonoBehaviour
 		}
 		else if (gm._gamePaused)
 		{
-			if (_ui._dialoguePanel.activeSelf)
+			if (context.started)
 			{
-				if (_ui._textIsDisplayed)
+				if (_ui._dialoguePanel.activeSelf)
 				{
-					_ui.HideElement(_ui._dialoguePanel);
+					if (_ui._textIsDisplayed)
+					{
+						_ui.HideElement(_ui._dialoguePanel);
+						gm._gamePaused = false;
+					}
+				}
+				if (_ui._craftPanel.activeSelf)
+				{
+					_ui.HideElement(_ui._craftPanel);
 					gm._gamePaused = false;
 				}
 			}
@@ -244,7 +252,7 @@ public partial class CharacterController : MonoBehaviour
 
 	public void PauseInput(InputAction.CallbackContext context)
 	{
-		if (context.started && !_ui._dialoguePanel.activeSelf)
+		if (context.started && !_ui._dialoguePanel.activeSelf && !_ui._craftPanel.activeSelf)
 		{
 			if (gm._gamePaused)
 			{
@@ -454,6 +462,7 @@ public partial class CharacterController : MonoBehaviour
 		{
 			Gatherable gatherable;
 			Dialoguable dialogue;
+			Crafting craft;
 
 			if (interactable.TryGetComponent<Gatherable>(out gatherable))
 			{
@@ -473,6 +482,14 @@ public partial class CharacterController : MonoBehaviour
 					_ui._textIsDisplayed = false;
 					gm._gamePaused = true;
 					_ui.DisplayDialogue(_ui._dialogueText, text);
+				}
+			}
+			else if (interactable.TryGetComponent<Crafting>(out craft))
+			{
+				if (_ui)
+				{
+					gm._gamePaused = true;
+					_ui.DisplayElement(_ui._craftPanel);
 				}
 			}
 			else

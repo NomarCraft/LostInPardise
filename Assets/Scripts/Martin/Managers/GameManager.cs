@@ -19,4 +19,6 @@ public class GameManager : Singleton<GameManager>
 	public List<InventoryDisplayPack> packs { get { return _packs; } }
 	[SerializeField] private CompendiumDisplay _compDis;
 	public CompendiumDisplay compDis { get { return _compDis; } }
+	[SerializeField] private Crafter _craft;
+	public Crafter craft { get { return _craft; } }
 }

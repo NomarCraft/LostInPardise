@@ -8,7 +8,8 @@ public class RecipeData : CompendiumData
 {
     DataType dataType = DataType.Recipe;
 
-    //Maybe change to id
+	//Maybe change to id
+	public int craftedItemId;
     public List<Ingredient> ingredients;
 }
 

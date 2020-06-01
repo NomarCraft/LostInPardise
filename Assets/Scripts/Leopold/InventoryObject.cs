@@ -74,7 +74,54 @@ public class InventoryObject : MonoBehaviour
 		}
     }
 
-    public void SortInventoryById(){
+	public bool AddItem(int id)
+	{
+		bool hasItem = false;
+		ItemData item;
+
+		item = compendium.GetItemReference(id);
+
+		if (actualWeight + item.itemWeight <= maximumWeight)
+		{
+
+			for (int i = 0; i < container.Count; i++)
+			{
+				if (container[i].item.id == id)
+				{
+					item = container[i].item;
+					container[i].AddAmount(1);
+					hasItem = true;
+					break;
+				}
+			}
+			if (!hasItem)
+			{
+				container.Add(new InventorySlot(item, 1));
+				//compendium.CheckCompendium(item);
+			}
+
+			if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You acquired " + 1.ToString() + " " + item.itemName, Color.green);
+			}
+
+			actualWeight += item.itemWeight;
+			return true;
+		}
+		else
+		{
+
+			if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You can't get " + 1.ToString() + " " + item.itemName + " because your inventory is full", Color.red);
+			}
+			return false;
+		}
+	}
+
+	public void SortInventoryById(){
 
         container.Sort(delegate(InventorySlot x, InventorySlot y)
         {
@@ -85,12 +132,15 @@ public class InventoryObject : MonoBehaviour
         });
     }
 
-    public void RemoveItem(ItemData item){
+    public void RemoveItem(ItemData item, int amount){
 
         for (int i = 0; i < container.Count; i++)
         {
             if(container[i].item == item){
-                container.Remove(container[i]);
+				container[i].amount -= amount;
+				if (container[i].amount <= 0)
+					container.Remove(container[i]);
+
                 break;
             }
         }
@@ -111,6 +161,7 @@ public class InventoryObject : MonoBehaviour
 	{
 		for (int i = 0; i < container.Count; i++)
 		{
+			Debug.Log(container[i].item.id);
 			if (container[i].item.id == id)
 			{
 				amount = container[i].amount;

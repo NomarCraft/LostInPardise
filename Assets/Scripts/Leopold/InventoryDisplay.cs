@@ -17,7 +17,7 @@ public class InventoryDisplay : MonoBehaviour
 		}
 	}
 
-    [SerializeField] private List<InventoryDisplayPack> packs;
+    [SerializeField] public List<InventoryDisplayPack> packs;
     /*public List<InventoryObject> inventories;
 
     [SerializeField] Transform itemPage;*/
