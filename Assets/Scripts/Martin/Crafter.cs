@@ -82,7 +82,35 @@ public class Crafter : MonoBehaviour
 
 		if (inventories[target].inventory.AddItem(craftedItem))
 		{
-			//Remove Items mais c'est chiant
+			foreach (Ingredient item in ingredients)
+			{
+				int requiredAmount = item.amount;
+
+				for (int i = 0; i < inventories.Count; i++)
+				{
+					if (i == 1)
+					{
+						//Avoid double check on Player Inventory
+					}
+					else
+					{
+						int itemAmount = 0;
+						if (inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount))
+						{
+							if (itemAmount >= requiredAmount)
+							{
+								inventories[i].inventory.RemoveItem(item.ingredient, requiredAmount);
+								break;
+							}
+							else if (itemAmount < requiredAmount)
+							{
+								requiredAmount -= itemAmount;
+								inventories[i].inventory.RemoveItem(item.ingredient, itemAmount);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

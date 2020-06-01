@@ -136,7 +136,8 @@ public class InventoryObject : MonoBehaviour
 
         for (int i = 0; i < container.Count; i++)
         {
-            if(container[i].item == item){
+			Debug.Log(amount);
+            if(container[i].item.id == item.id){
 				container[i].amount -= amount;
 				if (container[i].amount <= 0)
 					container.Remove(container[i]);
