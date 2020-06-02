@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5573737435282812769}
   - component: {fileID: 5573737435282812768}
   m_Layer: 0
-  m_Name: GM_Tree
+  m_Name: GM_Tree 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,11 +127,11 @@ LODGroup:
   m_LocalReferencePoint: {x: 1.8010445, y: 10.71402, z: 0.05992794}
   m_Size: 27.597109
   m_FadeMode: 2
-  m_AnimateCrossFading: 1
+  m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.5018099
-    fadeTransitionWidth: 0
+    fadeTransitionWidth: 0.1
     renderers:
     - renderer: {fileID: 8255805159906556641}
     - renderer: {fileID: 2757574819515193676}
@@ -148,7 +148,7 @@ LODGroup:
     - renderer: {fileID: 2757574820108988115}
     - renderer: {fileID: 2757574819723002045}
   - screenRelativeHeight: 0.2520395
-    fadeTransitionWidth: 0
+    fadeTransitionWidth: 0.1
     renderers:
     - renderer: {fileID: 286743554770262108}
     - renderer: {fileID: 2757574819787904596}
@@ -158,7 +158,7 @@ LODGroup:
     - renderer: {fileID: 2757574818944347166}
     - renderer: {fileID: 2757574820683170805}
   - screenRelativeHeight: 0.100239664
-    fadeTransitionWidth: 0
+    fadeTransitionWidth: 0.1
     renderers:
     - renderer: {fileID: 2842219611514641197}
     - renderer: {fileID: 2757574820020924586}
@@ -166,7 +166,7 @@ LODGroup:
     - renderer: {fileID: 2757574820581186931}
     - renderer: {fileID: 2757574820015809694}
   - screenRelativeHeight: 0.023884298
-    fadeTransitionWidth: 0
+    fadeTransitionWidth: 0.1
     renderers:
     - renderer: {fileID: 9115327451862300967}
     - renderer: {fileID: 2757574820045023252}
