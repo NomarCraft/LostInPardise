@@ -39,7 +39,7 @@ public class Compendium : MonoBehaviour
     public void CheckCompendium(int itemID){
 
         //Check if we already had the item
-        for (int i = itemDictionnaryInstance.Count - 1; i >= 0 ; i--)
+        for (int i = 0 ; i < itemDictionnaryInstance.Count ; i++)
         {
             if(itemDictionnaryInstance[i].item.id == itemID){
                 if(itemDictionnaryInstance[i].item.unlocked == false){
@@ -80,6 +80,7 @@ public class Compendium : MonoBehaviour
 
     public void UnlockItem(int id){
         itemDictionnaryInstance[id].item.unlocked = true;
+		unlockedItem.Add(itemDictionnaryInstance[id]);
         SortUnlockedItem();
     }
 

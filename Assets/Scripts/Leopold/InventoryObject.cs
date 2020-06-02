@@ -52,7 +52,7 @@ public class InventoryObject : MonoBehaviour
             }
             if(!hasItem){
                 container.Add(new InventorySlot(item, amount));
-                //compendium.CheckCompendium(item);
+                compendium.CheckCompendium(item.id);
             }
 
 			if (ui != null)
@@ -97,7 +97,7 @@ public class InventoryObject : MonoBehaviour
 			if (!hasItem)
 			{
 				container.Add(new InventorySlot(item, 1));
-				//compendium.CheckCompendium(item);
+				compendium.CheckCompendium(item.id);
 			}
 
 			if (ui != null)

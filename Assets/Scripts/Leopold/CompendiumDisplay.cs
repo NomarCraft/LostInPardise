@@ -15,21 +15,6 @@ public class CompendiumDisplay : MonoBehaviour
     TextMeshProUGUI itemDescription;
     Sprite itemSprite;
 
-    public void Update(){
-        /*UpdateDisplayedItems();
-        UpdateDisplayedRecipes();
-        UpdateDisplayedLogs();*/
-    }
-
-    /*public void CreateItemDisplay(){
-        
-        for (int i = 0; i < compendium.unlockedItem.Count; i++)
-        {
-            var obj = Instantiate(compendium.unlockedItem[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[0].page);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedItem[i].item.itemName.ToString();
-        }
-    }*/
     public void UpdateTime(){
         ChangeDisplay();
         UpdateDisplayedItems();
@@ -73,32 +58,14 @@ public class CompendiumDisplay : MonoBehaviour
             var obj = Instantiate(data.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].page);
             obj.GetComponent<ButtonSelection>().compendiumData = data;
             RectTransform trans = obj.GetComponent<RectTransform>();
-            trans.localPosition = GetPosition(i);
-            trans.anchorMax = new Vector2(0, 1);
-            trans.anchorMin = new Vector2(0, 1);
-            trans.pivot = new Vector2(0, 1);
-            packs[nb].objDisplayed.Add(data, obj);
+			trans.localPosition = GetPosition(i);
+			trans.anchorMax = new Vector2(0.5f, 1);
+            trans.anchorMin = new Vector2(0.5f, 1);
+            trans.pivot = new Vector2(0.5f, 1);
+			Debug.Log(GetPosition(i));
+			packs[nb].objDisplayed.Add(data, obj);
         }
     }
-
-    /*public void CreateRecipeDisplay(){
-        
-        for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
-        {
-            var obj = Instantiate(compendium.unlockedRecipe[i].recipe.menuAsset, Vector3.zero, Quaternion.identity, packs[0].page);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedRecipe[i].recipe.itemName.ToString();
-        }
-    }
-    public void CreateLogDisplay(){
-        
-        for (int i = 0; i < compendium.unlockedLog.Count; i++)
-        {
-            var obj = Instantiate(compendium.unlockedLog[i].log.menuAsset, Vector3.zero, Quaternion.identity, packs[0].page);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = compendium.unlockedLog[i].log.itemName.ToString();
-        }
-    }*/
 
     public void DisplayData(CompendiumData scriptable){
         itemName.text = scriptable.itemName;
