@@ -196,6 +196,8 @@ public partial class CharacterController : MonoBehaviour
 			{
 				_ui.HideElement(_ui._inventoryPanel);
 				_ui.DisplayElement(_ui._compendiumInventoryPanel);
+				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
+				gm.compDis.ChangeDisplay();
 			}
 		}
 	}
@@ -209,6 +211,36 @@ public partial class CharacterController : MonoBehaviour
 				_ui.HideElement(_ui._compendiumInventoryPanel);
 				_ui.DisplayElement(_ui._inventoryPanel);
 				gm.invDis.ChangeDisplay(0);
+			}
+		}
+	}
+
+	public void RightBumperInput (InputAction.CallbackContext context)
+	{
+		if (gm._gamePaused && _ui)
+		{
+			if (context.started)
+			{
+				_ui.HideElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
+				int currentSelection = _ui._currentCompendiumPanelSelected + 1;
+				_ui._currentCompendiumPanelSelected = Mathf.Clamp(currentSelection, 0, _ui._compendiumPanels.Length - 1);
+				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
+				gm.compDis.ChangeDisplay();
+			}
+		}
+	}
+
+	public void LeftBumperInput (InputAction.CallbackContext context)
+	{
+		if (gm._gamePaused && _ui)
+		{
+			if (context.started)
+			{
+				_ui.HideElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
+				int currentSelection = _ui._currentCompendiumPanelSelected - 1;
+				_ui._currentCompendiumPanelSelected = Mathf.Clamp(currentSelection, 0, _ui._compendiumPanels.Length - 1);
+				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
+				gm.compDis.ChangeDisplay();
 			}
 		}
 	}

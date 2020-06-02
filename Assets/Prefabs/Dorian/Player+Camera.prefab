@@ -1288,11 +1288,33 @@ MonoBehaviour:
     m_ActionId: 9d883b4c-a1b0-44fa-828b-dcdf378a3665
     m_ActionName: Player/PrevCategory[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412770315032018045}
+        m_MethodName: RightBumperInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d9fd245b-4d68-4299-a4d1-334fbf620a7e
     m_ActionName: Player/NextPanel[/XInputControllerWindows/rightShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412770315032018045}
+        m_MethodName: LeftBumperInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1f519b0a-05de-42c8-8573-437e811f6691
     m_ActionName: Player/PrevPanel[/XInputControllerWindows/leftShoulder]
   m_NeverAutoSwitchControlSchemes: 0

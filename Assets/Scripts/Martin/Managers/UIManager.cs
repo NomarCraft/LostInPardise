@@ -39,8 +39,10 @@ public class UIManager : MonoBehaviour
 
 	[Space(10)]
 	[Header("Compendium/Inventory")]
+	public int _currentCompendiumPanelSelected = 0;
 	public GameObject _inventoryPanel;
 	public GameObject _compendiumInventoryPanel;
+	public GameObject[] _compendiumPanels;
 	public GameObject _itemCompendiumPanel;
 	public GameObject _recipeCompendiumPanel;
 	public GameObject _logCompendiumPanel;
