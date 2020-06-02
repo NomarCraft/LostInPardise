@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 687d69860a8480141915435150dd0d65,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1594,6 +1595,7 @@ MonoBehaviour:
   _compendiumPanel: {fileID: 0}
   _displayMessagePanel: {fileID: 1957520221}
   _dialoguePanel: {fileID: 1250137029}
+  _craftPanel: {fileID: 0}
   _playerLifeScrollbar: {fileID: 1274368844}
   _interactableCenterImage: {fileID: 524775535}
   _interactableNameText: {fileID: 1106339695}
@@ -1643,6 +1645,9 @@ MonoBehaviour:
   _comp: {fileID: 441865426}
   _inv: {fileID: 620404116}
   _invDis: {fileID: 620404115}
+  _packs: []
+  _compDis: {fileID: 0}
+  _craft: {fileID: 0}
 --- !u!114 &620404115
 MonoBehaviour:
   m_ObjectHideFlags: 0
