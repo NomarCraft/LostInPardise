@@ -41,6 +41,11 @@ public class UIManager : MonoBehaviour
 	[Header("Compendium/Inventory")]
 	public GameObject _inventoryPanel;
 	public GameObject _compendiumInventoryPanel;
+	public GameObject _itemCompendiumPanel;
+	public GameObject _recipeCompendiumPanel;
+	public GameObject _logCompendiumPanel;
+	public TextMeshProUGUI _compendiumObjName;
+	public TextMeshProUGUI _compendiumObjDescription;
 
 	[Space(10)]
 	[Header("Dialogue")]
@@ -147,6 +152,12 @@ public class UIManager : MonoBehaviour
 			StopCoroutine(dialogueDisplay);
 
 		StartCoroutine(DisplayTextLetterByLetter(textToDisplay, text));
+	}
+
+	public void UpdateCompendiumText(CompendiumData compendiumData)
+	{
+		ChangeText(_compendiumObjName, compendiumData.itemName);
+		ChangeText(_compendiumObjDescription, compendiumData.description);
 	}
 
 	private IEnumerator Fade(Image imageToFade, int mode)

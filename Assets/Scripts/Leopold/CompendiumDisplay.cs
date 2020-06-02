@@ -71,6 +71,7 @@ public class CompendiumDisplay : MonoBehaviour
     public void UpdateDisplay(int i, int nb, CompendiumData data){
         if(!packs[nb].objDisplayed.ContainsKey(data)){
             var obj = Instantiate(data.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].page);
+            obj.GetComponent<ButtonSelection>().compendiumData = data;
             RectTransform trans = obj.GetComponent<RectTransform>();
             trans.localPosition = GetPosition(i);
             trans.anchorMax = new Vector2(0, 1);
