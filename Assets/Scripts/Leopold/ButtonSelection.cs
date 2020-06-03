@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class ButtonSelection : Button
 {
     public CompendiumData compendiumData;
+    public int inventoryPack;
+
     private UIManager _ui;
 	public UIManager ui
 	{
@@ -22,7 +24,10 @@ public class ButtonSelection : Button
     public override void OnSelect(BaseEventData eventData){
         base.OnSelect(eventData);
         ui.UpdateCompendiumText(compendiumData);
+        ui.ChangeSelectedButton(this);
     }
+
+
 /*
     public override void OnDeselect(BaseEventData eventData){
         base.OnDeselect(eventData);

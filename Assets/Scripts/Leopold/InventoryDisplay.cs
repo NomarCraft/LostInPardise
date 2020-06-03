@@ -27,31 +27,6 @@ public class InventoryDisplay : MonoBehaviour
     public int X_SPACE_BETWEEN_ITEM;
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
-/*
-    void Start(){
-        CreateDisplay();
-    }*/
-    void Update(){
-        //Remove Line when trying opening and closing the inventory
-    }
-/*
-    public void CreateDisplay(){
-        
-        foreach (var item in inventories)
-        {
-            for (int i = 0; i < item.container.Count; i++)
-            {
-                var obj = Instantiate(item.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, transform);
-                NUMBER_OF_COLUMN = Mathf.RoundToInt(itemPage.GetComponent<RectTransform>().sizeDelta.x / X_SPACE_BETWEEN_ITEM);
-                RectTransform trans = obj.GetComponent<RectTransform>();
-                trans.localPosition = GetPosition(i);
-                trans.anchorMax = new Vector2(0, 1);
-                trans.anchorMin = new Vector2(0, 1);
-                trans.pivot = new Vector2(0, 1);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = item.container[i].amount.ToString("n0");
-            }
-        }
-    }*/
 
     void UpdateDisplay(int nb){
 
@@ -64,13 +39,15 @@ public class InventoryDisplay : MonoBehaviour
                 packs[nb].itemsDisplayed[packs[nb].inventory.container[i]].GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
             }else{
                 var obj = Instantiate(packs[nb].inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].invetoryPage);
+                var butt = obj.GetComponent<ButtonSelection>();
+                butt.inventoryPack = nb;
                 RectTransform trans = obj.GetComponent<RectTransform>();
                 trans.localPosition = GetPosition(i);
                 trans.anchorMax = new Vector2(0, 1);
                 trans.anchorMin = new Vector2(0, 1);
                 trans.pivot = new Vector2(0, 1);
                 obj.GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
-                packs[nb].itemsDisplayed.Add(packs[nb].inventory.container[i], obj);
+                packs[nb].itemsDisplayed.Add(packs[nb].inventory.container[i], butt);
             }
         }
     }
@@ -91,11 +68,32 @@ public class InventoryDisplay : MonoBehaviour
     public Vector3 GetPosition(int i){
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i/NUMBER_OF_COLUMN)), 0f);
     }
+
+    public void TransferItems(ButtonSelection buttonSelection, int quantity){
+
+        bool added = false;
+
+        for (int i = 0; i < packs.Count; i++)
+        {
+            if(!(i == buttonSelection.inventoryPack)){
+                if(packs[i].inventory.AddItem(buttonSelection.compendiumData.id)){
+                    packs[i].inventory.AddItem(buttonSelection.compendiumData.id, quantity - 1);
+                    added = true;
+                }
+            }
+        }
+        
+        if(added){
+            packs[buttonSelection.inventoryPack].inventory.RemoveItem(buttonSelection.compendiumData as ItemData, quantity);
+        }
+    }
 }
+
 
 [System.Serializable]
 public class InventoryDisplayPack{
     public InventoryObject inventory;
     public Transform invetoryPage;
-    public Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    //public Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    public Dictionary<InventorySlot, ButtonSelection> itemsDisplayed = new Dictionary<InventorySlot, ButtonSelection>();
 }

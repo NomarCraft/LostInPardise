@@ -46,8 +46,11 @@ public class UIManager : MonoBehaviour
 	public GameObject _itemCompendiumPanel;
 	public GameObject _recipeCompendiumPanel;
 	public GameObject _logCompendiumPanel;
+	public GameObject _amountSelectionPanel;
 	public TextMeshProUGUI _compendiumObjName;
 	public TextMeshProUGUI _compendiumObjDescription;
+	public ButtonSelection _selectedButton;
+	public bool _amountSelectionning;
 
 	[Space(10)]
 	[Header("Dialogue")]
@@ -160,6 +163,21 @@ public class UIManager : MonoBehaviour
 	{
 		ChangeText(_compendiumObjName, compendiumData.itemName);
 		ChangeText(_compendiumObjDescription, compendiumData.description);
+	}
+
+	public void ChangeSelectedButton(ButtonSelection buttonSelection)
+	{
+		_selectedButton = buttonSelection;
+	}
+
+	public void ShowAmountSelectionPanel(){
+		_amountSelectionPanel.SetActive(true);
+		_amountSelectionPanel.GetComponent<TransferAmountSelection>().amount = 1;
+	}
+
+	public void TransferItems(int amount){
+		_amountSelectionPanel.SetActive(false);
+		GameManager.Instance.invDis.TransferItems(_selectedButton ,amount);
 	}
 
 	private IEnumerator Fade(Image imageToFade, int mode)
