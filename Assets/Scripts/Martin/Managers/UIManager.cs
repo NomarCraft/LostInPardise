@@ -172,11 +172,13 @@ public class UIManager : MonoBehaviour
 
 	public void ShowAmountSelectionPanel(){
 		_amountSelectionPanel.SetActive(true);
+		_amountSelectionning = true;
 		_amountSelectionPanel.GetComponent<TransferAmountSelection>().amount = 1;
 	}
 
 	public void TransferItems(int amount){
 		_amountSelectionPanel.SetActive(false);
+		_amountSelectionning = false;
 		GameManager.Instance.invDis.TransferItems(_selectedButton ,amount);
 	}
 

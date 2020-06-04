@@ -65,6 +65,13 @@ public class InventoryDisplay : MonoBehaviour
         UpdateDisplay(nb);
     }
 
+    public void ChangeDisplayAll(){
+        for (int i = 0; i < packs.Count; i++)
+        {
+            ChangeDisplay(i);
+        }
+    }
+
     public Vector3 GetPosition(int i){
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i/NUMBER_OF_COLUMN)), 0f);
     }
@@ -75,7 +82,7 @@ public class InventoryDisplay : MonoBehaviour
 
         for (int i = 0; i < packs.Count; i++)
         {
-            if(!(i == buttonSelection.inventoryPack)){
+            if((i != buttonSelection.inventoryPack) && i != 0){
                 if(packs[i].inventory.AddItem(buttonSelection.compendiumData.id)){
                     packs[i].inventory.AddItem(buttonSelection.compendiumData.id, quantity - 1);
                     added = true;
@@ -85,6 +92,7 @@ public class InventoryDisplay : MonoBehaviour
         
         if(added){
             packs[buttonSelection.inventoryPack].inventory.RemoveItem(buttonSelection.compendiumData as ItemData, quantity);
+            ChangeDisplayAll();
         }
     }
 }

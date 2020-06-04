@@ -34,6 +34,8 @@ public class InventoryObject : MonoBehaviour
 	}
 
     public void AddItem(int id, int amount){
+		if(amount == 0)
+		return;
 
         bool hasItem = false;
         ItemData item;
