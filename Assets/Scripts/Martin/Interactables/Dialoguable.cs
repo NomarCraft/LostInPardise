@@ -9,8 +9,10 @@ public class Dialoguable : Interactable
 	public int _logId;
 	public string _dialogueText;
 
-	public void Interaction(out string text)
+	public void Interaction(out string text, out int logId)
 	{
-		text = _dialogueText;
+		text = GameManager.Instance.comp.logDictionnaryInstance[_logId].log.text;
+		logId = _logId;
+		GameManager.Instance.comp.UnlockLog(_logId);
 	}
 }

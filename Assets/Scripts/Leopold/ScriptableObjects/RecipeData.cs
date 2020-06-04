@@ -16,6 +16,7 @@ public class RecipeData : CompendiumData
 [System.Serializable]
 public class Ingredient
 {
+	public bool unlocked;
 	public ItemData ingredient;
 	public int amount;
 }

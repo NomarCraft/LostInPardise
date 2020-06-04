@@ -12,6 +12,7 @@ public class Compendium : MonoBehaviour
     public List<LogDictionnary> logDictionnary;
     [HideInInspector] public List<LogDictionnary> logDictionnaryInstance;
     public List<ItemDictionnary> unlockedItem = new List<ItemDictionnary>();
+	public List<RecipeDictionnary> lockedRecipe = new List<RecipeDictionnary>();
     public List<RecipeDictionnary> unlockedRecipe = new List<RecipeDictionnary>();
     public List<LogDictionnary> unlockedLog = new List<LogDictionnary>();
 
@@ -27,6 +28,7 @@ public class Compendium : MonoBehaviour
         {
             recipeDictionnaryInstance.Add(new RecipeDictionnary());
             recipeDictionnaryInstance[i].recipe = Instantiate(recipeDictionnary[i].recipe);
+			lockedRecipe.Add(recipeDictionnaryInstance[i]);
         }
 
         for (int i = 0; i < logDictionnary.Count; i++)
@@ -45,32 +47,38 @@ public class Compendium : MonoBehaviour
                 if(itemDictionnaryInstance[i].item.unlocked == false){
                     UnlockItem(i);
 
-                    //Check if we can unlock recipes
-                    for (int k = 0; k < recipeDictionnaryInstance.Count; k++)
-                    {
-                        if(!recipeDictionnaryInstance[k].recipe.unlocked){
-                            recipeDictionnaryInstance[k].recipe.unlocked = true;
-                            for (int j = 0; j < recipeDictionnaryInstance[k].recipe.ingredients.Count; j++)
-                            {
-                                int id = new int();
+					List<RecipeDictionnary> lockedRecipeToRemove = new List<RecipeDictionnary>();
+					//Check if we can unlock recipes
+					for (int j = 0; j < lockedRecipe.Count; j++)
+					{
+						for (int k = 0; k < lockedRecipe[j].recipe.ingredients.Count; k++)
+						{
+							for (int l = 0; l < unlockedItem.Count; l++)
+							{
+								if (lockedRecipe[j].recipe.ingredients[k].ingredient.id == unlockedItem[l].item.id)
+								{
+									lockedRecipe[j].recipe.ingredients[k].unlocked = true;
+								}
+							}
 
-                                for (int l = 0; l < itemDictionnaryInstance.Count; l++)
-                                {
-                                    if(itemDictionnaryInstance[l].item.id == recipeDictionnaryInstance[k].recipe.ingredients[j].ingredient.id){
-                                        id = l;
-                                        break;
-                                    }
-                                }
+							bool checkIngr = true;
+							foreach(Ingredient ingr in lockedRecipe[j].recipe.ingredients)
+							{
+								if (!ingr.unlocked)
+								{
+									checkIngr = false;
+								}
+							}
 
-                                if(!itemDictionnaryInstance[id].item.unlocked){
-                                    recipeDictionnaryInstance[k].recipe.unlocked = false;
-                                    break;
-                                }
-                            }
-                            
-                            SortUnlockedRecipe();
-                        }
-                    }
+							if (checkIngr)
+							{
+								UnlockRecipe(lockedRecipe[j].recipe.id);
+								lockedRecipeToRemove.Add(lockedRecipe[j]);
+							}
+						}
+					}
+
+					RemoveRecipeFromList(lockedRecipeToRemove);
 
                     break;
                 }
@@ -84,14 +92,33 @@ public class Compendium : MonoBehaviour
         SortUnlockedItem();
     }
 
+	public void UnlockRecipe(int id)
+	{
+		if (!recipeDictionnaryInstance[id].recipe.unlocked)
+		{
+			recipeDictionnaryInstance[id].recipe.unlocked = true;
+			unlockedRecipe.Add(recipeDictionnaryInstance[id]);
+		}
+	}
+
     public void UnlockLog(int logNumber){
-        logDictionnaryInstance[logNumber].log.unlocked = true;
-        unlockedLog.Add(logDictionnaryInstance[logNumber]);
-        SortUnlockedLog();
+		if (!logDictionnaryInstance[logNumber].log.unlocked)
+		{
+			logDictionnaryInstance[logNumber].log.unlocked = true;
+			unlockedLog.Add(logDictionnaryInstance[logNumber]);
+			SortUnlockedLog();
+		}
     }
 
-    public void SortUnlockedItem(){
+	public void RemoveRecipeFromList(List<RecipeDictionnary> list)
+	{
+		foreach (RecipeDictionnary recipe in list)
+		{
+			lockedRecipe.Remove(recipe);
+		}
+	}
 
+    public void SortUnlockedItem(){
         unlockedItem.Sort(delegate(ItemDictionnary x, ItemDictionnary y)
         {
             if (x.item.id == 0 && y.item.id == 0) return 0;

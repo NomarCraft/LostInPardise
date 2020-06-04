@@ -507,8 +507,9 @@ public partial class CharacterController : MonoBehaviour
 			else if (interactable.TryGetComponent<Dialoguable>(out dialogue))
 			{
 				string text;
+				int logId;
 
-				dialogue.Interaction(out text);
+				dialogue.Interaction(out text, out logId);
 
 				if (_ui)
 				{
