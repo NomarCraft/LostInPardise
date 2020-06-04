@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
-  itemName: 
-  menuAsset: {fileID: 0}
+  itemName: Test Log
+  menuAsset: {fileID: 6068398185263138036, guid: 052696be8e1dcd6409e76be3dbcbc901,
+    type: 3}
   sprite: {fileID: 0}
   description: 
-  text: 
+  text: Oui c'est un test et c pas bo

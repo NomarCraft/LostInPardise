@@ -9,6 +9,9 @@ public class Gatherable : Interactable
 	public int _gatheredItemId;
 	public int _gatheredItemAmount;
 
+	[Header("Tool")]
+	public int _toolRequiredId;
+
 	public void Interaction(out ItemData item)
 	{
 		GameManager.Instance.inv.AddItem(_gatheredItemId, _gatheredItemAmount);

@@ -486,52 +486,64 @@ public partial class CharacterController : MonoBehaviour
 			return;
 
 		Interactable interactable = interactor._interactables[0];
+		Gatherable gatherable;
+		Dialoguable dialogue;
+		Crafting craft;
 
-		if (interactable._interactions[0]._toolRequired)
+		if (interactable.TryGetComponent<Gatherable>(out gatherable))
 		{
-			Debug.Log("Pas le bon outil");
-		}
-		else
-		{
-			Gatherable gatherable;
-			Dialoguable dialogue;
-			Crafting craft;
+			ItemData item;
 
-			if (interactable.TryGetComponent<Gatherable>(out gatherable))
+			if (interactable._interactions[0]._toolRequired)
 			{
-				ItemData item;
-
-				gatherable.Interaction(out item);
-
-			}
-			else if (interactable.TryGetComponent<Dialoguable>(out dialogue))
-			{
-				string text;
-				int logId;
-
-				dialogue.Interaction(out text, out logId);
-
-				if (_ui)
+				if (gm.inv.CheckItem(gatherable._toolRequiredId))
 				{
-					_ui._textIsDisplayed = false;
-					gm._gamePaused = true;
-					_ui.DisplayDialogue(_ui._dialogueText, text);
+
+					gatherable.Interaction(out item);
 				}
-			}
-			else if (interactable.TryGetComponent<Crafting>(out craft))
-			{
-				if (_ui)
+				else
 				{
-					gm._gamePaused = true;
-					_ui.DisplayElement(_ui._craftPanel);
+					if (_ui != null)
+					{
+						_ui.DisplayElement(_ui._displayMessagePanel);
+						_ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You can't gather " + gm.comp.GetItemReference(gatherable._gatheredItemId).itemName + " because you lack the needed tool", Color.red);
+					}
 				}
 			}
 			else
-				interactable.Interaction();
+			{
+				gatherable.Interaction(out item);
+			}
 
-			interactor._interactables.Remove(interactable);
-			UpdateInteraction();
+
 		}
+		else if (interactable.TryGetComponent<Dialoguable>(out dialogue))
+		{
+			string text;
+			int logId;
+
+			dialogue.Interaction(out text, out logId);
+
+			if (_ui)
+			{
+				_ui._textIsDisplayed = false;
+				gm._gamePaused = true;
+				_ui.DisplayDialogue(_ui._dialogueText, text);
+			}
+		}
+		else if (interactable.TryGetComponent<Crafting>(out craft))
+		{
+			if (_ui)
+			{
+				gm._gamePaused = true;
+				_ui.DisplayElement(_ui._craftPanel);
+			}
+		}
+		else
+			interactable.Interaction();
+
+		interactor._interactables.Remove(interactable);
+		UpdateInteraction();
 	}
 
 	#endregion
@@ -657,7 +669,7 @@ public partial class CharacterController : MonoBehaviour
 
 			if (interaction[i]._toolRequired)
 			{
-				_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.red);
+				//_ui.ChangeTextColor(_ui._interactablesNameText[i], Color.red);
 			}
 			else
 			{

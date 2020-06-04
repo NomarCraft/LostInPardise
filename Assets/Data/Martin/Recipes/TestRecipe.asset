@@ -15,10 +15,12 @@ MonoBehaviour:
   unlocked: 0
   id: 0
   itemName: Recipe Test
-  menuAsset: {fileID: 0}
+  menuAsset: {fileID: 6068398185263138036, guid: 6453cf9ac6723ed4c9761316e6692798,
+    type: 3}
   sprite: {fileID: 0}
   description: 
   craftedItemId: 12
   ingredients:
-  - ingredient: {fileID: 11400000, guid: 61b9e131591f7b54c926af6b7ba3d591, type: 2}
+  - unlocked: 0
+    ingredient: {fileID: 11400000, guid: 61b9e131591f7b54c926af6b7ba3d591, type: 2}
     amount: 4
