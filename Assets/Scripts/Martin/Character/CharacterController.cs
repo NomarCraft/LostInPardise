@@ -279,13 +279,19 @@ public partial class CharacterController : MonoBehaviour
 					_ui.HideElement(_ui._craftPanel);
 					gm._gamePaused = false;
 				}
+				if (_ui._chestPanel.activeSelf)
+				{
+					_ui.HideElement(_ui._chestPanel);
+					gm.invDis.packs[2].inventory = null;
+					gm._gamePaused = false;
+				}
 			}
 		}
 	}
 
 	public void PauseInput(InputAction.CallbackContext context)
 	{
-		if (context.started && !_ui._dialoguePanel.activeSelf && !_ui._craftPanel.activeSelf)
+		if (context.started && !_ui._dialoguePanel.activeSelf && !_ui._craftPanel.activeSelf && !_ui._chestPanel.activeSelf)
 		{
 			if (gm._gamePaused)
 			{
@@ -491,6 +497,7 @@ public partial class CharacterController : MonoBehaviour
 		Gatherable gatherable;
 		Dialoguable dialogue;
 		Crafting craft;
+		Storage storage;
 
 		if (interactable.TryGetComponent<Gatherable>(out gatherable))
 		{
@@ -539,6 +546,18 @@ public partial class CharacterController : MonoBehaviour
 			{
 				gm._gamePaused = true;
 				_ui.DisplayElement(_ui._craftPanel);
+			}
+		}
+		else if (interactable.TryGetComponent<Storage>(out storage))
+		{
+			if (_ui)
+			{
+				gm._gamePaused = true;
+				gm.invDis.packs[2].inventory = storage.inv;
+				gm.invDis.packs[2].inventory.AddItem(5, 25);
+				gm.invDis.ChangeDisplay(1);
+				gm.invDis.ChangeDisplay(2);
+				_ui.DisplayElement(_ui._chestPanel);
 			}
 		}
 		else
