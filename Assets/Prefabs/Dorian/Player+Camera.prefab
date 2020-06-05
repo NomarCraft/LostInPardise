@@ -3545,10 +3545,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1412770315032018045}
   _playerCenter: {fileID: 6970101126956845464}
-  _rotationRadius: 6
+  _rotationRadius: 5
   _heightOffset: 3
   _minimumHeightOffset: 0.1
-  _maximumHeightOffset: 7
+  _maximumHeightOffset: 5
   _angularSpeed: 2
 --- !u!1 &6970101126956845465
 GameObject:

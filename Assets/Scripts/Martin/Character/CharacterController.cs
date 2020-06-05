@@ -126,6 +126,7 @@ public partial class CharacterController : MonoBehaviour
 	[SerializeField] private float _respawnTime = 5f;
 	public float respawnTime { get { return _respawnTime; } }
 	private float _freezeMovement = 1f;
+	private float moveAmount;
 
 	private Coroutine jumpCoroutine;
 	private Coroutine respawnCoroutine;
@@ -363,7 +364,7 @@ public partial class CharacterController : MonoBehaviour
 		Vector3 h = _movementInput.x * camRef.right;
 
 		Vector3 moveDir = (v + h).normalized;
-		float moveAmount = Mathf.Clamp01(Mathf.Abs(_movementInput.x) + Mathf.Abs(_movementInput.y));
+		moveAmount = Mathf.Clamp01(Mathf.Abs(_movementInput.x) + Mathf.Abs(_movementInput.y));
 
 		Vector3 targetDir = moveDir;
 		targetDir.y = 0;
@@ -409,7 +410,8 @@ public partial class CharacterController : MonoBehaviour
 			StopCoroutine(jumpCoroutine);
 		jumpCoroutine = StartCoroutine(JumpCoroutine());
 
-		Vector3 jumpVel = rb.velocity;
+		float normalSpeed = ((Mathf.Abs(_movementInput.x) + Mathf.Abs(_movementInput.y)) / 2f) * speed;
+		Vector3 jumpVel = transform.forward * (normalSpeed * moveAmount);
 		jumpVel.y = jumpStrength;
 
 		rb.velocity = jumpVel;

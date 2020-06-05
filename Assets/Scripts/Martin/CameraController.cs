@@ -99,7 +99,7 @@ public partial class CameraController : MonoBehaviour
 
 		dir = new Vector3(_playerCenter.position.x + Mathf.Cos(_angle) * (rotationRadius - _rotationRadiusChecked), _playerCenter.position.y + heightOffset, _playerCenter.position.z + Mathf.Sin(_angle) * (rotationRadius - _rotationRadiusChecked));
 		transform.position = Vector3.Lerp(transform.position, dir, angularSpeed * 3 * Time.deltaTime);
-		transform.LookAt(_playerCenter);
+		transform.LookAt(_playerCenter.position + Vector3.up);
 	}
 
 	private void AngleNormalize()
