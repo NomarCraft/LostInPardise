@@ -5,8 +5,14 @@ using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
+	[Header("GameManagment")]
 	public bool _gamePaused = false;
+	public Gatherable[] _gatherables;
+	[SerializeField] private float _currentTime;
+	public float _turnDuration = 60f;
 
+	[Space(10)]
+	[Header("GameComponents")]
 	[SerializeField] private UIManager _uiManager;
 	public UIManager uiManager { get { return _uiManager; } }
 	[SerializeField] private Compendium _comp;
@@ -21,4 +27,46 @@ public class GameManager : Singleton<GameManager>
 	public CompendiumDisplay compDis { get { return _compDis; } }
 	[SerializeField] private Crafter _craft;
 	public Crafter craft { get { return _craft; } }
+
+	private void Start()
+	{
+		GetGatherables();
+	}
+
+	private void Update()
+	{
+		TimeManagment();
+	}
+
+	public void GetGatherables()
+	{
+		_gatherables = GameObject.FindObjectsOfType<Gatherable>();
+	}
+
+	private void TimeManagment()
+	{
+		_currentTime += Time.deltaTime;
+
+		if (_currentTime >= _turnDuration)
+		{
+			PassTurn();
+			_currentTime = 0;
+		}
+	}
+
+	private void PassTurn()
+	{
+		GatherableManagment();
+	}
+
+	private void GatherableManagment()
+	{
+		foreach (Gatherable gatherable in _gatherables)
+		{
+			if (!gatherable._isActive)
+			{
+				gatherable.TurnPass();
+			}
+		}
+	}
 }

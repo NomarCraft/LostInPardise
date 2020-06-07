@@ -15,7 +15,7 @@ public partial class Interactor : MonoBehaviour
 		Debug.Log(other.name);
 		Interactable interactable = other.GetComponent<Interactable>();
 
-		if (interactable != null)
+		if (interactable != null && interactable._isActive)
 		{
 			_interactables.Add(interactable);
 			OnInteract();
@@ -26,7 +26,7 @@ public partial class Interactor : MonoBehaviour
 	{
 		Interactable interactable = other.GetComponent<Interactable>();
 
-		if (interactable != null)
+		if (interactable != null && interactable._isActive)
 		{
 			foreach(Interactable inter in _interactables)
 			{

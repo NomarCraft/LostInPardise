@@ -123,6 +123,53 @@ public class InventoryObject : MonoBehaviour
 		}
 	}
 
+	public bool AddItem(int id, float amount)
+	{
+		bool hasItem = false;
+		ItemData item;
+
+		item = compendium.GetItemReference(id);
+
+		if (actualWeight + item.itemWeight <= maximumWeight)
+		{
+
+			for (int i = 0; i < container.Count; i++)
+			{
+				if (container[i].item.id == id)
+				{
+					item = container[i].item;
+					container[i].AddAmount(Mathf.RoundToInt(amount));
+					hasItem = true;
+					break;
+				}
+			}
+			if (!hasItem)
+			{
+				container.Add(new InventorySlot(item, 1));
+				compendium.CheckCompendium(item.id);
+			}
+
+			if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You acquired " + 1.ToString() + " " + item.itemName, Color.green);
+			}
+
+			actualWeight += item.itemWeight;
+			return true;
+		}
+		else
+		{
+
+			if (ui != null)
+			{
+				ui.DisplayElement(ui._displayMessagePanel);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You can't get " + 1.ToString() + " " + item.itemName + " because your inventory is full", Color.red);
+			}
+			return false;
+		}
+	}
+
 	public void SortInventoryById(){
 
         container.Sort(delegate(InventorySlot x, InventorySlot y)

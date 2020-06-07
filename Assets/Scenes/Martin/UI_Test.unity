@@ -1541,6 +1541,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 0
   _gamePaused: 0
+  _gatherables: []
+  _currentTime: 0
+  _turnDuration: 30
   _uiManager: {fileID: 620404113}
   _comp: {fileID: 441865426}
   _inv: {fileID: 620404116}
@@ -2066,6 +2069,7 @@ MonoBehaviour:
   _interactions:
   - _interaction: 4
     _toolRequired: 0
+  _isActive: 1
 --- !u!54 &775282675
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3787,6 +3791,7 @@ MonoBehaviour:
   _interactions:
   - _interaction: 2
     _toolRequired: 0
+  _isActive: 1
   _logId: 0
   _dialogueText: 
 --- !u!54 &1250314199
@@ -5136,6 +5141,7 @@ MonoBehaviour:
   _interactions:
   - _interaction: 3
     _toolRequired: 0
+  _isActive: 1
 --- !u!54 &1438416308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5263,8 +5269,11 @@ MonoBehaviour:
   _interactions:
   - _interaction: 2
     _toolRequired: 1
+  _isActive: 1
   _gatheredItemId: 0
   _gatheredItemAmount: 2
+  _turnsToRespawn: 1
+  _compToDesactivate: {fileID: 0}
   _toolRequiredId: 15
 --- !u!54 &1448014142
 Rigidbody:
@@ -6824,8 +6833,11 @@ MonoBehaviour:
   _interactions:
   - _interaction: 2
     _toolRequired: 0
+  _isActive: 1
   _gatheredItemId: 15
   _gatheredItemAmount: 1
+  _turnsToRespawn: 1
+  _compToDesactivate: {fileID: 0}
   _toolRequiredId: 0
 --- !u!54 &2036716630
 Rigidbody:

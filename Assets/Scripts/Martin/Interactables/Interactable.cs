@@ -17,6 +17,7 @@ public class Interactable : MonoBehaviour
 
 	public string _interactableName;
 	public InteractableType[] _interactions;
+	public bool _isActive = true;
 
 	public virtual void Interaction()
 	{
