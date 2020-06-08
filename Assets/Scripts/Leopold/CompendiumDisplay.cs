@@ -15,27 +15,40 @@ public class CompendiumDisplay : MonoBehaviour
     TextMeshProUGUI itemDescription;
     Sprite itemSprite;
 
-    public void UpdateTime(){
-        ChangeDisplay();
-        UpdateDisplayedItems();
-        UpdateDisplayedRecipes();
-        UpdateDisplayedLogs();
+    public void UpdateTime(int currentlySelected){
+		switch (currentlySelected)
+		{
+			case 0:
+				UpdateDisplayedItems();
+				break;
+			case 1:
+				UpdateDisplayedRecipes();
+				break;
+			case 2:
+				UpdateDisplayedLogs();
+				break;
+			default:
+				break;
+		}
     }
 
     void UpdateDisplayedItems(){
-        for (int i = 0; i < compendium.unlockedItem.Count; i++)
+		ChangeDisplay();
+		for (int i = 0; i < compendium.unlockedItem.Count; i++)
         {
             UpdateDisplay(i, 0, compendium.unlockedItem[i].item);
         }
     }
     void UpdateDisplayedRecipes(){
-        for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
+		ChangeDisplay();
+		for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
         {
             UpdateDisplay(i, 1, compendium.unlockedRecipe[i].recipe);
         }
     }
     void UpdateDisplayedLogs(){
-        for (int i = 0; i < compendium.unlockedLog.Count; i++)
+		ChangeDisplay();
+		for (int i = 0; i < compendium.unlockedLog.Count; i++)
         {
             UpdateDisplay(i, 2, compendium.unlockedLog[i].log);
         }
@@ -64,7 +77,9 @@ public class CompendiumDisplay : MonoBehaviour
             trans.pivot = new Vector2(0.5f, 1);
 			Debug.Log(GetPosition(i));
 			packs[nb].objDisplayed.Add(data, obj);
-        }
+			if (i == 0)
+				GameManager.Instance.uiEvents.SetSelectedGameObject(obj);
+		}
     }
 
     public void DisplayData(CompendiumData scriptable){

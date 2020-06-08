@@ -23,7 +23,10 @@ public class ButtonSelection : Button
 
     public override void OnSelect(BaseEventData eventData){
         base.OnSelect(eventData);
-        ui.UpdateCompendiumText(compendiumData);
+		if (compendiumData != null)
+		{
+			ui.UpdateCompendiumText(compendiumData);
+		}
         ui.ChangeSelectedButton(this);
     }
 
