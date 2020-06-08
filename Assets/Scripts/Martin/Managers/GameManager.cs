@@ -74,11 +74,11 @@ public class GameManager : Singleton<GameManager>
 		}
 	}
 
-	public void ShowConsole(InputAction.CallbackContext context){
+	/*public void ShowConsole(InputAction.CallbackContext context){
 		DeveloperConsole.Instance.ShowConsole();
 	}
 
 	public void EnterCommand(InputAction.CallbackContext context){
 		DeveloperConsole.Instance.EnterCommand();
-	}
+	}*/
 }
