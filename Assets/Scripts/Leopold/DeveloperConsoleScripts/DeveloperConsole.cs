@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 namespace Console
 {
@@ -43,7 +44,7 @@ namespace Console
         }
 
         private void Start(){
-            consoleCanvas.gameObject.SetActive(false);
+           // consoleCanvas.gameObject.SetActive(false);
         }
 
         private void CreateCommands(){
@@ -56,9 +57,48 @@ namespace Console
             }
         }
 
-        private void Update(){
-            if(Input.GetKeyDown(KeyCode.BackQuote)){
-                consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
+        private void EnterCommand(InputAction.CallbackContext context){
+            if(inputText.text != " ")
+            {
+                AddMessageToConsole(inputText.text);
+                ParseInput(inputText.text);
+            }
+        }
+
+        public void ShowConsole(InputAction.CallbackContext context){
+                if(Input.GetKeyDown(KeyCode.BackQuote)){
+                    consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
+                }
+        }
+
+        private void AddMessageToConsole(string msg){
+            consoleText.text += msg + "_n";
+            scrollRect.verticalNormalizedPosition = 0f;
+        }
+
+        public static void AddStaticMessageToConsole(string msg){
+            DeveloperConsole.Instance.consoleText.text += msg + "\n";
+            DeveloperConsole.Instance.scrollRect.verticalNormalizedPosition = 0f;
+        }
+
+        //Check if we can run the command
+        private void ParseInput(string input){
+            //Split the string at each null character --> Space
+            string[] _input = input.Split(null);
+
+            //If there is no command --> return
+            if(_input.Length == 0 || _input == null){
+                AddMessageToConsole("Command not recognized");
+                return;
+            }
+
+            //If the first word of the string is not in Commands --> return
+            if(!Commands.ContainsKey(_input[0])){
+                AddMessageToConsole("Command not recognized");
+            }
+            //If the command is registered then proceed
+            else{
+                Commands[_input[0]].RunCommand();
             }
         }
     }

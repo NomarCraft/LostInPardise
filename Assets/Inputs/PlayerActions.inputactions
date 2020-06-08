@@ -891,6 +891,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Console",
+            "id": "2bfe2335-d4d4-4d98-8a0b-111ae2eefc5b",
+            "actions": [
+                {
+                    "name": "ShowConsole",
+                    "type": "Button",
+                    "id": "d02c4cbc-3d11-4bf1-9d4d-6c649752222b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "EnterCommand",
+                    "type": "Button",
+                    "id": "c67e23da-d2f2-44e0-8fff-6a0309be2237",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "93950d68-451f-4e31-ae93-1e692f9065e3",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfef7d40-fb36-4368-b3bc-d42f62b2c92c",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
