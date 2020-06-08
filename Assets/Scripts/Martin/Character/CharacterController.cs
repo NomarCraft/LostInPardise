@@ -198,7 +198,7 @@ public partial class CharacterController : MonoBehaviour
 				_ui.HideElement(_ui._inventoryPanel);
 				_ui.DisplayElement(_ui._compendiumInventoryPanel);
 				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
-				gm.compDis.UpdateTime();
+				gm.compDis.UpdateTime(_ui._currentCompendiumPanelSelected);
 			}
 		}
 	}
@@ -226,7 +226,7 @@ public partial class CharacterController : MonoBehaviour
 				int currentSelection = _ui._currentCompendiumPanelSelected + 1;
 				_ui._currentCompendiumPanelSelected = Mathf.Clamp(currentSelection, 0, _ui._compendiumPanels.Length - 1);
 				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
-				gm.compDis.UpdateTime();
+				gm.compDis.UpdateTime(_ui._currentCompendiumPanelSelected);
 			}
 		}
 	}
@@ -241,7 +241,7 @@ public partial class CharacterController : MonoBehaviour
 				int currentSelection = _ui._currentCompendiumPanelSelected - 1;
 				_ui._currentCompendiumPanelSelected = Mathf.Clamp(currentSelection, 0, _ui._compendiumPanels.Length - 1);
 				_ui.DisplayElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
-				gm.compDis.UpdateTime();
+				gm.compDis.UpdateTime(_ui._currentCompendiumPanelSelected);
 			}
 		}
 	}
@@ -310,7 +310,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 				_ui.DisplayElement(_ui._compendiumPanel);
 				gm.invDis.ChangeDisplay(0);
-				gm.compDis.UpdateTime();
+				gm.compDis.UpdateTime(_ui._currentCompendiumPanelSelected);
 			}
 		}
 	}
