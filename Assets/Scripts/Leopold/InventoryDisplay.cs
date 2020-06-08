@@ -48,7 +48,8 @@ public class InventoryDisplay : MonoBehaviour
                 trans.pivot = new Vector2(0, 1);
                 obj.GetComponentInChildren<TextMeshProUGUI>().text = packs[nb].inventory.container[i].amount.ToString("n0");
                 packs[nb].itemsDisplayed.Add(packs[nb].inventory.container[i], butt);
-            }
+				gm.uiEvents.SetSelectedGameObject(obj);
+			}
         }
     }
 
@@ -58,7 +59,7 @@ public class InventoryDisplay : MonoBehaviour
 
         foreach (var obj in packs[nb].itemsDisplayed)
         {
-            Destroy(obj.Value);
+            Destroy(obj.Value.gameObject);
         }
         packs[nb].itemsDisplayed.Clear();
 

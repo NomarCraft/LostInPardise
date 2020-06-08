@@ -145,14 +145,14 @@ public class InventoryObject : MonoBehaviour
 			}
 			if (!hasItem)
 			{
-				container.Add(new InventorySlot(item, 1));
+				container.Add(new InventorySlot(item, Mathf.RoundToInt(amount)));
 				compendium.CheckCompendium(item.id);
 			}
 
 			if (ui != null)
 			{
 				ui.DisplayElement(ui._displayMessagePanel);
-				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You acquired " + 1.ToString() + " " + item.itemName, Color.green);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You acquired " + Mathf.RoundToInt(amount).ToString() + " " + item.itemName, Color.green);
 			}
 
 			actualWeight += item.itemWeight;
@@ -164,7 +164,7 @@ public class InventoryObject : MonoBehaviour
 			if (ui != null)
 			{
 				ui.DisplayElement(ui._displayMessagePanel);
-				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You can't get " + 1.ToString() + " " + item.itemName + " because your inventory is full", Color.red);
+				ui.DisplayTemporaryMessageWithColor(ui._itemDisplayMessageText, "You can't get " + Mathf.RoundToInt(amount).ToString() + " " + item.itemName + " because your inventory is full", Color.red);
 			}
 			return false;
 		}
