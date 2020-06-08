@@ -1552,6 +1552,10 @@ MonoBehaviour:
   _packs:
   - inventory: {fileID: 620404116}
     invetoryPage: {fileID: 1339794769}
+  - inventory: {fileID: 620404116}
+    invetoryPage: {fileID: 88810243}
+  - inventory: {fileID: 0}
+    invetoryPage: {fileID: 480953866}
   _compDis: {fileID: 620404118}
   _craft: {fileID: 620404117}
 --- !u!114 &620404115

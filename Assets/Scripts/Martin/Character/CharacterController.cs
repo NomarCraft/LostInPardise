@@ -220,7 +220,7 @@ public partial class CharacterController : MonoBehaviour
 	{
 		if (gm._gamePaused && _ui)
 		{
-			if (context.started)
+			if (context.started && !_ui._inventoryPanel.activeSelf)
 			{
 				_ui.HideElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
 				int currentSelection = _ui._currentCompendiumPanelSelected + 1;
@@ -235,7 +235,7 @@ public partial class CharacterController : MonoBehaviour
 	{
 		if (gm._gamePaused && _ui)
 		{
-			if (context.started)
+			if (context.started && !_ui._inventoryPanel.activeSelf)
 			{
 				_ui.HideElement(_ui._compendiumPanels[_ui._currentCompendiumPanelSelected]);
 				int currentSelection = _ui._currentCompendiumPanelSelected - 1;
@@ -553,8 +553,8 @@ public partial class CharacterController : MonoBehaviour
 			if (_ui)
 			{
 				gm._gamePaused = true;
-				gm.invDis.packs[2].inventory = storage.inv;
-				gm.invDis.packs[2].inventory.AddItem(5, 25);
+				gm.packs[2].inventory = storage.inv;
+				gm.packs[2].inventory.AddItem(5, 25);
 				gm.invDis.ChangeDisplay(1);
 				gm.invDis.ChangeDisplay(2);
 				_ui.DisplayElement(_ui._chestPanel);
