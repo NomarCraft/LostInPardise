@@ -57,7 +57,7 @@ namespace Console
             }
         }
 
-        private void EnterCommand(InputAction.CallbackContext context){
+        public void EnterCommand(){
             if(inputText.text != " ")
             {
                 AddMessageToConsole(inputText.text);
@@ -65,7 +65,7 @@ namespace Console
             }
         }
 
-        public void ShowConsole(InputAction.CallbackContext context){
+        public void ShowConsole(){
                 if(Input.GetKeyDown(KeyCode.BackQuote)){
                     consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
                 }

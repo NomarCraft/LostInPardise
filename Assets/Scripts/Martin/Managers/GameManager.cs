@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Console;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -71,5 +72,13 @@ public class GameManager : Singleton<GameManager>
 				gatherable.TurnPass();
 			}
 		}
+	}
+
+	public void ShowConsole(InputAction.CallbackContext context){
+		DeveloperConsole.Instance.ShowConsole();
+	}
+
+	public void EnterCommand(InputAction.CallbackContext context){
+		DeveloperConsole.Instance.EnterCommand();
 	}
 }
