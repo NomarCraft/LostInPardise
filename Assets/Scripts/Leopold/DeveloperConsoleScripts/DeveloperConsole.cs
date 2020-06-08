@@ -44,7 +44,7 @@ namespace Console
         }
 
         private void Start(){
-           // consoleCanvas.gameObject.SetActive(false);
+            consoleCanvas.gameObject.SetActive(false);
         }
 
         private void CreateCommands(){
@@ -57,7 +57,8 @@ namespace Console
             }
         }
 
-        public void EnterCommand(){
+        public void EnterCommand(InputAction.CallbackContext context){
+            Debug.Log("enter");
             if(inputText.text != " ")
             {
                 AddMessageToConsole(inputText.text);
@@ -65,10 +66,10 @@ namespace Console
             }
         }
 
-        public void ShowConsole(){
-                if(Input.GetKeyDown(KeyCode.BackQuote)){
-                    consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
-                }
+        public void ShowConsole(InputAction.CallbackContext context){
+            Debug.Log("nique");
+            consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
+            GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
         }
 
         private void AddMessageToConsole(string msg){
