@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
@@ -15,6 +16,8 @@ public class GameManager : Singleton<GameManager>
 	[Header("GameComponents")]
 	[SerializeField] private UIManager _uiManager;
 	public UIManager uiManager { get { return _uiManager; } }
+	[SerializeField] private EventSystem _uiEvents;
+	public EventSystem uiEvents { get { return _uiEvents; } }
 	[SerializeField] private Compendium _comp;
 	public Compendium comp { get { return _comp; } }
 	[SerializeField] private InventoryObject _inv;
