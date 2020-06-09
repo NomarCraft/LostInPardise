@@ -106,6 +106,7 @@ namespace Console
                 inputText.text = "";
                 consoleInput.text = "";
                 placeholderText.enabled = true;
+                consoleInput.ActivateInputField();
             }
 
             if(consoleCanvas.gameObject.activeInHierarchy)
