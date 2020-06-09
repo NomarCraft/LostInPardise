@@ -95,6 +95,7 @@ public class CommandHelp : ConsoleCommand{
             if(_inputs.Length == 1){
                 foreach (var item in DeveloperConsole.CommandDictionnary)
                 {
+                    Debug.Log("Write Help + a command to get more information");
                     Debug.Log(item.Value.Name);
                 }
             }else if(_inputs.Length == 2){
