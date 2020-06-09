@@ -24,6 +24,10 @@ namespace Console
             Debug.LogWarning(Name + " arguments not found");
         }
 
+        public void RunError(string text){
+            Debug.LogWarning(Name + ": " + text);
+        }
+
         public abstract void RunCommand(string[] _inputs);
     }
 
@@ -77,6 +81,10 @@ namespace Console
         {
             CommandQuit.CreateCommand();
             CommandTeleport.CreateCommand();
+            CommandAddItem.CreateCommand();
+            CommandUnlockItem.CreateCommand();
+            CommandUnlockRecipe.CreateCommand();
+            CommandUnlockLog.CreateCommand();
         }
 
         public static void AddCommandsToConsole(string _name, ConsoleCommand _command)
@@ -92,7 +100,11 @@ namespace Console
             if(Input.GetKeyDown(KeyCode.BackQuote))
             {
                 consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
-                GameManager.Instance._gamePaused = true;
+                GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
+                consoleText.text = "Starting Developer Console ...\n";
+                inputText.text = "";
+                consoleInput.text = "";
+                placeholderText.enabled = true;
             }
 
             if(consoleCanvas.gameObject.activeInHierarchy)
@@ -102,7 +114,7 @@ namespace Console
                     if(inputText.text != "")
                     {
                         AddMessageToConsole(inputText.text);
-                        ParseInput(inputText.text);
+                        ParseInput(inputText.text.ToLower());
                     }
                 }
             }
