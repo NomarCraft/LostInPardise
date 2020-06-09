@@ -1325,6 +1325,36 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c67e23da-d2f2-44e0-8fff-6a0309be2237
     m_ActionName: Console/EnterCommand[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1412770315032018045}
+        m_MethodName: TrashInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1972cde-92a4-4c5a-9480-cc9194241c72
+    m_ActionName: Player/Trash[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1412770315032018045}
+        m_MethodName: CancelInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 96fd60a9-76c2-4e15-86a7-632fc713ecc7
+    m_ActionName: Player/Cancel[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
