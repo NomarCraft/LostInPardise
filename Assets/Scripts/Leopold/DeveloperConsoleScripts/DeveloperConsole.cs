@@ -81,6 +81,7 @@ namespace Console
         {
             CommandQuit.CreateCommand();
             CommandTeleport.CreateCommand();
+            CommandHelp.CreateCommand();
             CommandAddItem.CreateCommand();
             CommandUnlockItem.CreateCommand();
             CommandUnlockRecipe.CreateCommand();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Console;
 
+#region Utils
 public class CommandQuit : ConsoleCommand
 {
     public override string Name { get; protected set; }
@@ -48,7 +49,7 @@ public class CommandTeleport : ConsoleCommand{
     public CommandTeleport()
     {
         Name = "Teleport";
-        Command = "tp";
+        Command = "teleport";
         Description = "Teleport the player";
         Help = "Use this command to teleport";
 
@@ -73,6 +74,50 @@ public class CommandTeleport : ConsoleCommand{
     }
 }
 
+public class CommandHelp : ConsoleCommand{
+        public override string Name { get; protected set; }
+        public override string Command { get; protected set; }
+        public override string Description { get; protected set; }
+        public override string Help { get; protected set; }
+
+        public CommandHelp()
+        {
+            Name = "Help";
+            Command = "help";
+            Description = "Give information about commands";
+            Help = "Use this command without arguments to get a list of commands\nUse this command with the name of a command to get information about it";
+
+            AddCommandToConsole();
+        }
+
+        public override void RunCommand(string[] _inputs)
+        {
+            if(_inputs.Length == 1){
+                foreach (var item in DeveloperConsole.CommandDictionnary)
+                {
+                    Debug.Log(item.Value.Name);
+                }
+            }else if(_inputs.Length == 2){
+                if(DeveloperConsole.CommandDictionnary.ContainsKey(_inputs[1])){
+                    ConsoleCommand command = DeveloperConsole.CommandDictionnary[_inputs[1]];
+                    Debug.Log(command.Name + "\n" + command.Description + "\n" + command.Help);
+                }else{
+                    RunError();
+                }
+            }else{
+                RunError();
+            }
+        }
+
+        public static CommandHelp CreateCommand()
+        {
+            return new CommandHelp();
+        }
+    }
+
+#endregion
+
+#region Inventory and Compendium
 public class CommandAddItem : ConsoleCommand{
     public override string Name { get; protected set; }
     public override string Command { get; protected set; }
@@ -229,33 +274,33 @@ public class CommandUnlockLog : ConsoleCommand{
         return new CommandUnlockLog();
     }
 }
+#endregion
     
-    namespace Console{
-        public class EmptyCommand : ConsoleCommand{
-            public override string Name { get; protected set; }
-            public override string Command { get; protected set; }
-            public override string Description { get; protected set; }
-            public override string Help { get; protected set; }
+namespace Console{
+    public class EmptyCommand : ConsoleCommand{
+        public override string Name { get; protected set; }
+        public override string Command { get; protected set; }
+        public override string Description { get; protected set; }
+        public override string Help { get; protected set; }
 
-            public EmptyCommand()
-            {
-                Name = "Empty";
-                Command = "empty";
-                Description = "Empty";
-                Help = "Empty";
+        public EmptyCommand()
+        {
+            Name = "Empty";
+            Command = "empty";
+            Description = "Empty";
+            Help = "Empty";
 
-                AddCommandToConsole();
-            }
+            AddCommandToConsole();
+        }
 
-            public override void RunCommand(string[] _inputs)
-            {
+        public override void RunCommand(string[] _inputs)
+        {
 
-            }
+        }
 
-            public static EmptyCommand CreateCommand()
-            {
-                return new EmptyCommand();
-            }
+        public static EmptyCommand CreateCommand()
+        {
+            return new EmptyCommand();
+        }
     }
-        
 }
