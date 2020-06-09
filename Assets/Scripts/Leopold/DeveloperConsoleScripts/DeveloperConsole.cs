@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.InputSystem;
 
 namespace Console
 {
@@ -14,109 +12,124 @@ namespace Console
         public abstract string Description { get; protected set; }
         public abstract string Help { get; protected set; }
 
-        public void AddCommandToConsole(){
+        public void AddCommandToConsole()
+        {
             string addMessage = " command has been added to the console.";
 
-            DeveloperConsole.AddCommandToConsole(Command, this);
-            DeveloperConsole.AddStaticMessageToConsole(Name + addMessage);
+            DeveloperConsole.AddCommandsToConsole(Command, this);
+            Debug.Log(Name + addMessage);
         }
 
-        public abstract void RunCommand();
+        public void RunError(){
+            Debug.LogWarning(Name + " arguments not found");
+        }
+
+        public abstract void RunCommand(string[] _inputs);
     }
 
     public class DeveloperConsole : MonoBehaviour
     {
-        public static  DeveloperConsole Instance { get; private set; }
-        public static Dictionary<string, ConsoleCommand> Commands {get; private set;}
+        public static DeveloperConsole Instance { get; private set; }
+        public static Dictionary<string, ConsoleCommand> CommandDictionnary { get; private set; }
 
         [Header("UI Components")]
         public Canvas consoleCanvas;
-        public ScrollRect scrollRect;
-        public TextMeshProUGUI consoleText;
-        public TextMeshProUGUI inputText;
-        public TMP_InputField consoleInput;
+        public Text consoleText;
+        public Text inputText;
+        public Text placeholderText;
+        public InputField consoleInput;
+        public ConsoleVar varRef;
 
-
-        private void Awake(){
-            if(Instance != null){
+        private void Awake()
+        {
+            if(Instance != null)
+            {
                 return;
             }
 
             Instance = this;
-            Commands = new Dictionary<string, ConsoleCommand>();
+            CommandDictionnary = new Dictionary<string, ConsoleCommand>();
         }
 
-        private void Start(){
+        private void Start()
+        {
             consoleCanvas.gameObject.SetActive(false);
             CreateCommands();
         }
 
-        public void Update(){
-            if(Input.GetKeyDown(KeyCode.Backspace)){
-            consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
-            GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
-            }
+        private void OnEnable()
+        {
+            Application.logMessageReceived += HandleLog;
+        }
 
-            if(Input.GetKeyDown(KeyCode.Return)){
-            if(inputText.text != " ")
+        private void OnDisable()
+        {
+            Application.logMessageReceived -= HandleLog;
+        }
+
+        private void HandleLog(string logMessage, string stackTrace, LogType type)
+        {
+            string _message = "[" + type.ToString() + "] " + logMessage;
+            AddMessageToConsole(_message);
+        }
+
+        private void CreateCommands()
+        {
+            CommandQuit.CreateCommand();
+            CommandTeleport.CreateCommand();
+        }
+
+        public static void AddCommandsToConsole(string _name, ConsoleCommand _command)
+        {
+            if(!CommandDictionnary.ContainsKey(_name))
             {
-                AddMessageToConsole(inputText.text);
-                ParseInput(inputText.text);
-            }
+                CommandDictionnary.Add(_name, _command);
             }
         }
 
-        private void CreateCommands(){
-            CommandQuit commandQuit = CommandQuit.CreateCommand();
-        }
-
-        public static void AddCommandToConsole(string _name, ConsoleCommand _command){
-            if(!Commands.ContainsKey(_name)){
-                Commands.Add(_name, _command);
-            }
-        }
-
-        public void EnterCommand(InputAction.CallbackContext context){
-            if(inputText.text != " ")
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.BackQuote))
             {
-                AddMessageToConsole(inputText.text);
-                ParseInput(inputText.text);
+                consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
+                GameManager.Instance._gamePaused = true;
+            }
+
+            if(consoleCanvas.gameObject.activeInHierarchy)
+            {
+                if(Input.GetKeyDown(KeyCode.Return))
+                {
+                    if(inputText.text != "")
+                    {
+                        AddMessageToConsole(inputText.text);
+                        ParseInput(inputText.text);
+                    }
+                }
             }
         }
 
-        public void ShowConsole(InputAction.CallbackContext context){
-            consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
-            GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
-        }
-
-        private void AddMessageToConsole(string msg){
+        private void AddMessageToConsole(string msg)
+        {
             consoleText.text += msg + "\n";
-            scrollRect.verticalNormalizedPosition = 0f;
         }
 
-        public static void AddStaticMessageToConsole(string msg){
-            DeveloperConsole.Instance.consoleText.text += msg + "\n";
-            DeveloperConsole.Instance.scrollRect.verticalNormalizedPosition = 0f;
-        }
-
-        //Check if we can run the command
-        private void ParseInput(string input){
-            //Split the string at each null character --> Space
+        private void ParseInput(string input)
+        {
             string[] _input = input.Split(null);
 
-            //If there is no command --> return
-            if(_input.Length == 0 || _input == null){
-                AddMessageToConsole("Command not recognized");
+            if (_input.Length == 0 || _input == null)
+            {
+                Debug.LogWarning("Command not recognized.");
                 return;
             }
 
-            //If the first word of the string is not in Commands --> return
-            if(!Commands.ContainsKey(_input[0])){
-                AddMessageToConsole("Command not recognized");
+            if (!CommandDictionnary.ContainsKey(_input[0]))
+            {
+                Debug.LogWarning("Command not recognized.");
             }
-            //If the command is registered then proceed
-            else{
-                Commands[_input[0]].RunCommand();
+            else
+            {
+                CommandDictionnary[_input[0]].RunCommand(_input);
             }
         }
     }
