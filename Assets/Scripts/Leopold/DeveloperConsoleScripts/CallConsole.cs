@@ -6,13 +6,13 @@ using Console;
 
 public class CallConsole : MonoBehaviour
 {
-   /* public void ShowConsole(InputAction.CallbackContext context){
+    public void ShowConsole(InputAction.CallbackContext context){
         Debug.Log("show");
-        DeveloperConsole.Instance.ShowConsole();
+        //DeveloperConsole.Instance.ShowConsole(context);
     }
 
     public void EnterCommand(InputAction.CallbackContext context){
         Debug.Log("enter base");
-        DeveloperConsole.Instance.EnterCommand();
-    }*/
+        //DeveloperConsole.Instance.EnterCommand(context);
+    }
 }

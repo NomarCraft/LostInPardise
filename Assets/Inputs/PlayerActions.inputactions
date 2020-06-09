@@ -920,7 +920,7 @@
                     "path": "<Keyboard>/backspace",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "ShowConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -931,7 +931,7 @@
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "EnterCommand",
                     "isComposite": false,
                     "isPartOfComposite": false

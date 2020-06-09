@@ -15,7 +15,10 @@ namespace Console
         public abstract string Help { get; protected set; }
 
         public void AddCommandToConsole(){
+            string addMessage = " command has been added to the console.";
 
+            DeveloperConsole.AddCommandToConsole(Command, this);
+            DeveloperConsole.AddStaticMessageToConsole(Name + addMessage);
         }
 
         public abstract void RunCommand();
@@ -45,10 +48,26 @@ namespace Console
 
         private void Start(){
             consoleCanvas.gameObject.SetActive(false);
+            CreateCommands();
+        }
+
+        public void Update(){
+            if(Input.GetKeyDown(KeyCode.Backspace)){
+            consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
+            GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
+            }
+
+            if(Input.GetKeyDown(KeyCode.Return)){
+            if(inputText.text != " ")
+            {
+                AddMessageToConsole(inputText.text);
+                ParseInput(inputText.text);
+            }
+            }
         }
 
         private void CreateCommands(){
-            
+            CommandQuit commandQuit = CommandQuit.CreateCommand();
         }
 
         public static void AddCommandToConsole(string _name, ConsoleCommand _command){
@@ -58,7 +77,6 @@ namespace Console
         }
 
         public void EnterCommand(InputAction.CallbackContext context){
-            Debug.Log("enter");
             if(inputText.text != " ")
             {
                 AddMessageToConsole(inputText.text);
@@ -67,13 +85,12 @@ namespace Console
         }
 
         public void ShowConsole(InputAction.CallbackContext context){
-            Debug.Log("nique");
             consoleCanvas.gameObject.SetActive(!consoleCanvas.gameObject.activeInHierarchy);
             GameManager.Instance._gamePaused = consoleCanvas.gameObject.activeInHierarchy;
         }
 
         private void AddMessageToConsole(string msg){
-            consoleText.text += msg + "_n";
+            consoleText.text += msg + "\n";
             scrollRect.verticalNormalizedPosition = 0f;
         }
 
