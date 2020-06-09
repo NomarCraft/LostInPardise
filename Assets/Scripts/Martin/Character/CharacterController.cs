@@ -362,6 +362,7 @@ public partial class CharacterController : MonoBehaviour
 			InitializeUI();
 		}
 
+		gm._chara = this;
 		ent.OnLifeChange += UpdateLifeBar;
 		ent.OnDeath += Respawn;
 		interactor.OnInteract += UpdateInteraction;
