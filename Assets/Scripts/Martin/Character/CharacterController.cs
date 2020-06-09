@@ -281,6 +281,41 @@ public partial class CharacterController : MonoBehaviour
 				}
 				if (_ui._chestPanel.activeSelf)
 				{
+					gm.invDis.TransferItems(_ui._selectedButton, 1);
+				}
+			}
+		}
+	}
+
+	public void TrashInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			if (_ui._inventoryPanel.activeSelf || _ui._chestPanel.activeSelf)
+			{
+				if (_ui._selectedButton != null)
+				{
+					int amount;
+					if (gm.invDis.packs[_ui._selectedButton.inventoryPack].inventory.CheckItem(_ui._selectedButton.compendiumData.id, out amount))
+					{
+						gm.invDis.packs[_ui._selectedButton.inventoryPack].inventory.RemoveItem(_ui._selectedButton.compendiumData as ItemData, amount);
+
+						if (_ui._inventoryPanel.activeSelf)
+							gm.invDis.ChangeDisplay(0);
+					}
+				}
+			}
+		}
+	}
+
+	public void CancelInput(InputAction.CallbackContext context)
+	{
+		if (gm._gamePaused)
+		{
+			if (context.started)
+			{
+				if (_ui._chestPanel.activeSelf)
+				{
 					_ui.HideElement(_ui._chestPanel);
 					gm.invDis.packs[2].inventory = null;
 					gm._gamePaused = false;

@@ -40,7 +40,8 @@ public class InventoryDisplay : MonoBehaviour
             }else{
                 var obj = Instantiate(packs[nb].inventory.container[i].item.menuAsset, Vector3.zero, Quaternion.identity, packs[nb].invetoryPage);
                 var butt = obj.GetComponent<ButtonSelection>();
-                butt.inventoryPack = nb;
+				butt.compendiumData = packs[nb].inventory.container[i].item;
+				butt.inventoryPack = nb;
                 RectTransform trans = obj.GetComponent<RectTransform>();
                 trans.localPosition = GetPosition(i);
                 trans.anchorMax = new Vector2(0, 1);
