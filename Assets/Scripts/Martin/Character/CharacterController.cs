@@ -88,6 +88,7 @@ public partial class CharacterController : MonoBehaviour
 	public Transform playerCenter { get { return _playerCenter; } }
 	[SerializeField] private Transform _camRef;
 	public Transform camRef { get { return _camRef; } set { _camRef = value; } }
+	public Transform playerParent;
 
 	[Space(10)]
 	[Header("Bools")]
@@ -362,7 +363,7 @@ public partial class CharacterController : MonoBehaviour
 			InitializeUI();
 		}
 
-		gm._chara = this;
+		gm._chara = playerParent;
 		ent.OnLifeChange += UpdateLifeBar;
 		ent.OnDeath += Respawn;
 		interactor.OnInteract += UpdateInteraction;

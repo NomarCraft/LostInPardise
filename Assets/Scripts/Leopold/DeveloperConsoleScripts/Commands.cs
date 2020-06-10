@@ -62,7 +62,7 @@ public class CommandTeleport : ConsoleCommand{
 
         if(_inputs[1] != null && transforms.ContainsKey(_inputs[1]))
         {
-            GameManager.Instance._chara.GetComponentsInParent<Transform>()[1].position = transforms[_inputs[1]].position;
+            GameManager.Instance._chara.position = transforms[_inputs[1]].position;
         }else{
             RunError();
         }
