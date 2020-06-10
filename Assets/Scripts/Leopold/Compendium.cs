@@ -15,6 +15,9 @@ public class Compendium : MonoBehaviour
 	public List<RecipeDictionnary> lockedRecipe = new List<RecipeDictionnary>();
     public List<RecipeDictionnary> unlockedRecipe = new List<RecipeDictionnary>();
     public List<LogDictionnary> unlockedLog = new List<LogDictionnary>();
+    public List<int> itemIDs;
+    public List<int> recipeIDs;
+    public List<int> logIDs;
 
 //Setting instance of the Scriptable Objects
     void Start(){
@@ -22,6 +25,7 @@ public class Compendium : MonoBehaviour
         {
             itemDictionnaryInstance.Add(new ItemDictionnary());
             itemDictionnaryInstance[i].item = Instantiate(itemDictionnary[i].item);
+            itemIDs.Add(itemDictionnary[i].item.id);
         }
 
         for (int i = 0; i < recipeDictionnary.Count; i++)
@@ -29,12 +33,14 @@ public class Compendium : MonoBehaviour
             recipeDictionnaryInstance.Add(new RecipeDictionnary());
             recipeDictionnaryInstance[i].recipe = Instantiate(recipeDictionnary[i].recipe);
 			lockedRecipe.Add(recipeDictionnaryInstance[i]);
+            recipeIDs.Add(recipeDictionnary[i].recipe.id);
         }
 
         for (int i = 0; i < logDictionnary.Count; i++)
         {
             logDictionnaryInstance.Add(new LogDictionnary());
             logDictionnaryInstance[i].log = Instantiate(logDictionnary[i].log);
+            logIDs.Add(logDictionnary[i].log.id);
         }
     }
 
