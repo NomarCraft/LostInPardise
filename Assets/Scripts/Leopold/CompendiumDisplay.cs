@@ -32,6 +32,15 @@ public class CompendiumDisplay : MonoBehaviour
 		}
     }
 
+	public void DisplayCraftWindow()
+	{
+		ChangeDisplay();
+		for (int i = 0; i < compendium.unlockedRecipe.Count; i++)
+		{
+			UpdateDisplay(i, 1, compendium.unlockedRecipe[i].recipe, GameManager.Instance.uiManager._craftWindow);
+		}
+	}
+
     void UpdateDisplayedItems(){
 		ChangeDisplay();
 		for (int i = 0; i < compendium.unlockedItem.Count; i++)
@@ -82,7 +91,25 @@ public class CompendiumDisplay : MonoBehaviour
 		}
     }
 
-    public void DisplayData(CompendiumData scriptable){
+	public void UpdateDisplay(int i, int nb, CompendiumData data, RectTransform parent)
+	{
+		if (!packs[nb].objDisplayed.ContainsKey(data))
+		{
+			var obj = Instantiate(data.menuAsset, Vector3.zero, Quaternion.identity, parent);
+			obj.GetComponent<ButtonSelection>().compendiumData = data;
+			RectTransform trans = obj.GetComponent<RectTransform>();
+			trans.localPosition = GetPosition(i);
+			trans.anchorMax = new Vector2(0.5f, 1);
+			trans.anchorMin = new Vector2(0.5f, 1);
+			trans.pivot = new Vector2(0.5f, 1);
+			Debug.Log(GetPosition(i));
+			packs[nb].objDisplayed.Add(data, obj);
+			if (i == 0)
+				GameManager.Instance.uiEvents.SetSelectedGameObject(obj);
+		}
+	}
+
+	public void DisplayData(CompendiumData scriptable){
         itemName.text = scriptable.itemName;
         itemDescription.text = scriptable.description;
     }
