@@ -54,6 +54,10 @@ public class UIManager : MonoBehaviour
 	public bool _amountSelectionning;
 
 	[Space(10)]
+	[Header("Craft")]
+	public RectTransform _craftWindow;
+
+	[Space(10)]
 	[Header("Dialogue")]
 	public float _dialogueSpeed;
 	public TextMeshProUGUI _dialogueText;

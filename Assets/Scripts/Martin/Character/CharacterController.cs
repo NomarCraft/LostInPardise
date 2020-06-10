@@ -582,6 +582,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 				gm._gamePaused = true;
 				_ui.DisplayElement(_ui._craftPanel);
+				gm.compDis.DisplayCraftWindow();
 			}
 		}
 		else if (interactable.TryGetComponent<Storage>(out storage))
