@@ -1371,6 +1371,9 @@ MonoBehaviour:
   lockedRecipe: []
   unlockedRecipe: []
   unlockedLog: []
+  itemIDs: 
+  recipeIDs: 
+  logIDs: 
 --- !u!4 &441865427
 Transform:
   m_ObjectHideFlags: 0
