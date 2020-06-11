@@ -10,20 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff3d7d0c4240a3d4dad38dd26c137e45, type: 3}
-  m_Name: Axe
+  m_Name: Iron Bar
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 2
-  itemName: Axe
-  menuAsset: {fileID: 6068398185263138036, guid: 082c8e200c090ce4bacfb543706545b8,
+  id: 4
+  itemName: Iron Bar
+  menuAsset: {fileID: 6068398185263138036, guid: 9ab2f141017c87f4493e0ca423ac3d58,
     type: 3}
   sprite: {fileID: 0}
-  description: UNE HAAAAAAAAAAAAAAACHE
-  craftedItemId: 22
+  description: LA BARRRREEEEE
+  craftedItemId: 14
   ingredients:
   - unlocked: 0
-    ingredient: {fileID: 11400000, guid: 61b9e131591f7b54c926af6b7ba3d591, type: 2}
-    amount: 1
-  - unlocked: 0
-    ingredient: {fileID: 11400000, guid: 3fa993ee67a49cd4185ca0c7bf6db9e4, type: 2}
+    ingredient: {fileID: 11400000, guid: f545734360c3a1d4c8c66f6c95a10adf, type: 2}
     amount: 4

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PickAxe
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 19
+  id: 20
   itemName: PickAxe
   menuAsset: {fileID: 6068398185263138036, guid: cc6830af6d2cb7445b36ad18daee4799,
     type: 3}

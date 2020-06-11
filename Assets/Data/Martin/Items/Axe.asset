@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   unlocked: 0
-  id: 21
+  id: 22
   itemName: Axe
   menuAsset: {fileID: 6068398185263138036, guid: cc6830af6d2cb7445b36ad18daee4799,
     type: 3}
