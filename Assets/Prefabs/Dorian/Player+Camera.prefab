@@ -1083,8 +1083,8 @@ MonoBehaviour:
   _playerCenter: {fileID: 6970101126956845464}
   _camRef: {fileID: 0}
   playerParent: {fileID: 0}
-  _pickaxe: {fileID: 0}
-  _axe: {fileID: 0}
+  _pickaxe: {fileID: 6425149508856108679}
+  _axe: {fileID: 2953292760057600078}
   _isRunning: 0
   _isGrounded: 0
   _isJumping: 0
@@ -4426,6 +4426,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6770377818164673494}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2953292760057600078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8433274934399394712, guid: 57a648b8b67a4a74fa5b69bf1bac7c1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6770377818164673494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7419523184267254896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4513,6 +4519,12 @@ PrefabInstance:
 --- !u!4 &8030462081796023444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 686411579246541028, guid: 2dfb40528b721ef4f85db4b0d1d7e86c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7419523184267254896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6425149508856108679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4602052549072292599, guid: 2dfb40528b721ef4f85db4b0d1d7e86c,
     type: 3}
   m_PrefabInstance: {fileID: 7419523184267254896}
   m_PrefabAsset: {fileID: 0}
