@@ -1226,6 +1226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049682991188724212}
   - component: {fileID: 8166583927677074701}
+  - component: {fileID: 6583365938333928543}
   m_Layer: 0
   m_Name: Tree_big_Cliff
   m_TagString: Untagged
@@ -1311,6 +1312,20 @@ LODGroup:
     - renderer: {fileID: 6358170765388533991}
     - renderer: {fileID: 4726250379952572800}
   m_Enabled: 1
+--- !u!136 &6583365938333928543
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049682991188724213}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.594672
+  m_Height: 18.457386
+  m_Direction: 1
+  m_Center: {x: -0.21092395, y: 6.409643, z: -0.47278497}
 --- !u!1 &5049682991292831300
 GameObject:
   m_ObjectHideFlags: 0
