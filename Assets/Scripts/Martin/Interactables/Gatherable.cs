@@ -12,8 +12,17 @@ public class Gatherable : Interactable
 	private int _currentTurnUntilRespawn;
 	public GameObject _compToDesactivate;
 
+	private Vector3 _startPos;
+	private Quaternion _startRot;
+
 	[Header("Tool")]
 	public int _toolRequiredId;
+
+	private void Start()
+	{
+		_startPos = transform.position;
+		_startRot = transform.rotation;
+	}
 
 	private void Desactivate()
 	{
@@ -37,6 +46,7 @@ public class Gatherable : Interactable
 	public void Activate()
 	{
 		_compToDesactivate.SetActive(true);
+		transform.SetPositionAndRotation(_startPos, _startRot);
 		_isActive = true;
 	}
 
