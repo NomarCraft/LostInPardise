@@ -19,6 +19,9 @@ public class Compendium : MonoBehaviour
     public List<int> recipeIDs;
     public List<int> logIDs;
 
+	public int pickaxeId;
+	public int axeId;
+
 //Setting instance of the Scriptable Objects
     void Start(){
         for (int i = 0; i < itemDictionnary.Count; i++)

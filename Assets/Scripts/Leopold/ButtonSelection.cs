@@ -27,6 +27,10 @@ public class ButtonSelection : Button
 		{
 			ui.UpdateCompendiumText(compendiumData);
 		}
+		if (ui._craftPanel.activeSelf && compendiumData != null)
+		{
+			ui.UpdateRecipeText(compendiumData as RecipeData);
+		}
         ui.ChangeSelectedButton(this);
     }
 

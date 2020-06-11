@@ -59,12 +59,15 @@ public class Crafter : MonoBehaviour
 				}
 				else
 				{
-					int itemAmount = 0;
-					if (inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount))
-						currentAmount += itemAmount;
+					if (inventories[i].inventory != null)
+					{
+						int itemAmount = 0;
+						if (inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount))
+							currentAmount += itemAmount;
 
-					Debug.Log(item.ingredient.id);
-					Debug.Log(inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount));
+						Debug.Log(item.ingredient.id);
+						Debug.Log(inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount));
+					}
 				}
 			}
 
@@ -75,7 +78,6 @@ public class Crafter : MonoBehaviour
 					ui.DisplayElement(ui._displayMessagePanel);
 					ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You can't craft " + comp.GetItemReference(craftedItem).itemName + " because you need more " + item.ingredient.itemName, Color.red);
 				}
-
 				return;
 			}
 		}

@@ -56,6 +56,10 @@ public class UIManager : MonoBehaviour
 	[Space(10)]
 	[Header("Craft")]
 	public RectTransform _craftWindow;
+	public TextMeshProUGUI _recipeName;
+	public TextMeshProUGUI _recipeDescription;
+	public TextMeshProUGUI[] _ingredientsNames;
+	public TextMeshProUGUI[] _ingredientsAmount;
 
 	[Space(10)]
 	[Header("Dialogue")]
@@ -168,6 +172,27 @@ public class UIManager : MonoBehaviour
 	{
 		ChangeText(_compendiumObjName, compendiumData.itemName);
 		ChangeText(_compendiumObjDescription, compendiumData.description);
+	}
+
+	public void UpdateRecipeText(RecipeData recipeData)
+	{
+		ChangeText(_recipeName, recipeData.itemName);
+		ChangeText(_recipeDescription, recipeData.description);
+
+		foreach (TextMeshProUGUI text in _ingredientsNames)
+		{
+			ChangeText(text, "");
+		}
+		foreach (TextMeshProUGUI text in _ingredientsAmount)
+		{
+			ChangeText(text, "");
+		}
+
+		for (int i = 0; i < recipeData.ingredients.Count; i++)
+		{
+			ChangeText(_ingredientsAmount[i], recipeData.ingredients[i].amount.ToString());
+			ChangeText(_ingredientsNames[i], recipeData.ingredients[i].ingredient.itemName);
+		}
 	}
 
 	public void ChangeSelectedButton(ButtonSelection buttonSelection)

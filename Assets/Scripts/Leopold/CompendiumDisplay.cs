@@ -84,7 +84,6 @@ public class CompendiumDisplay : MonoBehaviour
 			trans.anchorMax = new Vector2(0.5f, 1);
             trans.anchorMin = new Vector2(0.5f, 1);
             trans.pivot = new Vector2(0.5f, 1);
-			Debug.Log(GetPosition(i));
 			packs[nb].objDisplayed.Add(data, obj);
 			if (i == 0)
 				GameManager.Instance.uiEvents.SetSelectedGameObject(obj);
@@ -102,7 +101,6 @@ public class CompendiumDisplay : MonoBehaviour
 			trans.anchorMax = new Vector2(0.5f, 1);
 			trans.anchorMin = new Vector2(0.5f, 1);
 			trans.pivot = new Vector2(0.5f, 1);
-			Debug.Log(GetPosition(i));
 			packs[nb].objDisplayed.Add(data, obj);
 			if (i == 0)
 				GameManager.Instance.uiEvents.SetSelectedGameObject(obj);

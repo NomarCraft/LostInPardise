@@ -89,6 +89,8 @@ public partial class CharacterController : MonoBehaviour
 	[SerializeField] private Transform _camRef;
 	public Transform camRef { get { return _camRef; } set { _camRef = value; } }
 	public Transform playerParent;
+	[SerializeField] private GameObject _pickaxe;
+	[SerializeField] private GameObject _axe;
 
 	[Space(10)]
 	[Header("Bools")]
@@ -153,6 +155,9 @@ public partial class CharacterController : MonoBehaviour
 			VelocityCheck();
 
 		Move();
+
+		_pickaxe.SetActive(gm.inv.CheckItem(gm.comp.pickaxeId));
+		_axe.SetActive(gm.inv.CheckItem(gm.comp.axeId));
 	}
 
 	#endregion
@@ -275,14 +280,18 @@ public partial class CharacterController : MonoBehaviour
 						gm._gamePaused = false;
 					}
 				}
-				if (_ui._craftPanel.activeSelf)
-				{
-					_ui.HideElement(_ui._craftPanel);
-					gm._gamePaused = false;
-				}
 				if (_ui._chestPanel.activeSelf)
 				{
 					gm.invDis.TransferItems(_ui._selectedButton, 1);
+				}
+				if (_ui._craftPanel.activeSelf)
+				{
+					if (!_ui._selectedButton)
+						return;
+
+					RecipeData recipe = _ui._selectedButton.compendiumData as RecipeData;
+					Debug.Log(recipe.craftedItemId);
+					gm.craft.Craft(recipe.ingredients, gm.invDis.packs, recipe.craftedItemId, 0);
 				}
 			}
 		}
@@ -319,6 +328,11 @@ public partial class CharacterController : MonoBehaviour
 				{
 					_ui.HideElement(_ui._chestPanel);
 					gm.invDis.packs[2].inventory = null;
+					gm._gamePaused = false;
+				}
+				if (_ui._craftPanel.activeSelf)
+				{
+					_ui.HideElement(_ui._craftPanel);
 					gm._gamePaused = false;
 				}
 			}
@@ -544,7 +558,6 @@ public partial class CharacterController : MonoBehaviour
 			{
 				if (gm.inv.CheckItem(gatherable._toolRequiredId))
 				{
-
 					gatherable.Interaction(out item);
 				}
 				else

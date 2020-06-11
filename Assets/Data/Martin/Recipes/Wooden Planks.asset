@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff3d7d0c4240a3d4dad38dd26c137e45, type: 3}
-  m_Name: TestRecipe
+  m_Name: Wooden Planks
   m_EditorClassIdentifier: 
   unlocked: 0
   id: 0
-  itemName: Recipe Test
+  itemName: Wooden Planks
   menuAsset: {fileID: 6068398185263138036, guid: 6453cf9ac6723ed4c9761316e6692798,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: This is some real building material
   craftedItemId: 12
   ingredients:
   - unlocked: 0
