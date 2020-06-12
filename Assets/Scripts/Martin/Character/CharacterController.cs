@@ -88,7 +88,7 @@ public partial class CharacterController : MonoBehaviour
 	public Transform playerCenter { get { return _playerCenter; } }
 	[SerializeField] private Transform _camRef;
 	public Transform camRef { get { return _camRef; } set { _camRef = value; } }
-	public Transform playerParent;
+	//public Transform playerParent;
 	[SerializeField] private GameObject _pickaxe;
 	[SerializeField] private GameObject _axe;
 
@@ -377,7 +377,7 @@ public partial class CharacterController : MonoBehaviour
 			InitializeUI();
 		}
 
-		gm._chara = playerParent;
+		gm._chara = this;
 		ent.OnLifeChange += UpdateLifeBar;
 		ent.OnDeath += Respawn;
 		interactor.OnInteract += UpdateInteraction;
