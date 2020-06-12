@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &7433288999949704646
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6243705249445676422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1283755, y: 1.2817206, z: 1.4291972}
+  m_Center: {x: 0, y: 0.64461267, z: 0.119477846}
+--- !u!54 &4020649973958210030
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6243705249445676422}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &5867040561858085592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6243705249445676422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fc59bf0d9403c4893c8f56fca7483b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableName: Workshop
+  _interactions:
+  - _interaction: 3
+    _toolRequired: 0
+  _isActive: 1
 --- !u!1001 &2704400368208239759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79,3 +125,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c046fca2ffe5774392011fd6eadf7f2, type: 3}
+--- !u!1 &6243705249445676422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 4c046fca2ffe5774392011fd6eadf7f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2704400368208239759}
+  m_PrefabAsset: {fileID: 0}

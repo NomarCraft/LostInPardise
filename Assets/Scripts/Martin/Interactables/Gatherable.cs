@@ -32,7 +32,6 @@ public class Gatherable : Interactable
 			_compToDesactivate.SetActive(false);
 			_currentTurnUntilRespawn = 0;
 		}
-
 	}
 
 	public void TurnPass()
