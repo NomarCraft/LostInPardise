@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 43734ca0f0c85ba42aa588f838206f5d,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "The result of an alchemic experimentation who seems to heal wounds\r"
   itemWeight: 0

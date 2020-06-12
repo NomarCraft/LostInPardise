@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: cc6830af6d2cb7445b36ad18daee4799,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "A refined branch\r"
   itemWeight: 0

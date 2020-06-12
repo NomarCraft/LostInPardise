@@ -18,5 +18,6 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: cc6830af6d2cb7445b36ad18daee4799,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Rusticly made from a branch and rock this tool can pierce through
+    stone\r"
   itemWeight: 0

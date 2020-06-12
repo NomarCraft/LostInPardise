@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 0368fb45c80987f4780acb6b029f3845,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Some tasty treats from mother Earth\r"
   itemWeight: 0

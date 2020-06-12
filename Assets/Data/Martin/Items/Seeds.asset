@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: af72f5c69a5724e4c8377ba119b35d75,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "They can be planted and with time will grow into a tree\r"
   itemWeight: 0

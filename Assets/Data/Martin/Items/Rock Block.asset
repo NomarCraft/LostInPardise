@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 052696be8e1dcd6409e76be3dbcbc901,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "A block of rock harvested on the mountain\r"
   itemWeight: 0

@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 72aa4cc8f1549924fab3668fc8aa15de,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Cloths made from fibers\r"
   itemWeight: 0

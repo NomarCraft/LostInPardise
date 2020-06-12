@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 0964c6f60c8bcc4428b79eca0cbb8432,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "String made from vegetal fibers\r"
   itemWeight: 0

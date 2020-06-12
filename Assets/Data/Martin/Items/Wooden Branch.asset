@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: bb434fd486de200468f1b5bebc75c272,
     type: 3}
   sprite: {fileID: 0}
-  description: A wooden branch which fell from a tree
+  description: "A small branch found on the side of the road\r"
   itemWeight: 0

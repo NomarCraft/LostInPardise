@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 6453cf9ac6723ed4c9761316e6692798,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Planks made from a wood log\r"
   itemWeight: 0

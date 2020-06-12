@@ -1082,7 +1082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCenter: {fileID: 6970101126956845464}
   _camRef: {fileID: 0}
-  playerParent: {fileID: 0}
   _pickaxe: {fileID: 6425149508856108679}
   _axe: {fileID: 2953292760057600078}
   _isRunning: 0
