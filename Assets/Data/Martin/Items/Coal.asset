@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 7fa649ceb3142c247b80ff5075419d99,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "A combustible used to activate an oven\r"
   itemWeight: 0

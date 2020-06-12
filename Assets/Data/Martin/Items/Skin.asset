@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 0a7e61a1c2a5cfb479b91c8ccfc8466f,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Skin from a butchered animal\r"
   itemWeight: 0

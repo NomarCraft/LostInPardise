@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 9ab2f141017c87f4493e0ca423ac3d58,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "A bar of iron made from smelted ore\r"
   itemWeight: 0

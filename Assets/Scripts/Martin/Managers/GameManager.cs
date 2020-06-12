@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
 
 	[Space(10)]
 	[Header("GameComponents")]
-	public Transform _chara;
+	public CharacterController _chara;
 	[SerializeField] private UIManager _uiManager;
 	public UIManager uiManager { get { return _uiManager; } }
 	[SerializeField] private EventSystem _uiEvents;

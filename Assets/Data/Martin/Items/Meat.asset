@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: f473f03f52a133f4f8abee3e6e8cf099,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "Some meat harvested on an animal\r"
   itemWeight: 0

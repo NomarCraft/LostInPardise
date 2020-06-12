@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 2f6f61dd049de54409aac00a6447e31c,
     type: 3}
   sprite: {fileID: 0}
-  description: 
+  description: "The basic need for survival\r"
   itemWeight: 0

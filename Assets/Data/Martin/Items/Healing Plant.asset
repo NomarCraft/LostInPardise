@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 72010d59f12cfff40913d9d0cbf894bb,
     type: 3}
   sprite: {fileID: 0}
-  description: A special plant known for it's healing properties
+  description: "A bunch of medicinal plants gathered in the forest\r"
   itemWeight: 0

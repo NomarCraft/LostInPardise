@@ -18,5 +18,5 @@ MonoBehaviour:
   menuAsset: {fileID: 6068398185263138036, guid: 93f5b7718bd472f4880ca975d98a8553,
     type: 3}
   sprite: {fileID: 0}
-  description: A small rock you picked up from the ground
+  description: "A fragment of a bigger rock\r"
   itemWeight: 0
