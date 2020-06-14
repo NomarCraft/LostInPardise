@@ -25,7 +25,7 @@ namespace Console
         }
 
         public void RunError(string text){
-            Debug.LogWarning(Name + ": " + text);
+            Debug.LogWarning(/*Name + ": " + text*/ "You fell for it fool\nTHUNDER CROSS SPLIT ATTACK");
         }
 
         public abstract void RunCommand(string[] _inputs);
