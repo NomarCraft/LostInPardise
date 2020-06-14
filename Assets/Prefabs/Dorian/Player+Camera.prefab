@@ -1089,6 +1089,9 @@ MonoBehaviour:
   _isJumping: 0
   _jumpSafety: 0
   _isFalling: 0
+  _isClimbing: 0
+  _inPosition: 0
+  _isLerping: 0
   _speed: 8
   _runningMultiplyFactor: 2
   _rotSpeed: 10
@@ -1100,6 +1103,8 @@ MonoBehaviour:
   _fallingDamageTreshold: 10
   _fallingDamageLethalTreshold: 1e+10
   _respawnTime: 5
+  _positionOffset: 0
+  _offsetFromWall: 0.3
 --- !u!114 &8585615535073204104
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -99,6 +99,9 @@ public partial class CharacterController : MonoBehaviour
 	[SerializeField] private bool _isJumping;
 	[SerializeField] private bool _jumpSafety = false;
 	[SerializeField] private bool _isFalling = false;
+	[SerializeField] private bool _isClimbing = false;
+	[SerializeField] private bool _inPosition = false;
+	[SerializeField] private bool _isLerping = false;
 	public bool isFalling { get { return _isFalling; } }
 	private bool _isFastFalling = false;
 	private bool _isDeadlyFalling = false;
@@ -130,6 +133,16 @@ public partial class CharacterController : MonoBehaviour
 	public float respawnTime { get { return _respawnTime; } }
 	private float _freezeMovement = 1f;
 	private float moveAmount;
+
+	private float _posT;
+	private Vector3 _startPos;
+	private Vector3 _targetPos;
+	private Quaternion _startRot;
+	private Quaternion _targetRot;
+	public float _positionOffset;
+	public float _offsetFromWall = 0.3f;
+
+	Transform _helper;
 
 	private Coroutine jumpCoroutine;
 	private Coroutine respawnCoroutine;
@@ -177,7 +190,7 @@ public partial class CharacterController : MonoBehaviour
 		if (Mathf.Abs(_movementInput.y) <= 0.1f)
 			_movementInput.y = 0;
 
-		if (_movementInput != Vector2.zero)
+		if (_movementInput != Vector2.zero && !_isClimbing)
 			anim.SetFloat("Moving", 1);
 		else
 			anim.SetFloat("Moving", 0);
@@ -257,7 +270,12 @@ public partial class CharacterController : MonoBehaviour
 		if (!gm._gamePaused)
 		{
 			if (context.started)
-				Jump();
+			{
+				if (_isClimbing)
+					QuitClimbing();
+				else
+					Jump();
+			}
 		}
 	}
 
@@ -337,6 +355,13 @@ public partial class CharacterController : MonoBehaviour
 				}
 			}
 		}
+
+		else
+		{
+			if (context.started)
+				if (!_isClimbing)
+					CheckForClimb();
+		}
 	}
 
 	public void PauseInput(InputAction.CallbackContext context)
@@ -377,6 +402,9 @@ public partial class CharacterController : MonoBehaviour
 			InitializeUI();
 		}
 
+		_helper = new GameObject().transform;
+		_helper.name = "Climb Helper";
+
 		gm._chara = this;
 		ent.OnLifeChange += UpdateLifeBar;
 		ent.OnDeath += Respawn;
@@ -391,9 +419,18 @@ public partial class CharacterController : MonoBehaviour
 
 	private void Move()
 	{
-		_isGrounded = OnGround();
-		anim.SetBool("IsGrounded",_isGrounded);
-		anim.SetBool("isFalling", _isFalling);
+		if (!_isClimbing)
+		{
+			_isGrounded = OnGround();
+			anim.SetBool("IsGrounded", _isGrounded);
+			anim.SetBool("isFalling", _isFalling);
+		}
+
+		if (_isClimbing)
+		{
+			ClimbTick();
+			return;
+		}
 
 		if (_isGrounded && !_isJumping)
 		{
@@ -460,7 +497,7 @@ public partial class CharacterController : MonoBehaviour
 
 	private void Jump()
 	{
-		if (!_isGrounded)
+		if (!_isGrounded || _isClimbing)
 			return;
 
 		if (jumpCoroutine != null)
@@ -492,6 +529,158 @@ public partial class CharacterController : MonoBehaviour
 		_jumpSafety = true;
 		yield return new WaitForSeconds(0.1f);
 		_jumpSafety = false;
+	}
+
+	private void InitForClimb(RaycastHit hit)
+	{
+		Debug.Log(hit.collider.name);
+		_isClimbing = true;
+		_rb.useGravity = false;
+		_helper.transform.rotation = Quaternion.LookRotation(-hit.normal);
+		_startPos = transform.position;
+		_targetPos = hit.point + (hit.normal * _offsetFromWall);
+		_posT = 0;
+		_inPosition = false;
+	}
+
+	private void QuitClimbing()
+	{
+		_isClimbing = false;
+		_rb.useGravity = true;
+	}
+
+	private void ClimbTick()
+	{
+		if (!_inPosition)
+		{
+			GetInPosition();
+			return;
+		}
+
+		if (!_isLerping)
+		{
+			float hor = _movementInput.x;
+			float vert = _movementInput.y;
+			float m = Mathf.Abs(hor) + Mathf.Abs(vert);
+
+			Vector3 h = _helper.right * hor;
+			Vector3 v = _helper.up * vert;
+			Vector3 moveDir = (h + v).normalized;
+
+			bool canMove = CanMove(moveDir);
+			if (!canMove || moveDir == Vector3.zero)
+				return;
+
+			_posT = 0;
+			_isLerping = true;
+			_startPos = transform.position;
+			//Vector3 tp = _helper.position - transform.position;
+
+			_targetPos = _helper.position;
+		}
+		else
+		{
+			_posT += Time.deltaTime * 2;
+			if (_posT > 1)
+			{
+				_posT = 1;
+				_isLerping = false;
+			}
+
+			Vector3 cp = Vector3.Lerp(_startPos, _targetPos, _posT);
+			transform.position = cp;
+			transform.rotation = Quaternion.Slerp(transform.rotation, _helper.rotation, Time.deltaTime * 2);
+		}
+	}
+
+	private bool CanMove(Vector3 moveDir)
+	{
+		Vector3 origin = transform.position;
+		float dis = _positionOffset;
+		Vector3 dir = moveDir;
+
+		Debug.DrawRay(origin, dir * dis, Color.red);
+
+		RaycastHit[] hits;
+
+		hits = Physics.RaycastAll(origin, dir, dis);
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit.collider == this.GetComponent<Collider>() || hit.collider == interactor.GetComponent<Collider>())
+			{
+
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		origin += moveDir * dis;
+		dir = _helper.forward;
+
+		float dis2 = 1f;
+
+		Debug.DrawRay(origin, dir * dis2, Color.blue);
+
+		hits = Physics.RaycastAll(origin, dir, dis);
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit.collider == this.GetComponent<Collider>() || hit.collider == interactor.GetComponent<Collider>())
+			{
+
+			}
+			else
+			{
+				_helper.position = PosWithOffset(origin, hit.point);
+				_helper.rotation = Quaternion.LookRotation(-hit.normal);
+				return true;
+			}
+		}
+
+		origin += dir * dis2;
+		dir = -Vector3.up;
+		Debug.DrawRay(origin, dir, Color.yellow);
+
+		hits = Physics.RaycastAll(origin, dir, dis2);
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit.collider == this.GetComponent<Collider>() || hit.collider == interactor.GetComponent<Collider>())
+			{
+
+			}
+			else
+			{
+				float angle = Vector3.Angle(_helper.up, hit.normal);
+
+				if (angle < 40)
+				{
+					_helper.position = PosWithOffset(origin, hit.point);
+					_helper.rotation = Quaternion.LookRotation(-hit.normal);
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private void GetInPosition()
+	{
+		_posT += Time.deltaTime;
+
+		if (_posT > 1)
+		{
+			_posT = 1;
+			_inPosition = true;
+		}
+
+		Vector3 tp = Vector3.Lerp(_startPos, _targetPos, _posT);
+		transform.position = tp;
+		transform.rotation = Quaternion.Slerp(transform.rotation, _helper.rotation, Time.deltaTime * 2);
 	}
 
 	private void VelocityCheck()
@@ -683,6 +872,39 @@ public partial class CharacterController : MonoBehaviour
 
 		_isGrounded = false;
 		return false;
+	}
+
+	private void CheckForClimb()
+	{
+		Vector3 origin = transform.position;
+		origin.y += 1.4f;
+		Vector3 dir = transform.forward;
+		RaycastHit[] hits;
+
+		hits = Physics.RaycastAll(origin, dir, 2);
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit.collider == this.GetComponent<Collider>() || hit.collider == interactor.GetComponent<Collider>())
+			{
+
+			}
+			else
+			{
+				_helper.position = PosWithOffset(origin, hit.point);
+				InitForClimb(hit);
+				return;
+			}
+		}
+	}
+
+	private Vector3 PosWithOffset(Vector3 origin, Vector3 target)
+	{
+		Vector3 direction = origin - target;
+		direction.Normalize();
+		Vector3 offset = direction * _offsetFromWall;
+
+		return target + offset;
 	}
 
 	#endregion
