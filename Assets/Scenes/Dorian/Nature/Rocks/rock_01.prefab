@@ -26,9 +26,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb6209f18790b84797574293a9dcd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactableName: 
-  _interactions: []
+  _interactableName: Cliff
+  _interactions:
+  - _interaction: 6
+    _toolRequired: 1
   _isActive: 1
+  _toolRequiredId: 24
 --- !u!1 &9116929748575048303
 GameObject:
   m_ObjectHideFlags: 0

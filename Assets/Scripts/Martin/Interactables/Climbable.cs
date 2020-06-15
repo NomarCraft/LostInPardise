@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Climbable : Interactable
 {
-	
+	[Header("Tool")]
+	public int _toolRequiredId;
+
+
 }

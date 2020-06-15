@@ -545,6 +545,7 @@ public partial class CharacterController : MonoBehaviour
 
 	private void QuitClimbing()
 	{
+		_ui.HideElement(_ui._climbPanel);
 		_isClimbing = false;
 		_rb.useGravity = true;
 	}
@@ -882,6 +883,7 @@ public partial class CharacterController : MonoBehaviour
 		RaycastHit[] hits;
 
 		hits = Physics.RaycastAll(origin, dir, 2);
+		Climbable cliff;
 
 		foreach (RaycastHit hit in hits)
 		{
@@ -891,9 +893,20 @@ public partial class CharacterController : MonoBehaviour
 			}
 			else if (hit.collider.GetComponent<Climbable>() != null)
 			{
-				_helper.position = PosWithOffset(origin, hit.point);
-				InitForClimb(hit);
-				return;
+				cliff = hit.collider.GetComponent<Climbable>();
+				if (gm.inv.CheckItem(cliff._toolRequiredId))
+				{
+					_helper.position = PosWithOffset(origin, hit.point);
+					_ui.DisplayElement(_ui._climbPanel);
+					InitForClimb(hit);
+					return;
+				}
+
+				else
+				{
+					_ui.DisplayElement(_ui._displayMessagePanel);
+					_ui.DisplayTemporaryMessageWithColor(_ui._itemDisplayMessageText, "You can't climb because you lack the correct tool" , Color.red);
+				}
 			}
 		}
 	}
@@ -951,6 +964,9 @@ public partial class CharacterController : MonoBehaviour
 		}
 
 		InteractableType[] interaction = interactor._interactables[0]._interactions;
+
+		if (interactor._interactables[0].GetComponent<Climbable>() != null)
+			return;
 
 		_ui.DisplayElement(_ui._interactPanel);
 		_ui.UpdateImageAlpha(_ui._interactableCenterImage, 1f);
