@@ -611,7 +611,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 
 			}
-			else
+			else if (hit.collider.GetComponent<Climbable>() != null)
 			{
 				return false;
 			}
@@ -632,7 +632,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 
 			}
-			else
+			else if (hit.collider.GetComponent<Climbable>() != null)
 			{
 				_helper.position = PosWithOffset(origin, hit.point);
 				_helper.rotation = Quaternion.LookRotation(-hit.normal);
@@ -652,7 +652,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 
 			}
-			else
+			else if (hit.collider.GetComponent<Climbable>() != null)
 			{
 				float angle = Vector3.Angle(_helper.up, hit.normal);
 
@@ -889,7 +889,7 @@ public partial class CharacterController : MonoBehaviour
 			{
 
 			}
-			else
+			else if (hit.collider.GetComponent<Climbable>() != null)
 			{
 				_helper.position = PosWithOffset(origin, hit.point);
 				InitForClimb(hit);
