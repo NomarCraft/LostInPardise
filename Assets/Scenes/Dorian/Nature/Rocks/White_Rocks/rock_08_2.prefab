@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6151657480291604676}
   - component: {fileID: 460381503888303165}
   - component: {fileID: 3036489552422578283}
+  - component: {fileID: 751505918240821842}
   m_Layer: 0
-  m_Name: rock_08
+  m_Name: rock_08_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,3 +95,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4988658787876753581, guid: 167684f3d84f3b94ea207afffaef3dbd, type: 3}
+--- !u!114 &751505918240821842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188552079482425569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb6209f18790b84797574293a9dcd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableName: 
+  _interactions: []
+  _isActive: 1
