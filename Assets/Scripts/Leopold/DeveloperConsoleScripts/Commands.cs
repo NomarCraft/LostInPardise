@@ -93,9 +93,9 @@ public class CommandHelp : ConsoleCommand{
         public override void RunCommand(string[] _inputs)
         {
             if(_inputs.Length == 1){
+                Debug.LogWarning("Write Help + a command to get more information");
                 foreach (var item in DeveloperConsole.CommandDictionnary)
                 {
-                    Debug.Log("Write Help + a command to get more information");
                     Debug.Log(item.Value.Name);
                 }
             }else if(_inputs.Length == 2){
@@ -137,14 +137,18 @@ public class CommandAddItem : ConsoleCommand{
 
     public override void RunCommand(string[] _inputs)
     {
-        if(_inputs[1] != null && _inputs[2] != null && _inputs.Length == 3)
-        {
-            int id = int.Parse(_inputs[1]);
-            int amount = int.Parse(_inputs[2]);
+        if(_inputs.Length == 3){
+            if(_inputs[1] != null && _inputs[2] != null)
+            {
+                int id = int.Parse(_inputs[1]);
+                int amount = int.Parse(_inputs[2]);
 
-            if(GameManager.Instance.comp.itemIDs.Contains(id)){
-                
-                GameManager.Instance.inv.AddItem(id, amount);
+                if(GameManager.Instance.comp.itemIDs.Contains(id)){
+                    
+                    GameManager.Instance.inv.AddItem(id, amount);
+                }else{
+                    RunError();
+                }
             }else{
                 RunError();
             }

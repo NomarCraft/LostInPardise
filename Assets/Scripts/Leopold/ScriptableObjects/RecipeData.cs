@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
- [CreateAssetMenu(fileName = "New Recipe", menuName = "Inventory System/Recipe")]
+[CreateAssetMenu(fileName = "New Recipe", menuName = "Inventory System/Recipe")]
 public class RecipeData : CompendiumData
 {
     DataType dataType = DataType.Recipe;

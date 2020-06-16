@@ -21,11 +21,11 @@ namespace Console
         }
 
         public void RunError(){
-            Debug.LogWarning(Name + " arguments not found");
+            Debug.LogWarning(Name + " arguments not found\nUse help + the name of the command for further informations");
         }
 
         public void RunError(string text){
-            Debug.LogWarning(/*Name + ": " + text*/ "You fell for it fool\nTHUNDER CROSS SPLIT ATTACK");
+            Debug.LogWarning(Name + ": " + text);
         }
 
         public abstract void RunCommand(string[] _inputs);

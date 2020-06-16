@@ -39,6 +39,10 @@ public class CompendiumDisplay : MonoBehaviour
 		{
 			UpdateDisplay(i, 1, compendium.unlockedRecipe[i].recipe, GameManager.Instance.uiManager._craftWindow);
 		}
+        for (int i = 0; i < compendium.unlockedBuilding.Count; i++)
+        {
+            UpdateDisplay(i, 1, compendium.unlockedBuilding[i].building, GameManager.Instance.uiManager._craftWindow);
+        }
 	}
 
     void UpdateDisplayedItems(){
@@ -103,7 +107,7 @@ public class CompendiumDisplay : MonoBehaviour
 			trans.pivot = new Vector2(0.5f, 1);
 			packs[nb].objDisplayed.Add(data, obj);
 			if (i == 0)
-				GameManager.Instance.uiEvents.SetSelectedGameObject(obj);
+            GameManager.Instance.uiEvents.SetSelectedGameObject(obj);
 		}
 	}
 

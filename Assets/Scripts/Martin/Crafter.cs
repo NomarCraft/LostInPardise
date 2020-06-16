@@ -82,37 +82,53 @@ public class Crafter : MonoBehaviour
 			}
 		}
 
-		if (inventories[target].inventory.AddItem(craftedItem))
-		{
-			foreach (Ingredient item in ingredients)
-			{
-				int requiredAmount = item.amount;
+		ItemData searchItem = new ItemData();
 
-				for (int i = 0; i < inventories.Count; i++)
+		for (int i = 0; i < GameManager.Instance.comp.itemDictionnaryInstance.Count; i++)
+		{
+			if(GameManager.Instance.comp.itemDictionnaryInstance[i].item.id == craftedItem){
+				searchItem = GameManager.Instance.comp.itemDictionnaryInstance[i].item;
+			}
+		}
+
+		if(searchItem.dataType != DataType.Building){
+			if (inventories[target].inventory.AddItem(craftedItem))
+			{
+				foreach (Ingredient item in ingredients)
 				{
-					if (i == 1)
+					int requiredAmount = item.amount;
+
+					for (int i = 0; i < inventories.Count; i++)
 					{
-						//Avoid double check on Player Inventory
-					}
-					else
-					{
-						int itemAmount = 0;
-						if (inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount))
+						if (i == 1)
 						{
-							if (itemAmount >= requiredAmount)
+							//Avoid double check on Player Inventory
+						}
+						else
+						{
+							int itemAmount = 0;
+							if (inventories[i].inventory.CheckItem(item.ingredient.id, out itemAmount))
 							{
-								inventories[i].inventory.RemoveItem(item.ingredient, requiredAmount);
-								break;
-							}
-							else if (itemAmount < requiredAmount)
-							{
-								requiredAmount -= itemAmount;
-								inventories[i].inventory.RemoveItem(item.ingredient, itemAmount);
+								if (itemAmount >= requiredAmount)
+								{
+									inventories[i].inventory.RemoveItem(item.ingredient, requiredAmount);
+									break;
+								}
+								else if (itemAmount < requiredAmount)
+								{
+									requiredAmount -= itemAmount;
+									inventories[i].inventory.RemoveItem(item.ingredient, itemAmount);
+								}
 							}
 						}
 					}
 				}
 			}
+		}else{
+			GameManager.Instance.house.UpgradeHouse();
+			GameManager.Instance.comp.unlockedBuilding.Clear();
+			inventories[target].inventory.AddItem(craftedItem);
+			inventories[target].inventory.RemoveItem(searchItem, 1);
 		}
 	}
 }
