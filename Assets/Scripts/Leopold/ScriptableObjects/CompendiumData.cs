@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompendiumData : ScriptableObject
-{
-    public enum DataType{
+public enum DataType{
         Item,
         Recipe,
         Log,
+        Building
     };
+
+public class CompendiumData : ScriptableObject
+{
+    
     [Header("General")]
     public bool unlocked;
     public int id;

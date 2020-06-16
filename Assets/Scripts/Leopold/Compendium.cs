@@ -11,13 +11,18 @@ public class Compendium : MonoBehaviour
     [HideInInspector] public List<RecipeDictionnary> recipeDictionnaryInstance;
     public List<LogDictionnary> logDictionnary;
     [HideInInspector] public List<LogDictionnary> logDictionnaryInstance;
+    public List<BuildingDictionnary> buildingDictionnary;
+    [HideInInspector] public List<BuildingDictionnary> buildingDictionnaryInstance;
     public List<ItemDictionnary> unlockedItem = new List<ItemDictionnary>();
 	public List<RecipeDictionnary> lockedRecipe = new List<RecipeDictionnary>();
     public List<RecipeDictionnary> unlockedRecipe = new List<RecipeDictionnary>();
     public List<LogDictionnary> unlockedLog = new List<LogDictionnary>();
+    public List<BuildingDictionnary> lockedBuilding = new List<BuildingDictionnary>();
+    public List<BuildingDictionnary> unlockedBuilding = new List<BuildingDictionnary>();
     public List<int> itemIDs;
     public List<int> recipeIDs;
     public List<int> logIDs;
+    public List<int> buildingIDs;
 
 	public int pickaxeId;
 	public int axeId;
@@ -44,6 +49,14 @@ public class Compendium : MonoBehaviour
             logDictionnaryInstance.Add(new LogDictionnary());
             logDictionnaryInstance[i].log = Instantiate(logDictionnary[i].log);
             logIDs.Add(logDictionnary[i].log.id);
+        }
+
+        for (int i = 0; i < buildingDictionnary.Count; i++)
+        {
+            buildingDictionnaryInstance.Add(new BuildingDictionnary());
+            buildingDictionnaryInstance[i].building = Instantiate(buildingDictionnary[i].building);
+            lockedBuilding.Add(buildingDictionnaryInstance[i]);
+            buildingIDs.Add(logDictionnary[i].log.id);
         }
     }
 
@@ -83,12 +96,67 @@ public class Compendium : MonoBehaviour
 							{
 								UnlockRecipe(lockedRecipe[j].recipe.id);
 								lockedRecipeToRemove.Add(lockedRecipe[j]);
+                                
 							}
 						}
 					}
-
 					RemoveRecipeFromList(lockedRecipeToRemove);
+                    
+                    List<BuildingDictionnary> lockedBuildingToRemove = new List<BuildingDictionnary>();
+					//Check if we can unlock recipes
+					for (int j = 0; j < lockedBuilding.Count; j++)
+					{
+						for (int k = 0; k < lockedBuilding[j].building.ingredients.Count; k++)
+						{
+							for (int l = 0; l < unlockedItem.Count; l++)
+							{
+								if (lockedBuilding[j].building.ingredients[k].ingredient.id == unlockedItem[l].item.id)
+								{
+									lockedBuilding[j].building.ingredients[k].unlocked = true;
+								}
+							}
 
+							bool checkIngr = true;
+							foreach(Ingredient ingr in lockedBuilding[j].building.ingredients)
+							{
+								if (!ingr.unlocked)
+								{
+									checkIngr = false;
+								}
+							}
+
+							if (checkIngr)
+							{
+                                bool checkLog = false;
+
+                                foreach (var item in lockedBuilding)
+                                {
+                                    for (int m = 0; m < unlockedLog.Count; m++)
+                                    {
+                                        if(item.building.entry == unlockedLog[m].log.id){
+                                            checkLog = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if(checkLog){
+                                    int unlockID = lockedBuilding[j].building.id;
+                                    if (!buildingDictionnaryInstance[unlockID].building.unlocked)
+                                    {
+                                        buildingDictionnaryInstance[unlockID].building.unlocked = true;
+                                        unlockedBuilding.Add(buildingDictionnaryInstance[unlockID]);
+                                    }
+                                }
+                                
+							}
+						}
+					}
+                    foreach (BuildingDictionnary building in lockedBuildingToRemove)
+                    {
+                        lockedBuilding.Remove(building);
+                    }
+                    
                     break;
                 }
             }
@@ -184,4 +252,8 @@ public class Compendium : MonoBehaviour
     [System.Serializable]
     public class LogDictionnary : CustomDictionnary{
         public LogData log;
+    }
+    [System.Serializable]
+    public class BuildingDictionnary : CustomDictionnary{
+        public BuildingData building;
     }

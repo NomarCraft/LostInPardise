@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
 	public CompendiumDisplay compDis { get { return _compDis; } }
 	[SerializeField] private Crafter _craft;
 	public Crafter craft { get { return _craft; } }
+	public HouseConstruction house;
 
 	private void Start()
 	{

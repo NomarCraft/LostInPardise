@@ -21,7 +21,7 @@ namespace Console
         }
 
         public void RunError(){
-            Debug.LogWarning(Name + " arguments not found");
+            Debug.LogWarning(Name + " arguments not found\nUse help + the name of the command for further informations");
         }
 
         public void RunError(string text){

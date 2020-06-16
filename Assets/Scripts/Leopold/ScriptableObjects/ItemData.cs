@@ -5,6 +5,6 @@ using UnityEngine;
  [CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Item")]
 public class ItemData : CompendiumData
 {
-    DataType dataType = DataType.Item;
+    public DataType dataType = DataType.Item;
     public float itemWeight;
 }
