@@ -31,6 +31,13 @@ public class Gatherable : Interactable
 			_isActive = false;
 			_compToDesactivate.SetActive(false);
 			_currentTurnUntilRespawn = 0;
+			return;
+		}
+		else
+		{
+			_isActive = false;
+			this.gameObject.SetActive(false);
+			_currentTurnUntilRespawn = 0;
 		}
 	}
 
@@ -44,9 +51,18 @@ public class Gatherable : Interactable
 
 	public void Activate()
 	{
-		_compToDesactivate.SetActive(true);
-		transform.SetPositionAndRotation(_startPos, _startRot);
-		_isActive = true;
+		if (_compToDesactivate != null)
+		{
+			_compToDesactivate.SetActive(true);
+			transform.SetPositionAndRotation(_startPos, _startRot);
+			_isActive = true;
+		}
+		else
+		{
+			this.gameObject.SetActive(true);
+			_isActive = true;
+		}
+
 	}
 
 	public void Interaction(out ItemData item)
