@@ -36,9 +36,12 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
+#if !UNITY_EDITOR
 		SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
 		SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
+#endif
 	}
+
 
 	private void Update()
 	{
