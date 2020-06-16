@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Console;
 
@@ -36,11 +37,16 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
-		GetGatherables();
+#if !UNITY_EDITOR
+		SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+		SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
+#endif
 	}
+
 
 	private void Update()
 	{
+		SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
 		TimeManagment();
 	}
 

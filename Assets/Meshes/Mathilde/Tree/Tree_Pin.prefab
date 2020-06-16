@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4786523863320548105}
   - component: {fileID: 9170795420613238874}
-  - component: {fileID: 7558124932595174514}
+  - component: {fileID: 3735560640299636773}
   m_Layer: 0
   m_Name: Tree_Pin
   m_TagString: Untagged
@@ -219,8 +219,8 @@ LODGroup:
     - renderer: {fileID: 6635150836030078052}
     - renderer: {fileID: 1416289386227420010}
   m_Enabled: 1
---- !u!136 &7558124932595174514
-CapsuleCollider:
+--- !u!65 &3735560640299636773
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -229,10 +229,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.52969027
-  m_Height: 7.7153273
-  m_Direction: 1
-  m_Center: {x: -0.49421424, y: 3.8308644, z: 0.07590016}
+  serializedVersion: 2
+  m_Size: {x: 1.1538643, y: 5.084163, z: 1}
+  m_Center: {x: -0.5538844, y: 2.457421, z: 0}
 --- !u!1 &6624836907345623287
 GameObject:
   m_ObjectHideFlags: 0
