@@ -11,7 +11,7 @@ public class HouseConstruction : MonoBehaviour
         GameManager.Instance.house = this;
     }
 
-    public void UpgradeHouse(ItemData data){
+    public void UpgradeHouse(){
         foreach (var item in houseLvls)
         {
             item.SetActive(false);

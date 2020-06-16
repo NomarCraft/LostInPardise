@@ -125,7 +125,7 @@ public class Crafter : MonoBehaviour
 				}
 			}
 		}else{
-			GameManager.Instance.house.UpgradeHouse(searchItem);
+			GameManager.Instance.house.UpgradeHouse();
 			GameManager.Instance.comp.unlockedBuilding.Clear();
 			inventories[target].inventory.AddItem(craftedItem);
 			inventories[target].inventory.RemoveItem(searchItem, 1);
