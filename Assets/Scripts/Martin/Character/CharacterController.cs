@@ -399,6 +399,7 @@ public partial class CharacterController : MonoBehaviour
 		if (gm.uiManager != null)
 		{
 			_ui = gm.uiManager;
+			gm.GetGatherables();
 			InitializeUI();
 		}
 
