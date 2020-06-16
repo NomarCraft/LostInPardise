@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2022146190578484696}
   - component: {fileID: 5705095718815725857}
   - component: {fileID: 5768670005463594471}
+  - component: {fileID: -6178805979014745433}
   m_Layer: 0
-  m_Name: rock_07
+  m_Name: rock_07_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,3 +95,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9145469307450648051, guid: a8fe62a9efb8e784e8181cb84b51ce07, type: 3}
+--- !u!114 &-6178805979014745433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273589429501087229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb6209f18790b84797574293a9dcd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableName: Cliff
+  _interactions:
+  - _interaction: 6
+    _toolRequired: 1
+  _isActive: 1
+  _toolRequiredId: 24
