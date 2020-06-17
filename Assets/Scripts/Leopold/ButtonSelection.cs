@@ -31,6 +31,10 @@ public class ButtonSelection : Button
 		{
 			ui.UpdateRecipeText(compendiumData as RecipeData);
 		}
+		else if (ui._inventoryPanel.activeSelf && compendiumData != null)
+		{
+			ui.ChangeText(ui._inventoryItemName, compendiumData.itemName);
+		}
         ui.ChangeSelectedButton(this);
     }
 

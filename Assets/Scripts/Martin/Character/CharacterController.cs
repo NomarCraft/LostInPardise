@@ -345,12 +345,14 @@ public partial class CharacterController : MonoBehaviour
 				if (_ui._chestPanel.activeSelf)
 				{
 					_ui.HideElement(_ui._chestPanel);
+					_ui.HideElement(_ui._selecter);
 					gm.invDis.packs[2].inventory = null;
 					gm._gamePaused = false;
 				}
 				if (_ui._craftPanel.activeSelf)
 				{
 					_ui.HideElement(_ui._craftPanel);
+					_ui.HideElement(_ui._selecter);
 					gm._gamePaused = false;
 				}
 			}
@@ -380,7 +382,11 @@ public partial class CharacterController : MonoBehaviour
 			}
 
 			if (_ui._compendiumPanel.activeSelf)
+			{
 				_ui.HideElement(_ui._compendiumPanel);
+				_ui.HideElement(_ui._selecter);
+			}
+
 			else
 			{
 				_ui.DisplayElement(_ui._compendiumPanel);
@@ -415,7 +421,8 @@ public partial class CharacterController : MonoBehaviour
 	private void InitializeUI()
 	{
 		_ui.HideAllElements();
-		_ui.DisplayElement(_ui._playerStatusPanel);
+		_ui.HideElement(_ui._selecter);
+		//_ui.DisplayElement(_ui._playerStatusPanel);
 	}
 
 	private void Move()

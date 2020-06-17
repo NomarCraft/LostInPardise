@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 	public GameObject _craftPanel;
 	public GameObject _chestPanel;
 	public GameObject _climbPanel;
+	public GameObject _selecter;
 
 	[Space(10)]
 	[Header("PlayerStatus")]
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
 	public TextMeshProUGUI _compendiumObjName;
 	public TextMeshProUGUI _compendiumObjDescription;
 	public ButtonSelection _selectedButton;
+	public TextMeshProUGUI _inventoryItemName;
 	public bool _amountSelectionning;
 
 	[Space(10)]
@@ -199,6 +201,9 @@ public class UIManager : MonoBehaviour
 	public void ChangeSelectedButton(ButtonSelection buttonSelection)
 	{
 		_selectedButton = buttonSelection;
+		_selecter.SetActive(true);
+		_selecter.transform.position = buttonSelection.transform.position;
+		_selecter.GetComponent<RectTransform>().pivot = _selectedButton.GetComponent<RectTransform>().pivot;
 	}
 
 	public void ShowAmountSelectionPanel(){

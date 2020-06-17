@@ -51,7 +51,7 @@ public class Gatherable : Interactable
 
 	public void Activate()
 	{
-		if (_compToDesactivate != null)
+		/*if (_compToDesactivate != null)
 		{
 			_compToDesactivate.SetActive(true);
 			transform.SetPositionAndRotation(_startPos, _startRot);
@@ -62,7 +62,7 @@ public class Gatherable : Interactable
 			this.gameObject.SetActive(true);
 			_isActive = true;
 		}
-
+		*/
 	}
 
 	public void Interaction(out ItemData item)
